@@ -53,7 +53,6 @@ dist/
 Example package.json:
 ```json
 {
-  <...buncha crap...>
   "scripts": {
     "lint": "eslint ."
   }
