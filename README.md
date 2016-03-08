@@ -9,7 +9,7 @@ Don't take it personally; they're just semicolons and curly braces.
 ## Install
 
 ```
-npm install style-tt --save-dev
+npm install eslint-config-tt --save-dev
 ```
 
 And if you haven't already:
