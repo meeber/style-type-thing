@@ -1,0 +1,15 @@
+{
+  "name": "eslint-config-tt",
+  "version": "0.0.0",
+  "description": "style guide and ESLint config",
+  "author": "Grant Snodgrass <meeber@gametypething.com>",
+  "license": "MIT",
+  "repository": "meeber/style-type-thing",
+  "main": "index.js",
+  "scripts": {
+    "test": "eslint ."
+  },
+  "devDependencies": {
+    "eslint": "^2.3.0"
+  }
+}
