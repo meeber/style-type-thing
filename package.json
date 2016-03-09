@@ -7,6 +7,8 @@
   "repository": "meeber/style-type-thing",
   "main": "index.js",
   "scripts": {
+    "postversion": "git push && git push --tags",
+    "preversion": "npm test",
     "test": "eslint ."
   },
   "devDependencies": {
