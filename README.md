@@ -64,7 +64,7 @@ If this was 1997, there'd be a few "Under Construction" GIFs and a marquee tag.
 
 ## Ternary Operator
 
-I'm a huge fan of the ternary operator, especially when it's nested within another ternary operator or ten. It offends me greatly that there's both a "no-ternary" and a "no-nested-ternary" rule in ESLint. Setting these values to 0 isn't enough. I recommend `-20`. Also don't be deceived by the "no-unneeded-ternary" rule; the ternary operator is **_ALWAYS_** needed. For this value I recommend `NaN == NaN ? 2 : 0`.
+I'm a huge fan of the ternary operator, especially when it's nested within another ternary operator or ten. It offends me greatly that there's both a "no-ternary" and a "no-nested-ternary" rule in ESLint. Setting these values to 0 isn't enough. I recommend `-20`. Also don't be led astray by the "no-unneeded-ternary" rule; the ternary operator is **_ALWAYS_** needed. For this value I recommend `NaN == NaN ? 2 : 0`.
 
 ```js
 // Baaaaaaaaaaaad:
@@ -96,6 +96,24 @@ function isDrinkable(milk, drinker) {
 function isDrinkable(milk, drinker) {
   return isActuallyYoohoo(milk);
 }
+```
+
+In all seriousness, I do like the ternary operator (even nested) as long as every condition-expression pair fits on an 80-width line. I don't like indenting the multi-line statements; doing so wastes space and doesn't add much over the indentation that already occurs with ": ". Examples:
+
+```js
+// Good
+return cond ? expr1 : expr2;
+
+// Good
+return cond ? expr1
+: expr2;
+
+// Good
+return cond1 ? expr1
+: cond2 ? expr2
+: cond3 ? expr3
+: cond4 ? expr4
+: expr5;
 ```
 
 # Beware
