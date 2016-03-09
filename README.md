@@ -96,6 +96,7 @@ function isDrinkable(milk, drinker) {
 function isDrinkable(milk, drinker) {
   return isActuallyYoohoo(milk);
 }
+```
 
 # Beware
 
