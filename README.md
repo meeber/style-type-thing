@@ -66,8 +66,33 @@ If this was 1997, there'd be a few "Under Construction" GIFs and a marquee tag.
 
 I'm a huge fan of the ternary operator, especially when it's nested within another ternary operator or ten. It offends me greatly that there's both a "no-ternary" and a "no-nested-ternary" rule in ESLint. Setting these values to 0 isn't enough. I recommend `-20`. Also don't be led astray by the "no-unneeded-ternary" rule; the ternary operator is **_ALWAYS_** needed. For this value I recommend `NaN == NaN ? 2 : 0`.
 
+Joking aside, I actually do like the ternary operator. Even when it's nested.
+
+The rules I follow are:
+
+1. Each condition-expression pair must fit on its own line.
+1. Multi-line statements aren't indented; the ": " provides indentation.
+1. No unnecessary parenthesis; because of the first rule, it's rare to have to consider more than two operators at a time.
+
+Allowed formats:
+
 ```js
-// Baaaaaaaaaaaad:
+return cond ? expr1 : expr2;  // If cond, return expr1, else return expr2
+
+return cond ? expr1           // If cond, return expr1
+: expr2;                      // Else return expr2
+
+return cond1 ? expr1          // If cond1, return expr1
+: cond2 ? expr2               // If cond2, return expr2
+: cond3 ? expr3               // If cond3, return expr3
+: cond4 ? expr4               // If cond4, return expr4
+: expr5;                      // Else return expr5
+```
+
+Examples:
+
+```js
+// Meh
 function isDrinkable(milk, drinker) {
   return !isExpired(milk) && !isLactoseIntolerant(drinker) && (
     (isBrownish(milk) && isActuallyYoohoo(milk) && !hatesFun(drinker))
@@ -76,7 +101,7 @@ function isDrinkable(milk, drinker) {
   );
 }
 
-// Baaaaaaaaaaaad:
+// Better but excessive parentheses and repetition of "return"
 function isDrinkable(milk, drinker) {
   if (isExpired(milk) || isLactoseIntolerant(drinker)) return false;
   if (isBrownish(milk)) return isActuallyYoohoo(milk) && !hatesFun(drinker);
@@ -84,7 +109,7 @@ function isDrinkable(milk, drinker) {
   return hasCookies(drinker);
 }
 
-// Baaaaaaaaaaaad:
+// Better. Just consider line-by-line: "if cond, return expr" until final else
 function isDrinkable(milk, drinker) {
   return isExpired(milk) || isLactoseIntolerant(drinker) ? false
   : isBrownish(milk) ? isActuallyYoohoo(milk) && !hatesFun(drinker)
@@ -92,28 +117,10 @@ function isDrinkable(milk, drinker) {
   : hasCookies(drinker);
 }
 
-// Gooooooooooood:
+// Best
 function isDrinkable(milk, drinker) {
   return isActuallyYoohoo(milk);
 }
-```
-
-In all seriousness, I do like the ternary operator (even nested) as long as every condition-expression pair fits on an 80-width line. I don't like indenting the multi-line statements; doing so wastes space and doesn't add much over the indentation that already occurs with ": ". Examples:
-
-```js
-// Good
-return cond ? expr1 : expr2;
-
-// Good
-return cond ? expr1
-: expr2;
-
-// Good
-return cond1 ? expr1
-: cond2 ? expr2
-: cond3 ? expr3
-: cond4 ? expr4
-: expr5;
 ```
 
 # Beware
