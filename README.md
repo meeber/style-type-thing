@@ -193,7 +193,7 @@ let why = {
 
 I'm a huge fan of the ternary operator, especially when it's nested within another ternary operator or ten. It offends me greatly that there's both a no-ternary and a no-nested-ternary rule in ESLint. Setting these values to 0 isn't enough. I recommend `-20`. Also don't be led astray by the no-unneeded-ternary rule; the ternary operator is **_ALWAYS_** needed. For this value I recommend `NaN == NaN ? 2 : 0`.
 
-Joking aside, I actually have grown rather fond of our ternary friend. Even when it's nested. But only when the folling rules are applied:
+Joking aside, I actually have grown rather fond of our ternary friend. Even when it's nested. But only when the following rules are applied:
 
 1. Each `cond ? expr` pair must fit on its own line. The `: expr` may be on either the same line or the next.
 1. Multi-line statements aren't indented; the `: ` serves as the ident.
