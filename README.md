@@ -64,7 +64,7 @@ If this was 1997, there'd be a few "Under Construction" GIFs and a marquee tag.
 
 ## var VS let VS const
 
-`var` and I had a good run but it's over now and there's no turning back. From this point on, it's just me and `let` and that deceptive _expletive deleted_ `const`.
+`var` and I had a good run but it's over now and there's no turning back. From this point on, it's just me and `let` and the loveable yet misleading `const`.
 
 My preference is to only use `const` when I want to draw extra special attention to the notion that a variable and everything related to that variable should never change. For example:
 
@@ -72,7 +72,7 @@ My preference is to only use `const` when I want to draw extra special attention
 const FRONT_MAN_FOR_FOO_FIGHTERS = "Dave Grohl";
 ```
 
-Unfortunately, that's not what `const` actually means in JavaScript. Consider the following:
+Except that's not what `const` actually means in JavaScript. Consider the following:
 
 ```js
 function MusicalGenius(hasPrettyFace) {
@@ -98,10 +98,9 @@ My only comfort:
 bieber = new JonBonJovi(true);  // Invalid
 ```
 
-Pretty face or not, at least bieber will forever remain a MusicalGenius thanks to the awesome power of `const`. Is the protection against reassignment a strong enough reason to favor `const` over `let`? Popular opinion says "yes". After all, it only costs two extra characters. Right?
+Pretty face or not, at least bieber will forever remain my MusicalGenius thanks to the awesome power of `const`. Is the protection against reassignment a strong enough reason to favor `const` over `let`? Popular opinion says "yes, it's only two extra characters." I say "no, there's a cognitive cost to const, and it ain't cheap."
 
 ```js
-// The favor-over-let scale
 const donkey = {};
 always donkey = {};
 forever donkey = {};
@@ -110,14 +109,18 @@ immutable donkey = {};
 invariable donkey = {};
 unalterable donkey = {};
 unmodifiable donkey = {};
-canneverbechangediswear donkey = {};
+doesnotchange donkey = {};
 ```
 
 ## Line Length
 
 I'm an advocate of the 80-character line. My feeble brain rejects lines that are much longer. Also I like having two PuTTY windows open side-by-side on the same monitor with a relatively large (12pt) font.
 
-In general, I don't break a statement across multiple lines unless I have to. But if an array literal, object literal, or parameter list exceeds the 80-character limit, then I move each item onto its own indented line. If a string exceeds the limit, then I concat it across multiple lines with the `+ ` placed after the linebreak with no additional indent.
+In general, I don't break a statement across multiple lines unless I have to.
+
+If an array literal, object literal, or parameter list exceeds the 80-character limit, then I move each item onto its own indented line.
+
+If a string exceeds the limit, then I concat it across multiple lines with the `+` placed at the start of each new line.
 
 Valid formats:
 
@@ -141,9 +144,7 @@ var dilemma = "Has Anyone Really Been Far Even as Decided to Use Even Go Want"
 
 ## Indent
 
-If JavaScript taught me anything in life, it's that the 2 character indent is beautiful. I say "character" instead of "space" because I'm of the opinion that operators such as `: `, `+ `, `&&`, and `||` should serve as the indent when applicable.
-
-One of my most recent self-imposed rules is: No trying to be cute by adding extra spaces to line stuff up.
+I'll always cherish the time I spent in callback hell, for it taught me the beauty of the 2 character indent. I say "character" instead of "space" because I'm of the opinion that operators such as `:`, `+`, `&&`, and `||` should serve as the indent in some situations. I'm also of the opinion that one must always resist the temptation to add a bunch of extra spaces to the start of each line in order to achieve some kind of cute alignment.
 
 Valid formats:
 
@@ -152,14 +153,15 @@ Valid formats:
 function JohnMadden() {
   console.log("JohnMadden");
 
-  // "+ " serves as the indent
+  // "+ " serves as the indent; adding 2 spaces before it would only serve to
+  // decrease the number of "JohnMadden"s per line
   console.log("JohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohn"
   + "MaddenJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMadd"
   + "enJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMadden");
 }
 
 function isLog(val) {
-  // "&&" serves as the indent
+  // "&&" serves as the indent; fight the urge to add 4 spaces before each &&
   return rollsDownStairs(val)
   && isAloneOrInPairs(val)
   && rollsOverYourNeighborsDog(val)
