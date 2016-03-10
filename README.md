@@ -2,7 +2,7 @@
 
 JavaScript style guide and ESLint config.
 
-The purpose of this project is to document the reasoning behind my JavaScript style preferences so that when I change my mind a month from now I can wonder why I even bothered.
+The purpose of this project is to document the reasonings behind my JavaScript style preferences so that when I change my mind a month from now I can wonder why I even bothered.
 
 # ESLint Config
 
@@ -108,7 +108,8 @@ But then why is "Dave Grohl" guaranteed to always remain the front man of Foo Fi
 // "Prince" is immutable because it's a string primitive
 let artist = "Prince";
 
-// Valid. Reassign artist to a new string primitive (doesn't change "Prince")
+// Valid. Reassign artist to a new string primitive. "Prince" isn't modified but
+// since artist will no longer reference it, it's as good as gone
 artist = "The Artist Formerly Known as Prince"; 
 
 // Valid. Reassign artist to a new symbol primitive
@@ -116,8 +117,8 @@ artist = Symbol("Love");
 ```
 
 ```js
-// "Prince" is immutable because it's a string primitive
-// Oh and also: artist can never be reassigned due to const
+// "Prince" is immutable because it's a string primitive, and artist can never
+// be reassigned due to const
 const artist = "Prince";
 
 // Invalid due to const
@@ -129,7 +130,7 @@ artist = Symbol("Love");
 
 The prevalent opinion among the JavaScript community is that you should only use `let` when you intend on reassigning a variable to something else later on, and that `const` should be favored in all other situations, even when declaring a mutable object, such as with the bieber example above.
 
-But I disagree. I don't think `const` should be used to declare an object that has properties which are intended to change. It's misleading and the cognitive cost isn't worth the minor benefit of protection against accidental reassignment.
+I disagree. I don't think `const` should be used to declare an object that has properties which are intended to change. It's misleading and the cognitive cost of seeing through this deception isn't worth the minor benefit of protection against accidental reassignment.
 
 And besides, it's two extra characters long!!!
 
