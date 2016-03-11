@@ -102,7 +102,7 @@ But then something like this happens:
 bieber.hasPrettyFace = false; // Valid
 ```
 
-What the fuck, Bieber. You were supposed to stay beautiful forever :(
+What the hell, Bieber. You were supposed to stay beautiful forever :(
 
 My problem is that even though I understand that `const` deals with variable reassignment, not value mutability, my brain wants it to deal with both.
 
@@ -122,9 +122,17 @@ const artist = "Prince";
 artist = Symbol("Love"); // Invalid
 ```
 
-The fact that they don't work the same way (and never could without introducing some seriously weird behavior with nested objects) messes with my head. It adds a small cognitive cost to the `const` statement which is a problem mainly because any benefit gained from using `const` over `let` is also small.
+The fact that they don't work the same way (and never could without introducing some seriously weird behavior with nested objects) messes with my head. It adds a small cognitive cost to the `const` statement which is a problem particularly because any benefit gained from using `const` over `let` is also small.
 
 It just ain't worth it.
+
+## == VS ===
+
+My current feeling is that `===` should be favored over `==` due to the small cognitive cost of having to consider the possibility of an unexpected type coercion for each and every equality comparison that I make.
+
+However, it's worth noting that I've gone back and forth on this issue several times. An argument could be made that performing this extra consideration for each comparison promotes better understanding of both the code being written as well as the language itself.
+
+Also `===` looks funny.
 
 ## Line Length
 
@@ -205,7 +213,7 @@ let why = {
 
 ## Ternary Operator
 
-I'm a huge fan of the ternary operator, especially when it's nested within another ternary operator or ten. It offends me greatly that there's both a no-ternary and a no-nested-ternary rule in ESLint. Setting these values to 0 isn't enough. I recommend `-20`. Also don't be led astray by the no-unneeded-ternary rule; the ternary operator is **_ALWAYS_** needed. For this value I recommend `NaN == NaN ? 2 : 0`.
+I'm a huge fan of the ternary operator, especially when it's nested within another ternary operator or ten. It offends me greatly that there's both a no-ternary and a no-nested-ternary rule in ESLint. Setting these values to 0 isn't enough. I recommend `-20`. Also don't be led astray by the no-unneeded-ternary rule; the ternary operator is **_ALWAYS_** needed. For this value I recommend `NaN === NaN ? 2 : 0`.
 
 Joking aside, I actually have grown rather fond of our ternary friend. Even when it's nested. But only when the following rules apply:
 
@@ -244,7 +252,7 @@ function isDrinkable(milk, drinker) {
 function isDrinkable(milk, drinker) {
   if (isExpired(milk) || isLactoseIntolerant(drinker)) return false;
   if (isBrownish(milk)) return isActuallyYoohoo(milk) && !hatesFun(drinker);
-  if (isInABag(milk) return isCanadian(drinker);
+  if (isInABag(milk)) return isCanadian(drinker);
   return hasCookies(drinker);
 }
 
