@@ -122,7 +122,7 @@ const artist = "Prince";
 artist = Symbol("Love"); // Invalid
 ```
 
-The fact that they don't work the same way (and never could without introducing some seriously weird behavior with nested objects) messes with my head. It adds a small cognitive cost to the `const` statement which is a problem particularly because any benefit gained from using `const` over `let` is also small.
+The fact that they don't work the same way (and never could without introducing some seriously weird behavior with nested objects) messes with my head. It adds a small cognitive cost to the `const` statement. Unfortunately, the benefits of favoring `const` over `let` are also small--too small to afford any kind of associated cost. That's why some people have a problem with `const` merely on the grounds that it contains two extra characters.
 
 It just ain't worth it.
 
@@ -132,7 +132,7 @@ My current feeling is that `===` should be favored over `==` due to the small co
 
 However, it's worth noting that I've gone back and forth on this issue several times. An argument could be made that performing this extra consideration for each comparison promotes better understanding of both the code being written as well as the language itself.
 
-Also `===` looks funny.
+Plus `===` looks funny.
 
 ## Line Length
 
@@ -217,8 +217,8 @@ I'm a huge fan of the ternary operator, especially when it's nested within anoth
 
 Joking aside, I actually have grown rather fond of our ternary friend. Even when it's nested. But only when the following rules apply:
 
-1. Each `cond ? expr` pair must fit on its own line. The `: expr` may be on either the same line or the next.
-1. Multi-line statements aren't indented; the `: ` serves as the indent.
+1. Each `cond ? expr` pair must fit on its own line. The `: expr` may either be on the same line or the next.
+1. Multi-line statements aren't indented; the `:` serves as the indent.
 1. No unnecessary parentheses; because of the first rule, it's rare to have to consider more than two operators at a time.
 
 Valid formats:
