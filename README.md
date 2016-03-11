@@ -2,7 +2,7 @@
 
 JavaScript style guide and ESLint config.
 
-The purpose of this project is to document the reasonings behind my JavaScript style preferences so that when I change my mind a month from now I can wonder why I even bothered.
+The purpose of this project is to document the reasonings behind my JavaScript style preferences so that when I arbitrarily change my mind a month from now I can wonder why I even bothered.
 
 # ESLint Config
 
@@ -66,13 +66,23 @@ If this was 1997, there'd be a few "Under Construction" GIFs and a marquee tag.
 
 `var` and I had a good run but it's over now and there's no turning back. From this point on, it's just me and `let` and the loveable yet somewhat misleading `const`.
 
-My preference is to only use `const` when I want to draw extra special attention to the fact that something will never change. For example:
+My preference is to favor `let` over `const`, only using the latter when all of the following conditions are met:
+
+1. The value is a primitive.
+1. The value is known at build time.
+1. The value should definitely never change during execution.
+
+The name of a `const` should be in all caps with words separated by underscores.
+
+Valid format:
 
 ```js
 const FRONT_MAN_FOR_FOO_FIGHTERS = "Dave Grohl";
 ```
 
-The good news is that this code works as intended: Dave Grohl is and always will be the front man for Foo Fighters. The bad news is that it only works as intended because "Dave Grohl" is a primitive data type. Consider the following example with an object instead of a primitive:
+I fear that my style is not a popular one. The prevalent opinion among the JavaScript community is to favor `const` over `let`, only using the latter when there exists at least one reachable codepath which reassigns the variable to a different value. And to their credit, this opinion is perfectly in line with the spec.
+
+But it also creates a problem. Consider the following example:
 
 ```js
 class MusicalGenius {
@@ -89,63 +99,32 @@ When I look at this code, I think: "bieber is a Musical Genius with a pretty fac
 But then something like this happens:
 
 ```js
-bieber.hasPrettyFace = false;   // Valid
+bieber.hasPrettyFace = false; // Valid
 ```
 
-What the fuck. Bieber was my rock--my one and only constant in life--and yet all it took was a single cruel statement to deprive him of his beauty. How am I to ever trust `const` or my heart again?
+What the fuck, Bieber. You were supposed to stay beautiful forever :(
 
-My only comfort:
+My problem is that even though I understand that `const` deals with variable reassignment, not value mutability, my brain wants it to deal with both.
+
+My brain wants this...
 
 ```js
-bieber = new JonBonJovi(true);  // Invalid
+const artist = {name: "Prince"};
+
+artist.name = Symbol("Love"); // Valid
 ```
 
-What `const` does is prevent a variable from being reassigned; it doesn't prevent the value it's currently assigned to from changing. That's why bieber can lose his pretty face but can't shift from being a MusicalGenius to being a JonBonJovi.
-
-But then why is "Dave Grohl" guaranteed to always remain the front man of Foo Fighters? First off, he's a bad mfer. And secondly, unlike objects, all primitive data types in JavaScript are automatically immutable, regardless if a variable is declared with `var`, `let`, or `const`.
+...to work the same way as this...
 
 ```js
-// "Prince" is immutable because it's a string primitive
-let artist = "Prince";
-
-// Valid. Reassign artist to a new string primitive. "Prince" isn't modified but
-// since artist will no longer reference it, it's as good as gone
-artist = "The Artist Formerly Known as Prince"; 
-
-// Valid. Reassign artist to a new symbol primitive
-artist = Symbol("Love");
-```
-
-```js
-// "Prince" is immutable because it's a string primitive, and artist can never
-// be reassigned due to const
 const artist = "Prince";
 
-// Invalid due to const
-artist = "The Artist Formerly Known as Prince";
-
-// Invalid due to const
-artist = Symbol("Love");
+artist = Symbol("Love"); // Invalid
 ```
 
-The prevalent opinion among the JavaScript community is that you should only use `let` when you intend on reassigning a variable to something else later on, and that `const` should be favored in all other situations, even when declaring a mutable object, such as with the bieber example above.
+The fact that they don't work the same way (and never could without introducing some seriously weird behavior with nested objects) messes with my head. It adds a small cognitive cost to the `const` statement which is a problem mainly because any benefit gained from using `const` over `let` is also small.
 
-I disagree. I don't think `const` should be used to declare an object that has properties which are intended to change. It's misleading and the cognitive cost of seeing through this deception isn't worth the minor benefit of protection against accidental reassignment.
-
-And besides, it's two extra characters long!!!
-
-```js
-// New keywords slated for ES2017
-always Yes = {members: [...]};
-forever Yes = {members: [...]};
-everlong Yes = {members: [...]};
-immutable Yes = {members: [...]};
-invariable Yes = {members: [...]};
-unalterable Yes = {members: [...]};
-unmodifiable Yes = {members: [...]};
-doesnotchange Yes = {members: [...]};
-noreallyyoucantrustmethiswilldefinitelystaythesame Yes = {members: [...]};
-```
+It just ain't worth it.
 
 ## Line Length
 
