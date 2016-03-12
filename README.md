@@ -122,7 +122,7 @@ const artist = "Prince";
 artist = Symbol("Love"); // Invalid
 ```
 
-The fact that they don't work the same way (and never could without introducing some seriously weird behavior with nested objects) messes with my head. It adds a small cognitive cost to the `const` statement. Unfortunately, the benefits of favoring `const` over `let` are also small--too small to afford any kind of associated cost. That's why some people have a problem with `const` merely on the grounds that it contains two extra characters.
+The fact that they don't work the same way (and never could without introducing some seriously weird behavior with nested objects) adds a small cognitive cost to the `const` statement. Unfortunately, the benefits of favoring `const` over `let` are also small--too small to afford any kind of associated cost. That's why some people have a problem with `const` merely on the grounds that it contains two extra characters.
 
 It just ain't worth it.
 
