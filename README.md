@@ -68,16 +68,22 @@ If this was 1997, there'd be a few "Under Construction" GIFs and a marquee tag.
 
 My preference is to favor `let` over `const`, only using the latter when all of the following conditions are met:
 
-1. The value is a primitive.
+1. The value is a primitive (or a frozen object with primitive properties only).
 1. The value is known at build time.
 1. The value should definitely never change during execution.
 
 The name of a `const` should be in all caps with words separated by underscores.
 
-Valid format:
+Valid formats:
 
 ```js
 const FRONT_MAN_FOR_FOO_FIGHTERS = "Dave Grohl";
+
+const DURATION = Object.freeze({
+  SHORT: Symbol(),
+  LONG: Symbol(),
+  EVERLONG: Symbol(),
+});
 ```
 
 I fear that my style is not a popular one. The prevalent opinion among the JavaScript community is to favor `const` over `let`, only using the latter when there exists at least one reachable codepath which reassigns the variable to a different value. And to their credit, this opinion is perfectly in line with the spec.
@@ -102,7 +108,7 @@ But then something like this happens:
 bieber.hasPrettyFace = false; // Valid
 ```
 
-What the hell, Bieber. You were supposed to stay beautiful forever :(
+What the hell, B? You were supposed to stay beautiful forever :(
 
 My problem is that even though I understand that `const` deals with variable reassignment, not value mutability, my brain wants it to deal with both.
 
