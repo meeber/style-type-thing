@@ -140,6 +140,40 @@ However, it's worth noting that I've gone back and forth on this issue several t
 
 Plus `===` looks funny.
 
+## \` VS ' VS "
+
+When embedding an expression inside of a string, I favor `` ` `` over string concatenation. Otherwise, I use `"` exclusively, even if the string contains double quotes which must then be escaped.
+
+The advantages are small:
+
+* `"` is consistent with JSON.
+* Not needing to escape apostrophes is worth needing to escape double quotes.
+* `'` looks too much like `` ` ``.
+
+I omit quotations when they're not necessary.
+
+Valid formats:
+
+```js
+// No quotes needed for properties
+let stockton = {speed: 5, threePtrs: 5, dunks: 0, defense: 4};
+
+// Except when required
+let malone = {speed: 5, "three ptrs": 1, dunks: 6, defense: 4};
+
+// Double quotes in bracket notation
+pippen["speed"] = 5;
+
+// Double quotes for strings
+let phrases = ["He's heating up!", "He's on fire!", "Boomshakalaka!"];
+
+// Double quotes even if a double quote must be escaped
+let question = "Announcer: \"Is it the shoes?\"";
+
+// Template literal when embedding an expression
+let endOf = `END OF ${quarter} QUARTER`;
+```
+
 ## Line Length
 
 I'm an advocate of the 80-character line. My feeble brain rejects lines that are much longer. Also I like having two PuTTY windows open side-by-side on the same monitor with a comically large (14pt) Consolas font.
