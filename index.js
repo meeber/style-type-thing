@@ -87,6 +87,7 @@ module.exports = {
     "no-unused-labels": 2,
     "no-useless-call": 2,
     "no-useless-concat": 2,
+    "no-useless-escape": 2,
     "no-void": 2,
     "no-warning-comments": 1,
     "no-with": 2,
@@ -155,6 +156,7 @@ module.exports = {
     "max-nested-callbacks": 0,
     "max-params": 0,
     "max-statements": 0,
+    "max-statements-per-line": 0,
     "new-cap": [2, {
       newIsCap: true,
       capIsNew: false,
@@ -215,6 +217,7 @@ module.exports = {
     "no-confusing-arrow": [2, {allowParens: true}],
     "no-const-assign": 2,
     "no-dupe-class-members": 2,
+    "no-duplicate-imports": [2, {includeExports: false}],
     "no-new-symbol": 2,
     "no-restricted-imports": 0,
     "no-this-before-super": 2,
