@@ -157,10 +157,7 @@ module.exports = {
     "max-params": 0,
     "max-statements": 0,
     "max-statements-per-line": 0,
-    "new-cap": [2, {
-      newIsCap: true,
-      capIsNew: false,
-    }],
+    "new-cap": [2, {newIsCap: true, capIsNew: false}],
     "new-parens": 2,
     "newline-after-var": 0,
     "newline-before-return": 0,
