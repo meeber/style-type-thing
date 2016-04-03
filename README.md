@@ -1,4 +1,4 @@
-[![build status](https://travis-ci.org/travis/meeber/style-type-thing.svg)](https://travis-ci.org/meeber/style-type-thing)
+[![build status](https://img.shields.io/travis/meeber/style-type-thing.svg)](https://travis-ci.org/meeber/style-type-thing)
 [![npm version](https://img.shields.io/npm/v/eslint-config-tt.svg)](https://www.npmjs.com/package/eslint-config-tt)
 
 # StyleTypeThing
