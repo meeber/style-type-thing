@@ -7,9 +7,12 @@
   "repository": "meeber/style-type-thing",
   "main": "index.js",
   "scripts": {
-    "postversion": "git push && git push --tags",
-    "preversion": "npm test",
-    "test": "eslint ."
+    "postversion": "git checkout dev && git merge master && git push && git push --tags && npm publish",
+    "preversion": "git checkout master && git merge dev && npm test",
+    "release-major": "npm version major -m 'Finalize v%s'",
+    "release-minor": "npm version minor -m 'Finalize v%s'",
+    "release-patch": "npm version patch -m 'Finalize v%s'",
+    "test": "eslint --fix ."
   },
   "devDependencies": {
     "eslint": "^2.6.0"
