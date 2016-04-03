@@ -158,7 +158,7 @@ I omit quotations when they're not necessary.
 Valid formats:
 
 ```js
-// No quotes needed for properties
+// No quotes for properties
 let stockton = {speed: 5, threePtrs: 5, dunks: 0, defense: 4};
 
 // Except when required
