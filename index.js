@@ -196,7 +196,7 @@ module.exports = {
     "semi-spacing": [2, {before: false, after: true}],
     "sort-imports": [2, {
       ignoreCase: true,
-      memberSyntaxSortOrder: ["single", "all", "multiple", "none"],
+      memberSyntaxSortOrder: ["none", "single", "multiple", "all"],
     }],
     "sort-vars": [2, {ignoreCase: true}],
     "space-before-blocks": [2, "always"],
