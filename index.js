@@ -148,12 +148,7 @@ module.exports = {
     "key-spacing": [2, {beforeColon: false, afterColon: true, mode: "strict"}],
     "keyword-spacing": [2, {before: true, after: true}],
     "linebreak-style": [2, "unix"],
-    "lines-around-comment": [2, {
-      beforeBlockComment: true,
-      allowBlockStart: true,
-      allowObjectStart: true,
-      allowArrayStart: true,
-    }],
+    "lines-around-comment": 0,
     "max-depth": 0,
     "max-len": [2, 80],
     "max-nested-callbacks": 0,
