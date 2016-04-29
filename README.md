@@ -36,10 +36,7 @@ Example test/.eslintrc.js:
 ```js
 module.exports = {
   env: {mocha: true},
-  rules: {
-    "func-names": 0,
-    "no-unused-expressions": 0,
-  },
+  rules: {"func-names": 0, "no-unused-expressions": 0},
 };
 ```
 
@@ -204,12 +201,16 @@ var drinks = [
 
 // > 80 characters
 var dilemma = "Has Anyone Really Been Far Even as Decided to Use Even Go Want"
-+ " to do Look More Like?";
+            + " to do Look More Like?";
 ```
 
 ## Indent
 
-I'll always cherish my time in callback hell, for it taught me the beauty of the 2 character indent. I say "character" instead of "space" because I'm of the opinion that operators such as `:`, `+`, `&&`, and `||` should serve as the indent in some situations. I'm also of the opinion that one must always resist the temptation to add a bunch of extra spaces to the start of each line in order to achieve some kind of cute alignment.
+I'll always cherish my time in callback hell, for it taught me the beauty of the 2 space indent.
+
+In a previous version of this guide, I advocated using operators such as `&&` in lieu of two spaces when applicable, and I stressed the importance of resisting the temptation to add extra spaces in an attempt to achieve some kind of cute alignment.
+
+I've changed my mind on both accounts. I now always use 2-space indents regardless of operators, and I've succumbed to the temptation of adding extra spaces to achieve alignment. Cuteness prevails.
 
 Valid formats:
 
@@ -218,21 +219,20 @@ Valid formats:
 function JohnMadden() {
   console.log("JohnMadden");
 
-  // "+ " serves as the indent; adding 2 spaces before it would decrease the
-  // number of "JohnMadden"s per line while adding nothing of value in return
+  // Being cute with extra spaces at the cost of a few Maddens
   console.log("JohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohn"
-  + "MaddenJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMadd"
-  + "enJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMadden");
+            + "MaddenJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMadd"
+            + "enJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMadden");
 }
 
 function isLog(val) {
-  // "&&" serves as the indent; fight the urge to add 4 spaces before each &&
+  // More being cute with extra spaces
   return rollsDownStairs(val)
-  && isAloneOrInPairs(val)
-  && rollsOverYourNeighborsDog(val)
-  && isGreatForASnack(val)
-  && fitsOnYourBack(val)
-  && isLogLogLog(val);
+      && isAloneOrInPairs(val)
+      && rollsOverYourNeighborsDog(val)
+      && isGreatForASnack(val)
+      && fitsOnYourBack(val)
+      && isLogLogLog(val);
 }
 
 // Nested indents
@@ -261,22 +261,22 @@ I'm a huge fan of the ternary operator, especially when it's nested within anoth
 Joking aside, I actually have grown rather fond of our ternary friend. Even when it's nested. But only when the following rules apply:
 
 1. Each `cond ? expr` pair must fit on its own line. The `: expr` may either be on the same line or the next.
-1. Multi-line statements aren't indented; the `:` serves as the indent.
+1. Multi-line statements are aligned based on the first condition
 1. No unnecessary parentheses; because of the first rule, it's rare to have to consider more than two operators at a time.
 
 Valid formats:
 
 ```js
-cond ? expr1 : expr2;   // If cond, expr1, else expr2
+let val = cond ? expr1 : expr2;   // If cond, expr1, else expr2
 
-cond ? expr1            // If cond, expr1
-: expr2;                // Else expr2
+let val = cond ? expr1            // If cond, expr1
+        : expr2;                  // Else expr2
 
-cond1 ? expr1           // If cond1, expr1
-: cond2 ? expr2         // Else if cond2, expr2
-: cond3 ? expr3         // Else if cond3, expr3
-: cond4 ? expr4         // Else if cond4, expr4
-: expr5;                // Else expr5
+let val = cond1 ? expr1           // If cond1, expr1
+        : cond2 ? expr2           // Else if cond2, expr2
+        : cond3 ? expr3           // Else if cond3, expr3
+        : cond4 ? expr4           // Else if cond4, expr4
+        : expr5;                  // Else expr5
 ```
 
 Examples:
@@ -285,10 +285,10 @@ Examples:
 // Meh
 function isDrinkable(milk, drinker) {
   return !isExpired(milk) && !isLactoseIntolerant(drinker) && (
-    (isBrownish(milk) && isActuallyYoohoo(milk) && !hatesFun(drinker))
-    || (isInABag(milk) && isCanadian(drinker))
-    || hasCookies(drinker)
-  );
+           (isBrownish(milk) && isActuallyYoohoo(milk) && !hatesFun(drinker)) ||
+           (isInABag(milk) && isCanadian(drinker)) ||
+           hasCookies(drinker)
+         );
 }
 
 // Better but excessive parentheses and repetition of "return"
@@ -302,9 +302,9 @@ function isDrinkable(milk, drinker) {
 // Better. Consider each line on its own: "if cond, return expr"
 function isDrinkable(milk, drinker) {
   return isExpired(milk) || isLactoseIntolerant(drinker) ? false
-  : isBrownish(milk) ? isActuallyYoohoo(milk) && !hatesFun(drinker)
-  : isInABag(milk) ? isCanadian(drinker)
-  : hasCookies(drinker);
+       : isBrownish(milk) ? isActuallyYoohoo(milk) && !hatesFun(drinker)
+       : isInABag(milk) ? isCanadian(drinker)
+       : hasCookies(drinker);
 }
 
 // Best
