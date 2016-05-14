@@ -224,9 +224,9 @@ function JohnMadden() {
             + "MaddenJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMadd"
             + "enJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMadden");
 
-  // No cute indent here; too restrictive
+  // No cute indent; it'd be too restrictive to start string so far to the right
   let brandNewJohnMaddenPlushie = getBrandNewJohnMaddenPlushie("footballfootbal"
-    + "footballfootballfootballfootballfootballfootballfootballfootballfootbal";
+    + "footballfootballfootballfootballfootballfootballfootballfootballfootba");
 }
 
 function isLog(val) {
