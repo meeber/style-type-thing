@@ -182,7 +182,7 @@ In general, I don't break a statement across multiple lines unless I have to.
 
 If an array literal, object literal, or parameter list exceeds the 80-character limit, then I move each item onto its own indented line.
 
-If a string exceeds the limit, then I concat it across multiple lines with the `+` placed at the start of each new line.
+If a string exceeds the limit, then I concat it across multiple lines.
 
 Valid formats:
 
@@ -210,7 +210,7 @@ I'll always cherish my time in callback hell, for it taught me the beauty of the
 
 In a previous version of this guide, I advocated using operators such as `&&` in lieu of two spaces when applicable, and I stressed the importance of resisting the temptation to add extra spaces in an attempt to achieve some kind of cute alignment.
 
-I've changed my mind on both accounts. I now always use 2-space indents regardless of operators, and I've succumbed to the temptation of adding extra spaces to achieve alignment. Cuteness prevails.
+I've changed my mind on both accounts. I now always use 2-space indents regardless of operators, and I've succumbed to the temptation of adding extra spaces (within reason) to achieve alignment. Cuteness prevails.
 
 Valid formats:
 
@@ -223,6 +223,10 @@ function JohnMadden() {
   console.log("JohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohn"
             + "MaddenJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMadd"
             + "enJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMaddenJohnMadden");
+
+  // No cute indent here; too restrictive
+  let brandNewJohnMaddenPlushie = getBrandNewJohnMaddenPlushie("footballfootbal"
+    + "footballfootballfootballfootballfootballfootballfootballfootballfootbal";
 }
 
 function isLog(val) {
