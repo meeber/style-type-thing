@@ -17,6 +17,7 @@ module.exports = {
     "no-extra-parens": [2, "all", {
       conditionalAssign: false,
       nestedBinaryExpressions: false,
+      returnAssign: false,
     }],
     "no-extra-semi": 2,
     "no-func-assign": 2,
@@ -80,7 +81,7 @@ module.exports = {
     "no-param-reassign": 0,
     "no-proto": 2,
     "no-redeclare": 2,
-    "no-return-assign": 0,
+    "no-return-assign": [2, "except-parens"],
     "no-script-url": 2,
     "no-self-assign": 2,
     "no-self-compare": 2,
@@ -180,6 +181,7 @@ module.exports = {
     "no-unneeded-ternary": 2,
     "no-whitespace-before-property": 2,
     "object-curly-spacing": [2, "never"],
+    "object-property-newline": [2, {allowMultiplePropertiesPerLine: true}],
     "one-var": [2, {initialized: "never"}],
     "one-var-declaration-per-line": [2, "initializations"],
     "operator-assignment": [2, "always"],
@@ -220,7 +222,10 @@ module.exports = {
     "no-useless-computed-key": 2,
     "no-useless-constructor": 2,
     "no-var": 2,
-    "object-shorthand": [2, "always"],
+    "object-shorthand": [2, "always", {
+      avoidQuotes: false,
+      ignoreConstructors: false,
+    }],
     "prefer-arrow-callback": [2, {
       allowNamedFunctions: true,
       allowUnboundThis: false,
