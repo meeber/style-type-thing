@@ -264,6 +264,8 @@ rules:
   operator-linebreak:
     - error
     - before
+    - overrides: 
+        =: after  
   padded-blocks:
     - error
     - never
