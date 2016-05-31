@@ -13,9 +13,9 @@
     "test": "eslint --fix ."
   },
   "devDependencies": {
-    "eslint": "^2.11.0"
+    "eslint": "^2.11.1"
   },
   "peerDependencies": {
-    "eslint": "^2.11.0"
+    "eslint": "^2.11.1"
   }
 }
