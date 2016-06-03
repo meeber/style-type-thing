@@ -1,3 +1,5 @@
+plugins:
+  - babel
 rules:
   # Possible Errors
   comma-dangle:
@@ -326,18 +328,13 @@ rules:
   arrow-body-style:
     - error
     - as-needed
-  arrow-parens:
-    - error
-    - as-needed
+  arrow-parens: off
   arrow-spacing:
     - error
     - after: true
       before: true
   constructor-super: error
-  generator-star-spacing:
-    - error
-    - after: true
-      before: false
+  generator-star-spacing: off
   no-class-assign: error
   no-confusing-arrow: off
   no-const-assign: error
@@ -378,3 +375,13 @@ rules:
     - error
     - after: false
       before: true
+
+  # Babel
+  babel/arrow-parens:
+    - error
+    - as-needed
+  babel/generator-star-spacing:
+    - error
+    - after: true
+      before: false
+  babel/no-await-in-loop: error
