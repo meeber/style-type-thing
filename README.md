@@ -12,38 +12,39 @@ The purpose of this project is to document the reasonings behind my JavaScript s
 ## Install
 
 ```
-npm install eslint-config-tt --save-dev
+npm install --save-dev eslint-config-tt
 ```
 
-And if you haven't already `npm install eslint --save-dev`
+And if you haven't already:
+
+```
+npm install --save-dev eslint eslint-plugin-babel babel-eslint
+```
 
 ## Usage
 
 Modify the "extends" directive in your ESLint config file to include "tt".
 
-Example .eslintrc.js:
+Example .eslintrc.yml:
 
-```js
-module.exports = {
-  parserOptions: {ecmaVersion: 7, sourceType: "module"},
-  env: {node: true, es6: true},
-  extends: "tt",
-};
+```yaml
+parser: babel-eslint
+parserOptions:
+  ecmaVersion: 7
+  sourceType: module
+env:
+  es6: true
+  node: true
+extends: eslint-config-tt
 ```
 
-Example test/.eslintrc.js:
+Example test/.eslintrc.yml:
 
-```js
-module.exports = {
-  env: {mocha: true},
-  rules: {"func-names": 0, "no-unused-expressions": 0},
-};
-```
-
-Example .eslintignore:
-
-```
-dist/
+```yaml
+env:
+  mocha: true
+rules:
+  no-unused-expressions: off
 ```
 
 Example package.json:
@@ -51,7 +52,7 @@ Example package.json:
 ```json
 {
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint --fix ."
   }
 }
 ```
