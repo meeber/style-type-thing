@@ -98,7 +98,9 @@ rules:
   no-new-wrappers: error
   no-octal: error
   no-octal-escape: error
-  no-param-reassign: off
+  no-param-reassign:
+    - error
+    - props: false
   no-proto: error
   no-redeclare: error
   no-return-assign:
@@ -362,7 +364,10 @@ rules:
     - error
     - allowNamedFunctions: true
       allowUnboundThis: false
-  prefer-const: off
+  prefer-const:
+    - error
+    - destructuring: any
+      ignoreReadBeforeAssign: false
   prefer-reflect: error
   prefer-rest-params: error
   prefer-spread: error

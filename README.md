@@ -65,19 +65,22 @@ If this was 1997, there'd be a few "Under Construction" GIFs and a marquee tag.
 
 ## var VS let VS const
 
-`var` and I had a good run but it's over now and there's no turning back. From this point on, it's just me and `let` and the loveable yet somewhat misleading `const`.
+`var` and I had a good run but it's over now and there's no turning back.
 
-My preference is to favor `let` over `const`, only using the latter when all of the following conditions are met:
+Prior to v3.0.0 of this guide, it was my preference to favor `let` over `const` because of my inner English Major wanting the word "constant" to prevent both a variable from being reassigned as well as an object's properties from being mutated.
 
-1. The value is a primitive (or a frozen object with primitive properties only).
-1. The value is known at build time.
-1. The value should definitely never change during execution.
+I've changed my mind. I now follow these rules:
 
-The name of a `const` should be in all caps with words separated by underscores.
+1. Use `const` when a variable should never be reassigned. Otherwise use `let`.
+1. Never reassign function parameters.
+1. Name constants in all caps with words seperated by underscores when the value is known at build time.
+1. Use `Object.freeze` when all of a constant's properties are known at build time and should never be reassigned.
 
 Valid formats:
 
 ```js
+const favoriteBand = requestFavoriteBand();
+
 const FRONT_MAN_FOR_FOO_FIGHTERS = "Dave Grohl";
 
 const DURATION = Object.freeze({
@@ -86,52 +89,6 @@ const DURATION = Object.freeze({
   EVERLONG: Symbol(),
 });
 ```
-
-I fear that my style is not a popular one. The prevalent opinion among the JavaScript community is to favor `const` over `let`, only using the latter when there exists at least one reachable codepath which reassigns the variable to a different value. And to their credit, this opinion is perfectly in line with the spec.
-
-But it also creates a problem. Consider the following example:
-
-```js
-class MusicalGenius {
-  constructor (hasPrettyFace) {
-    this.hasPrettyFace = hasPrettyFace;
-  }
-}
-
-const bieber = new MusicalGenius(true);
-```
-
-When I look at this code, I think: "bieber is a Musical Genius with a pretty face, and he'll always remain that way." And I find myself smiling in agreement.
-
-But then something like this happens:
-
-```js
-bieber.hasPrettyFace = false; // Valid
-```
-
-What the hell, B? You were supposed to stay beautiful forever :(
-
-My problem is that even though I understand that `const` deals with variable reassignment, not value mutability, my brain wants it to deal with both.
-
-My brain wants this...
-
-```js
-const artist = {name: "Prince"};
-
-artist.name = Symbol("Love"); // Valid
-```
-
-...to work the same way as this...
-
-```js
-const artist = "Prince";
-
-artist = Symbol("Love"); // Invalid
-```
-
-The fact that they don't work the same way (and never could without introducing some seriously weird behavior with nested objects) adds a small cognitive cost to the `const` statement. Unfortunately, the benefits of favoring `const` over `let` are also small--too small to afford any kind of associated cost. That's why some people have a problem with `const` merely on the grounds that it contains two extra characters.
-
-It just ain't worth it.
 
 ## == VS ===
 
