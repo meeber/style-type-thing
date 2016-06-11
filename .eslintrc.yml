@@ -27,7 +27,7 @@ rules:
     - error
     - all
     - conditionalAssign: false
-      nestedBinaryExpressions: false
+      nestedBinaryExpressions: true
       returnAssign: false
   no-extra-semi: error
   no-func-assign: error
@@ -221,6 +221,7 @@ rules:
   max-len:
     - error
     - 80
+  max-lines: off
   max-nested-callbacks: off
   max-params: off
   max-statements: off
@@ -238,6 +239,9 @@ rules:
   no-continue: off
   no-inline-comments: error
   no-lonely-if: error
+  no-mixed-operators:
+    - error
+    - allowSamePrecedence: true
   no-mixed-spaces-and-tabs: error
   no-multiple-empty-lines:
     - error
@@ -253,6 +257,9 @@ rules:
   no-underscore-dangle: off
   no-unneeded-ternary: error
   no-whitespace-before-property: error
+  object-curly-newline:
+    - error
+    - multiline: true
   object-curly-spacing:
     - error 
     - never
@@ -330,6 +337,7 @@ rules:
   arrow-body-style:
     - error
     - as-needed
+    - requireReturnForObjectLiteral: false
   arrow-parens: off
   arrow-spacing:
     - error
@@ -373,6 +381,9 @@ rules:
   prefer-spread: error
   prefer-template: error
   require-yield: error
+  rest-spread-spacing:
+    - error
+    - never
   template-curly-spacing:
     - error
     - never
