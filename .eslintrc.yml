@@ -151,7 +151,7 @@ rules:
 
   # Node.js and CommonJS
   callback-return: error
-  global-require: error
+  global-require: off
   handle-callback-err: error
   no-mixed-requires: error
   no-new-require: error
