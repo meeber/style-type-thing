@@ -398,6 +398,9 @@ rules:
   babel/arrow-parens:
     - error
     - as-needed
+  babel/func-params-comma-dangle:
+    - error
+    - always-multiline
   babel/generator-star-spacing:
     - error
     - after: true
