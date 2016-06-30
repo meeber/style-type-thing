@@ -63,9 +63,7 @@ rules:
     - error
     - property
   dot-notation: error
-  eqeqeq:
-    - error
-    - smart
+  eqeqeq: error
   guard-for-in: error
   no-alert: error
   no-caller: error
@@ -133,7 +131,7 @@ rules:
     - global
 
   # Variables
-  init-declarations: off
+  init-declarations: error
   no-catch-shadow: off
   no-delete-var: error
   no-label-var: error
@@ -142,7 +140,7 @@ rules:
   no-shadow-restricted-names: error
   no-undef: error
   no-undef-init: error
-  no-undefined: off
+  no-undefined: error
   no-unused-vars: error
   no-use-before-define:
     - error
