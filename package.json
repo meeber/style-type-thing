@@ -13,11 +13,11 @@
     "test": "eslint --fix ."
   },
   "devDependencies": {
-    "eslint": "^3.0.0",
+    "eslint": "^3.0.1",
     "eslint-plugin-babel": "^3.3.0"
   },
   "peerDependencies": {
-    "eslint": "^3.0.0",
+    "eslint": "^3.0.1",
     "eslint-plugin-babel": "^3.3.0"
   }
 }
