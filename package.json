@@ -5,6 +5,9 @@
   "author": "Grant Snodgrass <meeber@gametypething.com>",
   "license": "MIT",
   "repository": "meeber/style-type-thing",
+  "engines": {
+    "node": ">=4.0.0"
+  },
   "main": ".eslintrc.yml",
   "scripts": {
     "postversion": "git checkout dev && git merge master && git push && git push --tags && npm publish",
