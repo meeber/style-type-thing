@@ -204,7 +204,7 @@ rules:
     - 2
     - SwitchCase: 1
       VariableDeclarator: 1
-      outerIIFEBody: true
+      outerIIFEBody: 1
   jsx-quotes: off
   key-spacing:
     - error
