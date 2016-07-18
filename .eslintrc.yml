@@ -333,6 +333,8 @@ rules:
   spaced-comment:
     - error
     - always
+    - block:
+        balanced: true
   unicode-bom:
     - error
     - never

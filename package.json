@@ -16,11 +16,11 @@
     "test": "echo '// just validating eslint config' | eslint --stdin"
   },
   "devDependencies": {
-    "eslint": "^3.1.0",
+    "eslint": "^3.1.1",
     "eslint-plugin-babel": "^3.3.0"
   },
   "peerDependencies": {
-    "eslint": "^3.1.0",
+    "eslint": "^3.1.1",
     "eslint-plugin-babel": "^3.3.0"
   }
 }
