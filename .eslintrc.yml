@@ -207,6 +207,7 @@ rules:
     - SwitchCase: 1
       VariableDeclarator: 1
       outerIIFEBody: 1
+      MemberExpression: 1
   jsx-quotes: off
   key-spacing:
     - error
@@ -257,6 +258,7 @@ rules:
   no-plusplus: off
   no-restricted-syntax: off
   no-spaced-func: error
+  no-tabs: error
   no-ternary: off
   no-trailing-spaces: error
   no-underscore-dangle: off
