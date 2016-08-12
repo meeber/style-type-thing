@@ -41,9 +41,11 @@ rules:
   no-prototype-builtins: error
   no-regex-spaces: error
   no-sparse-arrays: off
+  no-template-curly-in-string: error
   no-unexpected-multiline: error
   no-unreachable: error
   no-unsafe-finally: error
+  no-unsafe-negation: error
   use-isnan: error
   valid-jsdoc: off
   valid-typeof: error
@@ -63,7 +65,10 @@ rules:
     - error
     - property
   dot-notation: error
-  eqeqeq: error
+  eqeqeq:
+    - error
+    - always
+    - null: always
   guard-for-in: error
   no-alert: error
   no-caller: error
@@ -79,6 +84,7 @@ rules:
   no-extra-label: error
   no-fallthrough: error
   no-floating-decimal: error
+  no-global-assign: error
   no-implicit-coercion: off
   no-implicit-globals: error
   no-implied-eval: error
@@ -105,7 +111,9 @@ rules:
     - error
     - except-parens
   no-script-url: error
-  no-self-assign: error
+  no-self-assign:
+    - error
+    - props: true
   no-self-compare: error
   no-sequences: error
   no-throw-literal: error
@@ -191,6 +199,9 @@ rules:
   eol-last:
     - error
     - unix
+  func-call-spacing:
+    - error
+    - never
   func-names:
     - error
     - always
@@ -315,6 +326,11 @@ rules:
         - single
         - multiple
         - all
+  sort-keys:
+    - error
+    - asc
+    - caseSensitive: false
+      natural: true
   sort-vars:
     - error
     - ignoreCase: true
