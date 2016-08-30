@@ -48,12 +48,15 @@ rules:
   no-unsafe-negation: error
   use-isnan: error
   valid-jsdoc: off
-  valid-typeof: error
+  valid-typeof:
+    - error
+    - requireStringLiterals: true
 
   # Best Practices
   accessor-pairs: off
   array-callback-return: error
   block-scoped-var: error
+  class-methods-use-this: error
   complexity: off
   consistent-return: off
   curly:
@@ -409,6 +412,7 @@ rules:
   rest-spread-spacing:
     - error
     - never
+  symbol-description: error
   template-curly-spacing:
     - error
     - never
