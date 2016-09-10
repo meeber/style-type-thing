@@ -170,6 +170,7 @@ rules:
   no-process-env: off
   no-process-exit: error
   no-restricted-modules: off
+  no-restricted-properties: off
   no-sync: off
 
   # Stylistic Issues
@@ -222,6 +223,12 @@ rules:
       VariableDeclarator: 1
       outerIIFEBody: 1
       MemberExpression: 1
+      FunctionDeclaration:
+        parameters: 1
+        body: 1
+      FunctionExpression:
+        parameters: 1
+        body: 1
   jsx-quotes: off
   key-spacing:
     - error
@@ -232,14 +239,27 @@ rules:
     - error
     - after: true
       before: true
+  line-comment-position:
+    - error
+    - position: above
   linebreak-style:
     - error
     - unix
   lines-around-comment: off
+  lines-around-directive:
+    - error
+    - always
   max-depth: off
   max-len:
     - error
-    - 80
+    - code: 80
+      tabWidth: 2
+      comments: 80
+      ignoreComments: false
+      ignoreTrailingComments: false
+      ignoreUrls: false
+      ignoreStrings: false
+      ignoreTemplateLiterals: false
   max-lines: off
   max-nested-callbacks: off
   max-params: off
@@ -404,6 +424,7 @@ rules:
     - error
     - destructuring: any
       ignoreReadBeforeAssign: false
+  prefer-numeric-literals: error
   prefer-reflect: error
   prefer-rest-params: error
   prefer-spread: error
