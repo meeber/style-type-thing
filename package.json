@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-tt",
-  "version": "5.5.0",
+  "version": "5.6.0",
   "description": "style guide and ESLint config",
   "author": "Grant Snodgrass <meeber@gametypething.com>",
   "license": "MIT",
