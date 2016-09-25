@@ -202,7 +202,7 @@ rules:
     - self
   eol-last:
     - error
-    - unix
+    - always
   func-call-spacing:
     - error
     - never
@@ -386,13 +386,18 @@ rules:
     - error
     - as-needed
     - requireReturnForObjectLiteral: false
-  arrow-parens: off
+  arrow-parens:
+    - error
+    - as-needed
   arrow-spacing:
     - error
     - after: true
       before: true
   constructor-super: error
-  generator-star-spacing: off
+  generator-star-spacing:
+    - error
+    - after: true
+      before: false
   no-class-assign: error
   no-confusing-arrow: off
   no-const-assign: error
@@ -443,14 +448,7 @@ rules:
       before: true
 
   # Babel
-  babel/arrow-parens:
-    - error
-    - as-needed
   babel/func-params-comma-dangle:
     - error
     - always-multiline
-  babel/generator-star-spacing:
-    - error
-    - after: true
-      before: false
   babel/no-await-in-loop: error
