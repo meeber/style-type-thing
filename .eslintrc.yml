@@ -386,10 +386,7 @@ rules:
   wrap-regex: off
 
   # ECMAScript 6
-  arrow-body-style:
-    - error
-    - as-needed
-    - requireReturnForObjectLiteral: false
+  arrow-body-style: off  # Enable if ever setting enforcing braces on multiline
   arrow-parens:
     - error
     - as-needed
