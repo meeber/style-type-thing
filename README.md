@@ -73,7 +73,7 @@ I've changed my mind. I now follow these rules:
 
 1. Use `const` when a variable should never be reassigned. Otherwise use `let`.
 1. Never reassign function parameters.
-1. Name constants in all caps with words seperated by underscores when the value is known at build time.
+1. Name constants in all caps with words separated by underscores when the value is known at build time.
 1. Use `Object.freeze` when all of a constant's properties are known at build time and should never be reassigned.
 
 Valid formats:
