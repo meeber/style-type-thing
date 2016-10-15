@@ -1,10 +1,12 @@
-plugins:
-  - babel
 rules:
   # Possible Errors
   comma-dangle:
     - error
-    - always-multiline
+    - arrays: always-multiline
+      exports: always-multiline
+      functions: always-multiline
+      imports: always-multiline
+      objects: always-multiline
   no-cond-assign:
     - error
     - always
@@ -138,6 +140,7 @@ rules:
   wrap-iife:
     - error
     - inside
+    - functionPrototypeMethods: true
   yoda:
     - error
     - never
@@ -210,6 +213,9 @@ rules:
   func-call-spacing:
     - error
     - never
+  func-name-matching:
+    - error
+    - includeCommonJSModuleExports: false
   func-names:
     - error
     - always
@@ -366,7 +372,9 @@ rules:
     - always
   space-before-function-paren:
     - error
-    - always
+    - anonymous: always
+      asyncArrow: always
+      named: always
   space-in-parens:
     - error
     - never
@@ -447,9 +455,3 @@ rules:
     - error
     - after: false
       before: true
-
-  # Babel
-  babel/func-params-comma-dangle:
-    - error
-    - always-multiline
-  babel/no-await-in-loop: error
