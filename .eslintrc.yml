@@ -1,12 +1,5 @@
 rules:
   # Possible Errors
-  comma-dangle:
-    - error
-    - arrays: always-multiline
-      exports: always-multiline
-      functions: always-multiline
-      imports: always-multiline
-      objects: always-multiline
   no-cond-assign:
     - error
     - always
@@ -194,6 +187,13 @@ rules:
   camelcase:
     - error
     - properties: always
+  comma-dangle:
+    - error
+    - arrays: always-multiline
+      exports: always-multiline
+      functions: always-multiline
+      imports: always-multiline
+      objects: always-multiline
   comma-spacing:
     - error
     - after: true
