@@ -960,24 +960,24 @@ rules:
 
   # Never give a function expression a different name than the variable or
   # object property to which it's assigned (except when assigning
-  # `module.exports`); it reduces readability. Instead, don't give it a name at
-  # all; modern engines correctly detect its name based on assignment. But if
-  # giving it a name, then give it the same name as the variable or object
-  # property.
+  # `module.exports`); it reduces readability. Instead, give it the same name.
+  # Or better yet, don't give it a name at all; in ES6, most functions are named
+  # automatically.
+  #
+  # See the `func-names` rule for future changes that might impact this rule.
   func-name-matching:
     - error
     - includeCommonJSModuleExports: false
 
-  # Never give a function expression a name when assigning it to a variable or
-  # object property, and always give it a name when not; modern engines
-  # correctly detect its name based on assignment, but if no assignment is being
-  # made, then it must be explicitly provided. Otherwise, stack traces are less
-  # clear.
+  # Always name function expressions when they're not automatically named;
+  # otherwise, it reduces debuggability due to less explicit stack traces. Also,
+  # never name function expressions when they're automatically named; repeating
+  # or changing the name adds complexity without value.
   #
-  # Note that this rule is disabled because it doesn't support the desired
-  # policy. It'd be nice if there was an option that made it so that function
-  # expression names are only required when not being assigned to a variable or
-  # an object property.
+  # Note that this rule is disabled because it doesn't currently support the
+  # desired policy. If https://github.com/eslint/eslint/pull/7244 is merged,
+  # then this rule will be enabled with the `uninferred` option. Also note that
+  # context-based automatic naming of functions is new to ES6.
   func-names: off
 
   # Only use a function expression or arrow function when necessary. Otherwise,
