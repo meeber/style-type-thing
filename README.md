@@ -7,15 +7,15 @@ JavaScript style guide and ESLint config.
 
 ## Introduction
 
-This project contains my personal ESLint config. Every ESLint rule is documented in the config file, regardless of whether or not it's enabled. Documentation includes justification of each rule, along with guidance on how to adhere to the rule. In some instances, this documentation amounts to little more than paraphrasing of the official ESLint documentation. However, in many cases, there are fresh insights to be gained.
+This project contains my personal ESLint config. Every ESLint rule is documented in the config file, regardless of whether or not it's enabled. Documentation includes justification of each rule, along with guidance on how to follow the rule. In some instances, this documentation amounts to little more than paraphrasing of the official ESLint documentation. However, in many cases, there are fresh insights to be gained.
 
 ## Can this help you?
 
-It's unlikely that this ESLint config will perfectly suit your tastes. Many of the rules are subjective, some extremely so. That's OK, because this project isn't intended to serve as the standard for anyone's projects but my own. But that doesn't mean it can't be of any use to you. An enormous amount of time went into the research and deliberation of these rules, and it's possible that the resulting documentation can assist you with defining your own ESLint config, even if it ends up being contrary to mine.
+It's unlikely that this ESLint config will perfectly suit your tastes. Many of the rules are subjective, some extremely so. That's OK, because this project isn't intended to serve as the standard for anyone's projects but my own. But that doesn't mean it can't be of any use to you. An enormous amount of time went into the research and deliberation of these rules, and it's possible that the resulting documentation can help you to define your own ESLint config, even if it ends up being contrary to mine.
 
 ## Values
 
-My values have changed significantly over the years as I've progressed from creating solo projects at home, to writing software at work that needed to be understood, debugged, and modified by system administrators (instead of developers), to finally working on popular open source libraries that are both used and contributed to by developers of widely varying skill levels and ideologies.
+My values have changed significantly over the years as I've progressed from creating solo projects at home, to writing software at work that must be understood, debugged, and modified by system administrators (instead of developers), to finally working on popular open source libraries that are both used and contributed to by developers of widely varying skill levels and ideologies.
 
 Ranked by priority, I value:
 
@@ -80,7 +80,7 @@ Many ESLint rules disallow language features or coding styles that achieve conci
 
 ### Performance
 
-Performance doesn't matter. Most of the time. Or rather, a small gain in performance usually isn't worth whatever sacrifice must be made to achieve it.
+Performance doesn't matter. Most of the time. Or rather, a small gain in performance usually isn't worth whatever sacrifice that must be made to achieve it.
 
 But there are exceptions. Performance is the one value that can suddenly and drastically increase in priority, all the way from last to first, not replacing correctness but rather combining with it. That's because when there's a problem with performance, it's usually so severe that the software no longer fulfills its requirements, and is thus no longer correct. In such cases, the performance problem must be fixed at any cost.
 
