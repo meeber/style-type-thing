@@ -63,8 +63,8 @@ rules:
 
   # Don't write an empty block of code unless necessary, in which case express
   # intent by adding a comment inside. Otherwise, there's doubt about whether or
-  # not it's intentional; it's common to accidentally be left with an empty
-  # block of code after refactoring.
+  # not it's intentional; it's a common accident to be left with an empty block
+  # of code after refactoring.
   no-empty:
     - error
     - allowEmptyCatch: false
