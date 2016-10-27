@@ -7,10 +7,11 @@ rules:
   # Possible Errors #
   ###################
 
-  # Don't put an assignment expression inside of a conditional unless necessary,
-  # in which case express intent by disabling this rule via an inline comment.
-  # Otherwise, there's doubt about whether or not it's intentional; it's common
-  # to accidentally type `=` instead of `===`.
+  # Don't put an assignment expression inside of a conditional unless necessary
+  # for a reason other than elegance, in which case express intent by disabling
+  # this rule via an inline comment. Otherwise, it reduces correctness, and
+  # reduces expressiveness by creating doubt: did the developer accidentally
+  # type `=` instead of `===`?
   #
   # The `always` option is set instead of the default `except-parens` option
   # because wrapping the assignment in an extra set of parenthesis isn't
@@ -22,73 +23,78 @@ rules:
   # Don't release code containing a `console` statement unless in a development
   # environment, in which case set this rule to `warn` instead of `error` in the
   # local config file so that the build doesn't fail but reminders are still
-  # provided.
+  # provided. Otherwise, debugging information is needlessly leaked to users.
   no-console: error
 
-  # Don't use a constant expression as a conditional unless necessary, in which
-  # case express intent by disabling this rule via an inline comment, or assign
-  # the constant to a variable with an explanatory name. Otherwise, there's
-  # doubt about whether or not it's intentional; it's common to make a mistake
-  # in logic that results in an infinite loop or an `if` statement that always
-  # has the same result.
+  # Don't use a constant expression as a conditional unless necessary for a
+  # reason other than elegance, in which case express intent by disabling this
+  # rule via an inline comment, or assign the constant to a variable with an
+  # explanatory name. Otherwise, it reduces correctness, and reduces
+  # expressiveness by creating doubt: did the developer accidentally create an
+  # infinite loop?
   no-constant-condition:
     - error
     - checkLoops: true
 
   # Feel free to use control characters in regular expressions.
   #
-  # This rule is disabled because it doesn't add enough value. There are
-  # legitimate uses for control characters, especially in server-side
-  # programming. They're rarely used on accident, and even when they are, the
-  # consequences usually aren't severe.
+  # This rule is disabled because the value it attempts to add in terms of
+  # correctness isn't worth the reduction in elegance. There are legitimate uses
+  # for control characters, especially in server-side programming. They're
+  # rarely used on accident, and even when they are, the problem is easily
+  # detected and corrected.
   no-control-regex: off
 
   # Don't release code containing a `debugger` statement unless in a development
   # environment, in which case set this rule to `warn` instead of `error` in the
   # local config file so that the build doesn't fail but reminders are still
-  # provided.
+  # provided. Otherwise, debugging information is needlessly leaked to users.
   no-debugger: error
 
   # Never define a function that has multiple arguments with the same name; the
-  # last occurrence shadows the one(s) before it.
+  # last occurrence shadows the one(s) before it, thus reducing correctness.
   no-dupe-args: error
 
   # Never define an object literal that has multiple properties with the same
-  # name; the last occurrence shadows the one(s) before it.
+  # name; the last occurrence shadows the one(s) before it, thus reducing
+  # correctness.
   no-dupe-keys: error
 
   # Never define a `switch` statement that has multiple cases with the same
-  # clause; the first occurrence is the only one that'll ever be matched.
+  # clause; the first occurrence is the only one that'll ever be matched, thus
+  # reducing correctness.
   no-duplicate-case: error
 
   # Don't write an empty block of code unless necessary, in which case express
-  # intent by adding a comment inside. Otherwise, there's doubt about whether or
-  # not it's intentional; it's a common accident to be left with an empty block
-  # of code after refactoring.
+  # intent by adding a comment inside. Otherwise, it reduces elegance, and
+  # reduces expressiveness by creating doubt: did the developer accidentally
+  # leave behind an empty block after refactoring?
   no-empty:
     - error
     - allowEmptyCatch: false
 
   # Never include empty brackets in a regular expression; an empty character set
-  # doesn't match anything. If needing to include "[]" as part of the pattern,
-  # then escape each bracket.
+  # doesn't match anything, thus reducing correctness. If needing to include
+  # "[]" as part of the pattern, then escape each bracket.
   no-empty-character-class: error
 
-  # Never reassign the exception parameter in a `catch` block; there's an
-  # expectation that the exception parameter will always reference the caught
-  # error. Instead, assign the exception to a separate variable that can later
-  # be reassigned as necessary.
+  # Never reassign the exception parameter in a `catch` block; it reduces
+  # conventionality by defying the expectation that the exception parameter will
+  # always reference the caught error. Instead, assign the exception to a
+  # separate variable that can later be reassigned as necessary.
   no-ex-assign: error
 
   # Never cast a variable to a boolean as part of a test condition; it's done
-  # automatically by the engine.
+  # automatically by the engine. Manually doing so reduces elegance and
+  # performance in a misguided attempt to add expressiveness where it's not
+  # needed.
   no-extra-boolean-cast: error
 
   # Always add extra parentheses when combining binary expressions of varying
-  # precedence; it makes the logic easier to understand, and it removes doubt
-  # about whether or not the expressions were written with a correct
-  # understanding of the order of operations. Never add extra parentheses in
-  # other situations; it reduces readability without adding value.
+  # precedence; it increases correctness, and increases expressiveness by
+  # removing doubt: did the developer fully understand order of operations?
+  # Never add extra parentheses in other situations; it reduces elegance without
+  # adding expressiveness.
   #
   # Note that the `no-mixed-operators` rule is the one that enforces the use of
   # extra parentheses when combining binary expressions of varying precedence.
@@ -102,14 +108,15 @@ rules:
       returnAssign: false
 
   # Never put semicolons anywhere that not even automatic semicolon insertion
-  # would add one; it reduces readability without adding value. It's a common
+  # would add one; it reduces elegance without adding value. It's a common
   # accident to type `;;` instead of `;`, or to add a `;` after the closing
   # brace of a function declaration.
   no-extra-semi: error
 
-  # Never reassign a function declaration; there's an expectation that a
-  # function defined in this way will never be reassigned. Instead, assign a
-  # function expression to a variable that can later be reassigned as necessary.
+  # Never reassign a function declaration; it reduces conventionality by defying
+  # the expectation that a function defined in this manner will never be
+  # reassigned. Instead, assign a function expression to a variable that can
+  # later be reassigned as necessary.
   no-func-assign: error
 
   # Feel free to use function declarations in nested blocks; starting with ES6,
@@ -120,14 +127,15 @@ rules:
   no-inner-declarations: off
 
   # Never put an invalid regular expression inside of a `RegExp` constructor; it
-  # throws a `SyntaxError` when executed.
+  # throws a `SyntaxError` when executed, thus reducing correctness.
   no-invalid-regexp: error
 
-  # Don't use non-standard whitespace characters unless necessary, in which case
-  # express intent by disabling this rule via an inline comment. Otherwise, it
-  # can lead to unexpected behavior during string operations, and there's doubt
-  # about whether or not it's intentional; it's a common accident to copy and
-  # paste code from the web that contains non-standard whitespace characters.
+  # Don't use non-standard whitespace characters unless necessary for a reason
+  # other than elegance, in which case express intent by disabling this rule via
+  # an inline comment. Otherwise, it reduces correctness during string
+  # operations, and reduces expressiveness by creating doubt: did the developer 
+  # accidentally copy and paste code from the web that contained non-standard
+  # whitespace characters?
   no-irregular-whitespace:
     - error
     - skipStrings: false
@@ -136,58 +144,64 @@ rules:
       skipTemplates: false
 
   # Never invoke non-function global objects such as `Math` or `JSON` as if
-  # they're functions; it throws a `TypeError` when executed.
+  # they're functions; it throws a `TypeError` when executed, thus reducing
+  # correctness.
   no-obj-calls: error
 
   # Never directly invoke an `Object.prototype` method on an object; it's
   # possible for such methods to be shadowed, or for an object to not even have
-  # `Object.prototype` in its prototype chain. Instead, use `call`, or wrap them
-  # in stand-alone helper functions.
+  # `Object.prototype` in its prototype chain, thus reducing correctness.
+  # Instead, use `call`, or wrap them in stand-alone helper functions.
   no-prototype-builtins: error
 
-  # Never chain multiple spaces together in a regex; it makes it difficult to
-  # count the number of spaces, and it creates doubt about whether or not the
-  # current number of spaces is intentional; it's a common accident to type `  `
-  # instead of ` `. Instead, use a single space followed by `{n}` where `n` is
+  # Never chain multiple spaces together in a regex; it reduces debuggability
+  # by making it difficult to count the number of spaces, and reduces
+  # expressiveness by creating doubt: did the developer accidentally type `  `
+  # instead of ` `? Instead, use a single space followed by `{n}` where `n` is
   # the number of spaces.
   no-regex-spaces: error
 
-  # Don't create a sparse array unless necessary, in which case express intent
-  # by disabling this rule via an inline comment. Otherwise, there's doubt about
-  # whether or not it's intentional; it's a common accident to type `,,` instead
-  # of `,`.
+  # Don't create a sparse array unless necessary for a reason other than
+  # elegance or performance, in which case express intent by disabling this rule
+  # via an inline comment. Otherwise, it reduces correctness, and reduces
+  # expressiveness by creating doubt: did the developer accidentally type `,,`
+  # instead of `,`?
   no-sparse-arrays: error
 
   # Don't put a template literal placeholder such as `${var}` inside of a
-  # single- or double-quoted string unless necessary, in which case express
-  # intent by disabling this rule via an inline comment. Otherwise, there's
-  # doubt about whether or not it's intentional; it's a common accident to use
-  # single or double quotes instead of backticks.
+  # single- or double-quoted string unless necessary for a reason other than
+  # elegance, in which case express intent by disabling this rule via an inline
+  # comment. Otherwise, it reduces correctness, and reduces expressiveness by
+  # creating doubt: did the developer accidentally use single or double quotes
+  # instead of backticks?
   no-template-curly-in-string: error
 
   # Never split an expression across multiple lines in such a way that the
-  # newline looks like it's ending the statement when it's not; it creates
-  # confusion without adding value.
+  # newline looks like it's ending the statement when it's not; it reduces
+  # correctness and elegance without adding value.
   no-unexpected-multiline: error
 
-  # Never put code after an unconditional exit statement; it's never executed.
+  # Never put code after an unconditional exit statement; it's never executed,
+  # thus reducing correctness.
   no-unreachable: error
 
   # Never put a control flow statement such as `return` inside of a `finally`
-  # block; it leads to unexpected behavior because it's not commonly understood
-  # that control flow statements inside of a `finally` block take priority over
-  # control flow statement inside of a `try` or `catch` block.
+  # block; it reduces correctness, and reduces accessibility because it's not
+  # commonly understood that control flow statements inside of a `finally` block
+  # take priority over control flow statement inside of a `try` or `catch`
+  # block.
   no-unsafe-finally: error
 
-  # Never negate the left operand when using `in` or `instanceof`; it leads to
-  # unexpected behavior, and it creates doubt about whether or not it's
-  # intentional; it's common to forget that only the left operand is negated,
-  # not the full expression. Instead, either wrap the full expression in
-  # parentheses after the `!`, or refactor so that such ambiguity is avoided.
+  # Never negate the left operand when using `in` or `instanceof`; it reduces
+  # correctness, and reduces expressiveness by creating doubt: did the developer
+  # accidentally negate the operand instead of the full expression by forgetting
+  # to wrap the full expression in parentheses?
   no-unsafe-negation: error
 
-  # Never compare a value to `NaN`; it leads to unexpected behavior due to `NaN`
-  # not being equal to itself. Instead, use `isNaN` or `Number.isNaN`.
+  # Never compare a value to `NaN`; it reduces correctness, and reduces
+  # accessibility because it's not commonly understood that `NaN` is the only
+  # value in JavaScript that's not equal to itself. Instead, use `isNaN` or
+  # `Number.isNaN`.
   use-isnan: error
 
   # This rule is disabled due to lack of jsdoc usage. It may be enabled in the
@@ -195,9 +209,11 @@ rules:
   valid-jsdoc: off
 
   # Never compare a `typeof` expression to any string literal other than one of
-  # the valid types; it always fails. The `requireStringLiterals` option is set
-  # to `false` because comparing a `typeof` expression to a variable isn't a
-  # problem.
+  # the valid types; it always fails, thus reducing correctness.
+  #
+  # The `requireStringLiterals` option is set to `false` because comparing a
+  # `typeof` expression to a variable is a normal thing to do, and it doesn't
+  # inherently reduce correctness.
   valid-typeof:
     - error
     - requireStringLiterals: false
@@ -207,32 +223,35 @@ rules:
   ##################
 
   # Never define a setter via `set` without a corresponding getter, or
-  # vice-versa; there's an expectation that a property that can be assigned a
-  # value via an assignment operator can also have the value retrieved via
-  # simple property access, and vice-versa.
+  # vice-versa; it reduces conventionality by defying the expectation that a
+  # property that can be assigned a value via an assignment operator can also
+  # have the value retrieved via simple property access, and vice-versa.
   accessor-pairs:
     - error
     - setWithoutGet: true
       getWithoutSet: true
   
   # Never invoke one of Array's map/reduce methods without returning a value in
-  # the callback; such methods rely on the return value to fulfill their
-  # purpose. If the method was just being used to invoke a function for each
-  # entry in an array, then use `Array.prototype.forEach` instead.
+  # the callback; it reduces correctness, and reduces expressiveness by creating
+  # doubt: did the developer forget to return a value? If the method was just
+  # being used to invoke a function for each entry in an array, then use
+  # `Array.prototype.forEach` instead.
   array-callback-return: error
 
   # Never use a variable defined via `var` outside of the block in which it was
-  # defined; it creates unexpected behavior due to variable hoisting. Instead,
-  # move the definition to the top of the variable scope. Or better yet, use
-  # `let` or `const` instead; they're both block-scoped.
+  # defined; it reduces correctness, and reduces accessibility because variable
+  # hoisting isn't widely understood. Instead, move the definition to the top of
+  # the variable scope. Or better yet, use `let` or `const` instead; they're
+  # both block-scoped.
   #
   # Note that the `no-var` rule enforces the use of `let` and `const` over
   # `var`. This rule is only enabled in case the `no-var` rule is disabled.
   block-scoped-var: error
 
-  # Never define a class method that doesn't reference `this`; it defies the
-  # purpose of a class method, which is to operate on a specific instance of a
-  # class. Instead, use a static class function.
+  # Never define a class method that doesn't reference `this`; it reduces
+  # correctness, and reduces expressiveness by creating doubt: did the developer
+  # accidentally reference a local variable instead of an instance property?
+  # Instead, use a static class function.
   class-methods-use-this: error
 
   # This rule is disabled because it's too subjective and doesn't offer enough
@@ -240,30 +259,30 @@ rules:
   complexity: off
 
   # Never define a function that returns a value in one code path but not
-  # another; it creates doubt about whether or not it's intentional. Instead,
-  # maintain consistency across all code paths. If one code path needs to return
+  # another; it reduces expressiveness by creating doubt: did the developer
+  # forget to return a value in a code path? If one code path needs to return
   # a value, but another doesn't, then express intent by having the latter
-  # return `null`; there's too much ambiguity involved with `undefined`.
+  # return `null` instead of `undefined`. Otherwise, it reduces correctness,
+  # debuggability, expressiveness, and accessibility due to the ambiguity of
+  # `undefined`.
   consistent-return:
     - error
     - treatUndefinedAsUnspecified: false
 
   # Put braces around conditional execution blocks unless every execution block
-  # in a grouping fits on the same line as its condition; it makes the code a
-  # little easier to read.
+  # in a grouping fits on the same line as its condition; it improves elegance.
   curly:
     - error
     - multi-line
     - consistent
 
   # Always add a `// no default` comment at the bottom of `switch` blocks that
-  # don't have a `default` case; it removes doubt about whether or not the lack
-  # of a `default` case is intentional. It's common to forget to add a `default`
-  # case.
+  # don't have a `default` case; it improves expressiveness by removing doubt:
+  # did the developer forget to add a `default` case?
   default-case: error
 
   # Always place the dot at the beginning of the property (instead of at the end
-  # of the object) in multiline member expressions; it improves readability by
+  # of the object) in multiline member expressions; it improves elegance by
   # avoiding confusion caused by the role of periods in the English language to
   # indicate the end of a sentence.
   dot-location:

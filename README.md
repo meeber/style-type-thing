@@ -32,7 +32,7 @@ Ranked by priority, I value:
 
 Obviously, the code has to work.
 
-Many ESLint rules help catch bugs before they even reach tests.
+Some ESLint rules identify bugs before they even reach tests. Other rules disallow practices that increase the risk of bugs later on.
 
 ### Debuggability
 
