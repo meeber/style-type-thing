@@ -7,7 +7,7 @@ JavaScript style guide and ESLint config.
 
 ## Introduction
 
-This project contains my personal ESLint config. Every ESLint rule is documented in the config file, regardless of whether or not it's enabled. Documentation includes justification of each rule, along with guidance on how to follow the rule. In some instances, this documentation amounts to little more than paraphrasing of the official ESLint documentation. However, in many cases, there are fresh insights to be gained.
+This project contains my personal ESLint config. Every ESLint rule is documented in the config file, regardless of whether or not it's enabled. Documentation consists of analysis, justification, and guidance. In some instances, this amounts to little more than paraphrasing of the official ESLint documentation. However, in many cases, there are fresh insights to be gained.
 
 ## Can this help you?
 
@@ -19,28 +19,36 @@ My values have changed significantly over the years as I've progressed from crea
 
 Ranked by priority, I value:
 
+1. Security
 1. Correctness
 1. Debuggability
 1. Testability
+1. Maintainability
 1. Expressiveness
-1. Conventionality
+1. Consistency
 1. Accessibility
 1. Elegance
 1. Performance
 
+### Security
+
+The only thing more important than correctness is security. The cost of exposing clients and/or the server to vulnerabilities is usually greater than the benefit provided by the code.
+
+Some ESLint rules disallow practices that increase the risk of writing insecure code. But these rules are just a small part of creating secure software.
+
 ### Correctness
 
-Obviously, the code has to work.
+Obviously, the code needs to work.
 
-Some ESLint rules identify bugs before they even reach tests. Other rules disallow practices that increase the risk of bugs later on.
+Some ESLint rules disallow practices that increase the risk of writing buggy software. Other rules identify potential bugs in the code.
 
 ### Debuggability
 
 When things go wrong, we need to find out why. Quickly. There's more urgency involved with debugging than any other aspect of software development. Therefore, it's critical to optimize code in terms of debuggability. To make even a small sacrifice in debuggability, there must be tremendous gain elsewhere.
 
-At a low level, debuggability is often about writing code that generates informative stack traces when something goes wrong. One of the biggest issues with frameworks is the way they obfuscate stack traces.
+At a high level, debuggability is about the overall architect of the application. A debuggable application is modularized with clear separation of concerns between components.
 
-At a high level, debuggability is about the overall architect of the application. A debuggable application is modularized with clear separations of concerns between components.
+At a low level, debuggability is about writing code that generates informative stack traces when something goes wrong. One of the biggest issues with frameworks is the way they obfuscate stack traces.
 
 ESLint rules related to debuggability exist only at a low level.
 
@@ -48,17 +56,23 @@ ESLint rules related to debuggability exist only at a low level.
 
 There aren't many ESLint rules that impact testability, but it's still worth noting that writing testable code is a requirement for maintaining correctness. In particular, code must be modularized with clearly defined contracts. This facilitates unit testing and stubbing.
 
+### Maintainability
+
+In order for code to be maintainable, it must be easy to refactor and expand. A big part of maintainability exists at a high level in terms of the overall architecture. But there are low level practices too, such as avoiding duplication, and adhering to a style that produces clean diffs when changes are made.
+
+ESLint rules related to maintainability exist only at a low level.
+
 ### Expressiveness
 
 Good code doesn't create doubt in the minds of other developers, or our future selves. Instead, it expresses intent. And when intent can't be sufficiently expressed through code alone, then it's supplemented with comments.
 
 Many ESLint rules work to eliminate ambiguity and doubt. However, there's a cost to expressiveness: verbosity. The extra code that often accompanies an expressive style can be frustrating, especially for those who place a lot of value in elegance. But the cost is worth the benefit.
 
-### Conventionality
+### Consistency
 
-Also known as the principle of least surprise, what this value boils down to is not defying the expectations of other developers. If something works a certain way in other applications, then it should work the same way in our applications.
+Also known as the principle of least surprise, what this value boils down to is not defying the expectations of other developers. If something works a certain way in other applications, then it should work the same way in our applications. Furthermore, if something is handled a certain way in one part of our application, then it should be handled the same way in other parts.
 
-Many ESLint rules disallow practices that create confusion, such as modifying builtin globals.
+Many ESLint rules disallow practices that create confusion, such as modifying builtin globals. Other rules enforce a consistent style throughout the code.
 
 ### Accessibility
 
@@ -76,13 +90,13 @@ Many ESLint rules disallow language features or quirks that add more complexity 
 
 Elegance in code matters. It just doesn't matter as much as other values.
 
-Many ESLint rules disallow language features or coding styles that achieve conciseness but at too high of a cost in terms of other values.
+Many ESLint rules disallow language features or coding styles that make the code more concise but at too high of a cost in terms of other values.
 
 ### Performance
 
-Performance doesn't matter. Most of the time. Or rather, a small gain in performance usually isn't worth whatever sacrifice that must be made to achieve it.
+Performance doesn't matter except when it does.
 
-But there are exceptions. Performance is the one value that can suddenly and drastically increase in priority, all the way from last to first, not replacing correctness but rather combining with it. That's because when there's a problem with performance, it's usually so severe that the software no longer fulfills its requirements, and is thus no longer correct. In such cases, the performance problem must be fixed at any cost.
+In most situations, a small gain in performance isn't worth whatever sacrifice that must be made to achieve it. But there are exceptions. Performance is the one value that can suddenly and drastically increase in priority, all the way from last to second, not replacing correctness but rather combining with it. That's because when there's a problem with performance, it's usually so severe that the software no longer fulfills its requirements, and is thus no longer correct. In such cases, the performance problem must be fixed at almost any cost.
 
 In some projects, performance is so critical that it should be assumed forever intertwined with correctness. But for the vast majority of projects, in the vast majority of situations, no other value should be sacrificed in the name of performance.
 
