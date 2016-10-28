@@ -100,7 +100,7 @@ In most situations, a small gain in performance isn't worth whatever sacrifice t
 
 In some projects, performance is so critical that it should be assumed forever intertwined with correctness. But for the vast majority of projects, in the vast majority of situations, no other value should be sacrificed in the name of performance.
 
-There aren't any ESLint rules that directly address performance.
+Although there aren't any ESLint rules that directly address performance, some do have a minor performance impact.
 
 ## Warning
 
