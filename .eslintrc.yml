@@ -265,7 +265,8 @@ rules:
   # code path needs to return a value, but another doesn't, then express intent
   # by having the latter return `null` instead of `undefined`. Otherwise, it
   # reduces correctness, debuggability, expressiveness, and accessibility due to
-  # the ambiguity of `undefined`.
+  # the ambiguity of `undefined` (which can mean either "undeclared", "declared
+  # but unassigned", or "declared and explicitly assigned to `undefined`").
   consistent-return:
     - error
     - treatUndefinedAsUnspecified: false
@@ -601,9 +602,8 @@ rules:
   # opening the door for injection attacks, and reduces performance.
   no-script-url: error
 
-  # Never assign a variable or object property to itself; it's pointless, thus
-  # reducing elegance without adding value. It's common for this to be done on
-  # accident.
+  # Never assign a variable or object property to itself; it's pointless. It's
+  # common for this to be done on accident.
   no-self-assign:
     - error
     - props: true
@@ -636,17 +636,15 @@ rules:
   # create an infinite loop?
   no-unmodified-loop-condition: error
 
-  # Never write an expression that doesn't have any effect; it's pointless, thus
-  # reducing elegance without adding value. It's common to make a mistake in
-  # logic that results in such an expression.
+  # Never write an expression that doesn't have any effect; it's pointless. It's
+  # common to make a mistake in logic that results in such an expression.
   no-unused-expressions:
     - error
     - allowShortCircuit: false
       allowTernary: false
 
-  # Never define a label that's never used; it's pointless, thus reducing
-  # elegance without adding value. It's a common accident to be left with an
-  # unused label after refactoring.
+  # Never define a label that's never used; it's pointless. It's a common
+  # accident to be left with an unused label after refactoring.
   no-unused-labels: error
 
   # Only use `.call` or `.apply` when necessary, such as when explicitly setting
@@ -671,16 +669,23 @@ rules:
   no-useless-concat: error
 
   # Never escape non-special characters in strings, template literals, and
-  # regular expressions; it's pointless, thus reducing elegance. It's a common
-  # accident to escape the wrong character.
+  # regular expressions; it's pointless. It's a common accident to escape the
+  # wrong character.
   no-useless-escape: error
 
   # Never use the `void` operator; it reduces expressiveness and elegance, and
   # reduces accessibility because it's not widely understood that `void` always
-  # returns `undefined`. Instead, use `undefined` directly.
+  # returns `undefined`. Instead, reference `undefined` directly. Better yet,
+  # use `null` instead of `undefined` whenever possible; it improves
+  # correctness, debuggability, expressiveness, and accessibility due to the
+  # ambiguity of `undefined` (which can mean either "undeclared", "declared but
+  # unassigned", or "declared and explicitly assigned to `undefined`"). 
   #
-  # Starting with ES5, the global `undefined` can't be redefined, and the
-  # `no-shadow-restricted-names` rule already disallows shadowing `undefined`.
+  # Note that some guides recommend using `void` instead of referencing
+  # `undefined` directly because `undefined` can be redefined or shadowed, thus
+  # reducing correctness. But starting with ES5, the global `undefined` can't be
+  # redefined, and the `no-shadow-restricted-names` rule disallows shadowing
+  # `undefined`.
   no-void: error
 
   # Feel free to add inline reminders using `// TODO:` comments; it improves
@@ -722,11 +727,11 @@ rules:
     - inside
     - functionPrototypeMethods: true
 
-  # Never use the yoda style in conditionals; although it slightly improves
-  # correctness, it drastically reduces consistency, accessibility, and elegance
-  # because it acts contrary to the natural flow of language. Also, the
-  # `no-cond-assign` rule already protects against the accidental assignment of
-  # variables in conditionals, further reducing the benefit of the yoda style.
+  # Never use the yoda style in conditionals; it reduces consistency, elegance,
+  # and accessibility because it acts contrary to the natural flow of thought.
+  # Also, the `no-cond-assign` rule already protects against the accidental
+  # assignment of variables in conditionals, overlapping any benefit of the yoda
+  # style in terms of correctness.
   yoda:
     - error
     - never
@@ -735,11 +740,11 @@ rules:
   # Strict Mode #
   ###############
 
-  # Always enable strict mode at the global level; it prevents common mistakes.
-  # In Node.js code, put `"use strict";` at the top of each module file. Once
-  # ES6 modules are implemented, or when transpiling via babel, disable this
-  # rule in the local config file, as strict mode is either implied or enabled
-  # automatically.
+  # Always enable strict mode at the global level; it improves correctness by
+  # preventing common mistakes. In Node.js code, put `"use strict";` at the top
+  # of each module file. Once ES6 modules are implemented, or when transpiling
+  # via babel, disable this rule in the local config file; strict mode is either
+  # implied or enabled automatically.
   strict:
     - error
     - global
@@ -748,16 +753,14 @@ rules:
   # Variables #
   #############
 
-  # Always assign variables at the same time that they're declared; it reduces
-  # the risk of unexpected behavior due to the ambiguity of `undefined`, and it
-  # removes any doubt about whether or not it's intentional. It's common to
-  # forget to assign an initial value when declaring a variable. If declaring a
-  # variable before its value has been determined, then assign it to `null`.
-  #
-  # Note that `undefined` can mean either "undeclared", "declared but
-  # unassigned", or "declared and explicitly assigned to `undefined`". This
-  # ambiguity is a major source of mistakes and confusion in JavaScript. This
-  # rule plays a critical part in eliminating the ambiguity.
+  # Always assign variables at the same time that they're declared; it improves
+  # correctness, and improves expressiveness by removing doubt; did the
+  # developer forget to assign an initial value? If declaring a variable before
+  # its value has been determined, then assign it to `null` instead of
+  # `undefined`; it improves correctness, debuggability, expressiveness, and
+  # accessibility due to the ambiguity of `undefined` (which can mean either
+  # "undeclared", "declared but unassigned", or "declared and explicitly
+  # assigned to `undefined`").
   init-declarations:
     - error
     - always
@@ -767,7 +770,8 @@ rules:
   no-catch-shadow: off
 
   # Never use `delete` on a variable instead of an object's property; it doesn't
-  # work. If resetting a variable, then reassign it to `null`.
+  # work, thus reducing correctness. If resetting a variable, then reassign it
+  # to `null`.
   #
   # Note that the `prefer-reflect` rule enforces the use of
   # `Reflect.deleteProperty` over `delete`. This rule is only enabled in case
@@ -775,93 +779,95 @@ rules:
   no-delete-var: error
 
   # Never declare a variable with the same name as a label, or vice-versa; it
-  # leads to unexpected behavior.
+  # reduces debuggability, expressiveness, and elegance due to adding ambiguity
+  # without value.
   no-label-var: error
 
   # This rule is disabled. It may be enabled in the future if there are global
   # variables that are deemed important enough to disallow by default.
   no-restricted-globals: off
 
-  # Never shadow a global object or identifier such as `undefined`; there's an
-  # expectation that global objects and identifiers can be referenced anywhere
-  # by name.
+  # Never shadow a global object or identifier such as `undefined`; it reduces
+  # correctness, and reduces consistency because it defies the expectation that
+  # global objects and identifiers can be referenced anywhere by name.
   no-shadow-restricted-names: error
 
   # Never declare a variable in an inner scope with the same name as an existing
-  # variable in an outer scope (including global variables); it leads to
-  # unexpected behavior, and creates doubt about whether or not it's
-  # intentional. It's common to forget that a variable with the same name was
-  # already declared in the outer scope.
+  # variable in an outer scope (including global variables); it reduces
+  # correctness, and reduces expressiveness by creating doubt: did the developer
+  # accidentally declare a variable with the same name instead of referencing
+  # the existing one in the outer scope?
   #
   # The `hoist` option is set to `all` because although it's not technically
   # shadowing when the variable in the outer scope is declared after the inner
-  # function, and thus the chance of closure-related mistakes is reduced, it
-  # still makes the code harder to understand.
+  # function, and thus the chance of closure-related mistakes is lowered, it
+  # still reduces expressiveness without adding value.
   no-shadow:
     - error
     - builtinGlobals: true
       hoist: all
  
-  # Never initialize a variable to `undefined` unless necessary, in which case
-  # disable this rule via an inline comment; there's too much ambiguity involved
-  # with the use of `undefined`. Instead, use `null`.
+  # Always initialize a variable to `undefined` explicitly instead of
+  # implicitly; it improves correctness, and improves expressiveness by removing
+  # doubt: did the developer forget to assign an initial value? Better yet,
+  # initialize the variable to `null` instead of `undefined` whenever possible;
+  # it improves correctness, debuggability, expressiveness, and accessibility
+  # due to the ambiguity of `undefined` (which can mean either "undeclared",
+  # "declared but unassigned", or "declared and explicitly assigned to 
+  # `undefined`").
   #
-  # Note that the stated intention of this rule is to favor `var foo;` over
-  # `var foo = undefined;` because `undefined` is implicit in the first form,
-  # so it's deemed unnecessary to explicitly assign it. But that's not why this
-  # rule is enabled here. Instead, this rule is enabled so as to promote the use
-  # of `null` over `undefined` whenever possible. And if `undefined` really is
-  # needed, then it should be assigned explicitly so as to express intent. The
-  # `init-declarations` rule already prevents declaring a variable without
-  # explicitly initializing it at the same time.
-  no-undef-init: error
+  # This rule is disabled because it promotes implicitly initializing a variable
+  # to `undefined` instead of doing so explicitly. Note that the
+  # `init-declarations` rule disallows declaring a variable without explicitly
+  # initializing it at the same time.
+  no-undef-init: off
 
   # Never reference a variable that hasn't been declared, not even when using
-  # the `typeof` operator; it creates doubt about whether or not it's
-  # intentional. It's common to forget to declare a variable. If the variable is
-  # a global that's not recognized by ESLint for the specified environment, then
-  # add the variable to the `globals` section of the local config file.
+  # the `typeof` operator; it reduces correctness, and reduces expressiveness
+  # by creating doubt: did the developer mistype the variable name? If the
+  # variable is a global that's not recognized by ESLint for the specified
+  # environment, then add the variable to the `globals` section of the local
+  # config file.
   no-undef:
     - error
     - typeof: true
 
-  # Always reference `undefined` directly instead of using `void`; it's more
-  # expressive and less complex. Also, always compare object properties and
-  # declared variables against `undefined` directly instead of using `typeof`;
-  # it's less complex.
-  # 
-  # Note that the stated intention of this rule is to prevent unexpected
-  # behavior from occurring as a result of the global `undefined` being
-  # reassigned or shadowed. But starting with ES5, the global `undefined` can't
-  # be redefined, and the `no-shadow-restricted-names` rule already disallows
-  # shadowing `undefined`. Therefore, it's now safe to reference `undefined`
-  # directly without having to resort to more complex and less expressive
-  # alternatives. This rule is disabled as a result.
+  # Always reference `undefined` explicitly instead of implicitly; it improves
+  # correctness and expressiveness, and improves accessibility because it's not
+  # widely understood that `void` always returns `undefined`. Better yet, use
+  # `null` instead of `undefined` whenever possible; it improves correctness,
+  # debuggability, expressiveness, and accessibility due to the ambiguity of
+  # `undefined` (which can mean either "undeclared", "declared but unassigned",
+  # or "declared and explicitly assigned to `undefined`").
   #
-  # However, this rule doesn't address favoring `null` over `undefined`. As
-  # dictated by the `init-declarations` and `no-undef-init` rules, `undefined`
-  # should only be used when necessary; it involves too much ambiguity. Instead,
-  # use `null` whenever possible. But when `undefined` is the only option, then
-  # reference it directly.
+  # This rule is disabled because it promotes referencing `undefined` implicitly
+  # instead of explicitly. The argument in favor of implicitness is that
+  # `undefined` can be redefined or shadowed, thus reducing correctness. But
+  # starting with ES5, the global `undefined` can't be redefined, and the
+  # `no-shadow-restricted-names` rule disallows shadowing `undefined`.
+  # 
+  # Note that the `no-void` rule disallows the use of `void`, and the
+  # `init-declarations` rule disallows declaring a variable without explicitly
+  # initializing it at the same time.
   no-undefined: off
 
   # Always use every variable and `catch`-block exception argument at least
-  # once. Otherwise, it's pointless to declare them. Also, use every function
-  # argument at least once unless writing a callback with a predefined argument
-  # order when the first argument isn't needed but one or more subsequent ones
-  # are, in which case express intent by disabling this rule via an inline
-  # comment. Otherwise, there's doubt about whether or not it's intentional;
-  # it's a common accident to be left with unused variables and arguments after
-  # refactoring.
+  # once. Otherwise, it's pointless to declare them. For the same reason, use
+  # every function argument at least once unless writing a callback with a
+  # predefined argument order when the first argument isn't needed but one or
+  # more subsequent ones are, in which case disable this rule via an inline
+  # comment. It's a common accident to be left with unused variables and
+  # arguments after refactoring.
   no-unused-vars:
     - error
     - vars: all
       args: all
       caughtErrors: all
 
-  # Never reference a variable, function, or class before defining it; it leads
-  # to unexpected behavior due to hoisting, and, in the case of ES6 bindings
-  # such as `let`, throws a `ReferenceError` when executed.
+  # Never reference a variable, function, or class before defining it; it
+  # reduces correctness, and reduces accessibility because variable hoisting
+  # isn't widely understood. In the case of ES6 bindings such as `let`, it
+  # throws a `ReferenceError` when executed.
   no-use-before-define:
     - error
     - functions: true
