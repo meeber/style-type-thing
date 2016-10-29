@@ -48,7 +48,7 @@ When things go wrong, we need to find out why. Quickly. There's more urgency inv
 
 At a high level, debuggability is about the overall architect of the application. A debuggable application is modularized with clear separation of concerns between components.
 
-At a low level, debuggability is about writing code that generates informative stack traces when something goes wrong. One of the biggest issues with frameworks is the way they obfuscate stack traces.
+At a low level, debuggability is about writing code with an intuitive logic flow, and avoiding practices that obfuscate stack traces when an error is thrown.
 
 ESLint rules related to debuggability exist only at a low level.
 
