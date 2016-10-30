@@ -119,13 +119,19 @@ rules:
   # debugabbility, and reduces consistency by defying the expectation that a
   # function defined in this manner will never be reassigned. Instead, assign a
   # function expression to a variable that can later be reassigned as necessary.
+  #
+  # Note that the `func-style` rule enforces the use of function expressions
+  # over function declarations and arrow functions.
   no-func-assign: error
 
   # Feel free to use function declarations in nested blocks; starting with ES6,
-  # function declarations are appropriately block-scoped.
+  # function declarations are appropriately block-scoped. Better yet, use a
+  # function expression; it improves consistency.
   # 
   # This rule is disabled because it only applies to pre-ES5 environments. Note
-  # that the `no-var` rule enforces the use of  `let` and `const` over `var`.
+  # that the `func-style` rule enforces the use of function expressions over
+  # function declarations and arrow functions. Also, the `no-var` rule enforces
+  # the use of  `let` and `const` over `var`.
   no-inner-declarations: off
 
   # Never put an invalid regular expression inside of a `RegExp` constructor; it
@@ -449,8 +455,9 @@ rules:
   # reduces expressiveness by creating doubt: did the developer accidentally
   # create a global variable instead of a local one?
   #
-  # Note that the `no-var` rule enforces the use of `let` and `const` over
-  # `var`.
+  # Note that the `func-style` enforces the use of function expressions over
+  # function declarations and arrow functions. Also, the `no-var` rule enforces
+  # the use of `let` and `const` over `var`.
   no-implicit-globals: error
 
   # Never indirectly invoke `eval`-like behavior, such as by passing code as the
@@ -491,7 +498,7 @@ rules:
   # block on purpose.
   no-lone-blocks: error
 
-  # Don't declare functions inside of loops unless necessary for a reason other
+  # Don't define functions inside of loops unless necessary for a reason other
   # than elegance, in which case disable this rule via an inline comment.
   # Otherwise, it reduces correctness, and reduces accessibility because it's
   # not widely understood that all instances of an inner function will reference
@@ -888,11 +895,10 @@ rules:
   # Node.js and CommonJS #
   ########################
 
-  # Always return immediately after invoking a callback function unless it's
-  # necessary not to, in which case express intent by disabling this rule via
-  # an inline comment. Otherwise, there's doubt about whether or not it's
-  # intentional; it's common to forget to return after invoking a callback
-  # function.
+  # When invoking a callback function but not returning immediately thereafter,
+  # always express into by disabling this rule via an inline comment; it
+  # improves expressiveness by removing doubt: did the developer forget to add
+  # a `return` statement after invoking the callback?
   #
   # Note that this rule only applies to callback functions assigned to function
   # arguments named "callback", "cb", and "next".
@@ -902,81 +908,100 @@ rules:
   # it's not a problem.
   global-require: off
 
-  # Always handle possible errors in functions that have an argument named
-  # "err". Otherwise, errors go unhandled. It's common to forget to handle them.
+  # When defining a function with `err` as the first argument, always add error
+  # handling logic. Otherwise, it reduces correctness because errors go
+  # unhandled. This problem usually happens by accident.
   handle-callback-err: error
 
   # Never mix require statements with other variable declarations; it reduces
-  # readability.
+  # elegance.
   no-mixed-requires:
     - error
     - grouping: false
       allowCall: true
 
-  # Never use `new` in conjunction with a `require` statement; it creates
-  # confusion and can lead to unexpected behavior. Instead, assign the result of
-  # the `require` statement to a variable, and then use `new` in conjunction
-  # with the variable.
+  # Never use `new` in conjunction with a `require` statement; it reduces
+  # correctness, and reduces accessibility because it's not widely understood
+  # that it only works properly if parentheses are added around the require
+  # statement (e.g., `const dog = new (require("./dog"));`). Instead, assign the
+  # result of the `require` statement to a variable, and then use `new` in
+  # conjunction with the variable.
   no-new-require: error
 
-  # Never use string concatenation to create a directory or file path; it can
-  # create incompatibilities across different platforms. Instead, use Node's
-  # `path.join` or `path.resolve`.
+  # When combining strings containing parts of a directory or file path, never
+  # use string concatenation; it reduces correctness because different platforms
+  # use different path separators, and because it's easy to accidentally add
+  # double separators. Instead, use Node's `path.join` or `path.resolve`.
   no-path-concat: error
 
-  # Feel free to use `process.env`. This rule is disabled because it's not a
-  # problem.
-  no-process-env: off
+  # When using `process.env`, always create a module wrapper around it, and
+  # disable this rule at the top of the module file. Otherwise, it reduces
+  # testability because it's more difficult to create a test double of a global
+  # than a module.
+  no-process-env: error
 
-  # Never use `process.exit`; there's an expectation that programs either run to
-  # completion, or terminate with a non-zero error code due to a thrown error.
+  # Never use `process.exit`; it reduces testability because it's difficult to
+  # test a code path that immediately terminates the application. Instead, throw
+  # an error.
   no-process-exit: error
 
   # This rule is disabled. It may be enabled in the future if there are modules
   # that are deemed important enough to disallow by default.
   no-restricted-modules: off
 
-  # Always use the asynchronous version of an I/O function unless absolutely
-  # certain that the synchronous version won't impact performance, in which case
-  # disable this rule via an inline comment. If it's always safe to use
-  # synchronous I/O functions, then disable this rule in the local config file.
+  # When using a synchronous I/O function, always express intent by disabling
+  # this rule via an inline comment. Otherwise, it reduces performance, and
+  # reduces expressiveness by creating doubt: did the developer accidentally use
+  # a synchronous I/O function instead of its asynchronous counterpart? If a
+  # project exclusively uses synchronous I/O, then disable this rule in the
+  # local config file.
   no-sync: error
 
   ####################
   # Stylistic Issues #
   ####################
 
-  # Never add spaces between array brackets and the tokens inside; it's harder
-  # to type and it doesn't improve readability.
+  # Never add spaces between array brackets and the tokens inside.
+  #
+  # The important thing is that this rule enforces a consistent style. The
+  # option is personal preference.
   array-bracket-spacing:
     - error
     - never
+    - singleValue: false
+      objectsInArrays: false
+      arraysInArrays: false
 
   # Always add a space between each brace and the code inside when writing a
-  # single-line block; it helps distinguish the block from an object literal.
+  # single-line block.
   #
-  # Note that the `curly` rule allows braces to be omitted from the execution
-  # blocks of single-line conditionals.
+  # The important thing is that this rule enforces a consistent style. The
+  # option is personal preference.
   block-spacing:
     - error
     - always
 
   # Always follow the one true brace style by putting the opening brace of a
-  # block on the same line as its corresponding statement or declaration; it
-  # improves readability.
+  # block on the same line as its corresponding statement or declaration.
+  #
+  # The important thing is that this rule enforces a consistent style. The
+  # options are personal preference.
   brace-style:
     - error
     - 1tbs
     - allowSingleLine: true
 
-  # Always use camelcase instead of underscores when naming non-constants; it's
-  # easier to type.
+  # Always use camelcase instead of underscores when naming non-constants.
+  #
+  # The important thing is that this rule enforces a consistent style. Favoring
+  # camelcase is personal preference.
   camelcase:
     - error
     - properties: always
 
   # Always include a comma at the end of the last item in a multiline list; it
-  # produces cleaner diffs when an item is added to or removed from the end.
+  # improves maintainability by producing cleaner diffs when an item is added to
+  # or removed from the end.
   comma-dangle:
     - error
     - arrays: always-multiline
@@ -985,29 +1010,34 @@ rules:
       imports: always-multiline
       objects: always-multiline
 
-  # Always add a space after commas instead of before; it improves readability
-  # due to consistency with the English language.
+  # Always add a space after commas instead of before.
+  #
+  # The important thing is that this rule enforces a consistent style. The
+  # options are personal preference.
   comma-spacing:
     - error
     - after: true
       before: false
 
-  # Always place commas after each item in a multiline list instead of before;
-  # it produces cleaner diffs when an item is added to or removed from the
-  # beginning, and it improves readability due to consistency with the English
-  # language.
+  # Always place commas after (instead of before) each item in a multiline list;
+  # it improves maintainability by producing cleaner diffs when an item is added
+  # to or removed from the beginning.
   comma-style:
     - error
     - last
 
-  # Never add spaces between computed property brackets and the values inside;
-  # it's harder to type and it doesn't improve readability.
+  # Never add spaces between computed property brackets and the values inside.
+  #
+  # The important thing is that this rule enforces a consistent style. The
+  # option is personal preference.
   computed-property-spacing:
     - error
     - never
 
-  # Always name a variable `self` when it's being used to capture `this`; it's
-  # clearer than alternatives such as `that` or `me`.
+  # Always name a variable `self` when it's being used to capture `this`.
+  #
+  # The important thing is that this rule enforces a consistent style. The
+  # option is personal preference.
   consistent-this:
     - error
     - self
@@ -1020,27 +1050,31 @@ rules:
     - always
 
   # Never add a space between a function invocation and the opening parenthesis
-  # of the argument list; it reduces readability by making function invocations
-  # less distinguishable from function definitions.
+  # of the argument list.
+  #
+  # The important thing is that this rule enforces a consistent style. The
+  # option is personal preference.
   func-call-spacing:
     - error
     - never
 
-  # Never give a function expression a different name than the variable or
-  # object property to which it's assigned (except when assigning
-  # `module.exports`); it reduces readability. Instead, give it the same name.
-  # Or better yet, don't give it a name at all; in ES6, most functions are named
-  # automatically.
+  # When defining a function expression (other than `module.exports`) that's
+  # automatically given a name in ES6 based on context, never manually give it a
+  # different name; it reduces consistency. Instead, don't manually give it a
+  # name at all; the one assigned automatically is sufficient.
   #
-  # See the `func-names` rule for future changes that might impact this rule.
+  # Note that this rule only disallows manually giving a function expression a
+  # different name than the one that's automatically given in ES6 based on
+  # context; it doesn't disallow manually giving it the same name.
   func-name-matching:
     - error
     - includeCommonJSModuleExports: false
 
-  # Always name function expressions when they're not automatically named;
-  # otherwise, it reduces debuggability due to less explicit stack traces. Also,
-  # never name function expressions when they're automatically named; repeating
-  # or changing the name adds complexity without value.
+  # Always manually give a name to a function expression when it's not
+  # automatically given one in ES6 based on context; it improves debuggability
+  # by producing more informative stack traces. Also, never manually give a name
+  # to a function expression when it's automatically given one in ES6 based on
+  # context; it's pointless.
   #
   # Note that this rule is disabled because it doesn't currently support the
   # desired policy. If https://github.com/eslint/eslint/pull/7244 is merged,
@@ -1048,35 +1082,36 @@ rules:
   # context-based automatic naming of functions is new to ES6.
   func-names: off
 
-  # Only use a function expression or arrow function when necessary. Otherwise,
-  # use a function declaration; they're less complex.
+  # Always use function expressions (instead of function declarations or arrow
+  # functions); compared to function declarations, they improve correctness and
+  # expressiveness by allowing either `let` or `const` to be used depending on
+  # whether or not the variable is later reassigned, and compared to arrow
+  # functions they improve debuggability by producing more informative stack
+  # traces (when a name is manually or automatically given).
   #
-  # Note that the `no-use-before-define` rule prevents function declarations
-  # from being called before they're defined, thus removing any risk of
-  # unexpected behavior due to hoisting. Also note that the
-  # `no-restricted-syntax` rule disallows the use of arrow functions.
+  # Note that the `no-restricted-syntax` rule disallows the use of arrow
+  # functions.
   func-style:
     - error
-    - declaration
+    - expression
     - allowArrowFunctions: false
 
   # This rule is disabled. It may be enabled in the future if there are
   # identifiers that are deemed important enough to disallow by default.
   id-blacklist: off
 
-  # Feel free to Uue identifiers of any length; even `i` is expressive enough in
+  # Feel free to use identifiers of any length; even `i` is expressive enough in
   # many situations where iteration is obvious. This rule is disabled because
   # it's not a problem.
   id-length: off
 
-  # This rule is disabled; it doesn't add enough value over other rules such as
-  # `camelcase`.
+  # This rule is disabled because it doesn't add enough value over other rules
+  # such as `camelcase`.
   id-match: off
 
-  # Always use two-space indentation; tabs often lead to funky alignment issues
-  # across development environments, and indentations of more than two spaces
-  # takes up too much room. Also, always indent each nested block only a single
-  # level; indenting multiple levels each time takes up too much room.
+  # Always use two-space indentation; tabs reduce maintainability by causing
+  # alignment issues across development environments. The number of spaces is
+  # personal preference.
   indent:
     - error
     - 2
@@ -1095,31 +1130,31 @@ rules:
   # future.
   jsx-quotes: off
 
-  # Never add any spaces before the colon, and always add exactly one space
-  # after the colon, when working with object literal properties; it improves
-  # readability. 
+  # When defining properties in an object literal, never add any spaces before
+  # the colon, and always add exactly one space after the colon; it improves
+  # maintainability because otherwise whenever a new property is added to the
+  # object with a longer name than the existing properties, all properties in
+  # the object must be realigned, resulting in noisy diffs.
   #
-  # Note that the `no-multi-spaces` rule also prevents multiple spaces from
-  # being added after the colon; although aligning property values across
-  # multiple lines is cute, it's more difficult to maintain because whenever a
-  # new property is added to the object with a longer name than the existing
-  # properties, all properties in the object must be realigned, resulting in
-  # noisy diffs.
+  # Note that the `no-multi-spaces` rule also disallows the use of multiple
+  # spaces.
   key-spacing:
     - error
     - afterColon: true
       beforeColon: false
       mode: strict
 
-  # Always add a single space before and after keywords such as `if` and `else`;
-  # it improves readability.
+  # Always add a single space before and after keywords such as `if` and `else`.
+  #
+  # The important thing is that this rule enforces a consistent style. The
+  # option is personal preference.
   keyword-spacing:
     - error
     - after: true
       before: true
 
-  # Feel free to add line comments either above or on the same line as code.
-  # This rule is disabled because it's not a problem.
+  # Feel free to add comments anywhere. This rule is disabled because it's not a
+  # problem.
   line-comment-position: off
 
   # Always use Unix line endings; Unix is a more common development environment
@@ -1128,12 +1163,14 @@ rules:
     - error
     - unix
 
-  # Feel free to add comments wherever it seems useful. This rule is disabled
-  # because it's not a problem.
+  # Feel free to add comments anywhere. This rule is disabled because it's not a
+  # problem.
   lines-around-comment: off
 
-  # Always add empty lines before and after directives such as `"use strict";`;
-  # it improves readability.
+  # Always add empty lines before and after directives such as `"use strict";`.
+  #
+  # The important thing is that this rule enforces a consistent style. The
+  # option is personal preference.
   lines-around-directive:
     - error
     - always
@@ -1142,8 +1179,10 @@ rules:
   # value to be of use.
   max-depth: off
 
-  # Always limit lines to 80 characters; it's a long-established standard, and
-  # code becomes less readable as the lines become longer.
+  # Always limit lines to 80 characters.
+  #
+  # The important thing is that this rule enforces a consistent style. The
+  # options are personal preference.
   max-len:
     - error
     - code: 80
@@ -1175,22 +1214,16 @@ rules:
   # value to be of use.
   max-statements-per-line: off
 
-  # Never split a ternary operator across multiple lines; it adds more
-  # complexity than value. Instead, use an expressive alternative, such as a
-  # nested `if`/`else` statement.
-  #
-  # Note that the `no-ternary` rule disallows the ternary operator. This rule is
-  # only enabled in case the `no-ternary` rule is disabled.
-  multiline-ternary:
-    - error
-    - never
+  # This rule is disabled because it's too subjective and doesn't offer enough
+  # value to be of use. Note that the `no-ternary` rule disallows the ternary
+  # operator.
+  multiline-ternary: off
 
   # Only use `new` in conjunction with functions that begin with an uppercase,
-  # and only invoke functions that begin with an uppercase by using `new`.
-  # Otherwise, it creates doubt about whether or not it's intentional because
-  # there's an expectation that functions that start with uppercase are
-  # constructors, and functions that start with lowercase aren't constructors.
-  # If using a 3rd-party library that violates this expectation, then use the
+  # and only invoke functions that begin with an uppercase by using `new`; it
+  # improves consistency because there's an expectation that functions that
+  # start with a capital letter are constructors, and ones that don't aren't. If
+  # using a 3rd-party library that violates this expectation, then use the
   # `newIsCapExceptions` or `capIsNewExceptions` option to add an exception to
   # this rule in the local config file.
   new-cap:
@@ -1200,34 +1233,46 @@ rules:
       properties: true
 
   # Always add parentheses to the end of the constructor when invoking it with
-  # `new`, even if not providing any arguments. Otherwise, it creates doubt
-  # about whether or not it's intentional; it's common to forget to specify
-  # arguments when creating a new object.
+  # `new`, even if not providing any arguments; it improves consistency.
   new-parens: error
 
-  # Feel free to add or not add empty lines after variable declarations.
-  # Sometimes it makes sense for multiple declarations to be grouped together,
-  # and sometimes it doesn't. This rule is disabled because a universal rule is
-  # too restrictive.
-  newline-after-var: off
+  # Always add a new line after variable declarations.
+  #
+  # The important thing is that this rule enforces a consistent style. The
+  # option is personal preference.
+  newline-after-var:
+    - error
+    - always
 
-  # Feel free to add or not add an empty line before `return` statements. This
-  # rule is disabled because it's not a problem.
-  newline-before-return: off
+  # Always add a new line before `return` statements in multiline blocks.
+  #
+  # The important thing is that this rule enforces a consistent style. Favoring
+  # a new line is personal preference.
+  newline-before-return: error
 
-  # Feel free to include multiple method calls on the same line or break it up
-  # across multiple lines. This rule is disabled because it's not a problem.
-  newline-per-chained-call: off
+  # When chaining multiple method calls, always put each call on a separate
+  # line; it improves maintainability by producing cleaner diffs when one of the
+  # calls is changed.
+  newline-per-chained-call:
+    - error
+    - ignoreChainWithDepth: 1
 
-  # Never use the `Array` constructor unless necessary, in which case disable
-  # this rule via an inline comment. Instead, use array literal notation
-  # whenever possible.
+  # Only use the `Array` constructor when a sparse array is needed, in which
+  # case express intent by disabling this rule via an inline comment. Otherwise,
+  # it reduces correctness, and reduces accessibility because it's not widely
+  # understood that providing a single argument creates a sparse array of the
+  # given size whereas providing multiple arguments creates an array with the
+  # given elements, and reduces expressiveness by creating doubt: did the
+  # developer accidentally create a sparse array instead of an array with a
+  # single element? Instead, use array literal notation whenever possible.
   no-array-constructor: error
 
-  # Never use bitwise operators such as `&` and `|` unless necessary, in which
-  # case express intent by disabling this rule via an inline comment. Otherwise,
-  # there's doubt about whether or not it's intentional; it's a common accident
-  # to type `&` instead of `&&`.
+  # Don't use bitwise operators (e.g., `&` and `|`) unless necessary for a
+  # reason other than elegance, in which case express intent by disabling this
+  # rule via an inline comment. Otherwise, it reduces correctness, and reduces
+  # accessibility because bitwise operators aren't widely understood, and
+  # reduces expressiveness by creating doubt: did the developer accidentally
+  # type `&` instead of `&&`?
   no-bitwise:
     - error
     - int32Hint: false
@@ -1236,77 +1281,88 @@ rules:
   # it's not a problem.
   no-continue: off
 
-  # Feel free to add comments wherever it makes sense to do so. This rule is
-  # disabled because it's not a problem.
+  # Feel free to add comments anywhere. This rule is disabled because it's not
+  # a problem.
   no-inline-comments: off
 
-  # Always use `else if` instead of nesting a lone `if` inside of an `else`'s
-  # execution block; it improves readability.
+  # Never nest a lone `if` inside of an `else`'s execution block. Instead, use
+  # `else if`.
+  #
+  # The important thing is that this rule enforces a consistent style. Favoring
+  # `else if` is personal preference.
   no-lonely-if: error
 
-  # Always add extra parentheses when combining binary expressions of varying
-  # precedence; it makes the logic easier to understand, and it removes doubt
-  # about whether or not the expressions were written with a correct
-  # understanding of the order of operations.
+  # When combining binary expressions of varying precedence, always add extra
+  # parentheses; it increases correctness, and increases expressiveness by
+  # removing doubt: did the developer fully understand order of operations?
   no-mixed-operators:
     - error
     - allowSamePrecedence: true
 
-  # Never mix tabs and spaces; it leads to unexpected alignment issues across
-  # development environments. Instead, use spaces.
+  # Never mix tabs and spaces; it reduces maintainability by causing alignment
+  # issues across development environments. Instead, always use spaces.
   #
   # Note that the `no-tabs` rule disallows the use of tabs.
   no-mixed-spaces-and-tabs: error
 
-  # Never put more than one empty line in a row; it doesn't add value, and it
-  # creates doubt about whether or not it's intentional. It's a common accident
-  # to add two empty lines instead of one.
+  # Never put more than one empty line in a row.
+  #
+  # The important thing is that this rule enforces a consistent style. The max
+  # number of empty lines is personal preference.
   no-multiple-empty-lines:
     - error
     - max: 1
 
   # Never negate conditions when writing an `if`/`else` statement or a ternary
-  # expression; it adds complexity without value. Instead, invert the condition.
+  # expression. Instead, invert the condition.
+  #
+  # The important thing is that this rule enforces a consistent style.
   no-negated-condition: error
 
-  # Never use a nested ternary expression; it adds more complexity than value.
-  # Instead, use an expressive alternative, such as nested `if`/`else`
-  # statements.
+  # Never use a nested ternary expression; it reduces correctness and
+  # expressiveness, and reduces accessibility because the ternary operator isn't
+  # widely understood, especially when nested. Instead, use an expressive
+  # alternative, such as nested `if`/`else` statements.
   #
   # Note that the `no-ternary` rule disallows the ternary operator. This rule is
   # only enabled in case the `no-ternary` rule is disabled.
   no-nested-ternary: error
 
-  # Never create an object using `new Object();`; it adds complexity without
-  # value. Instead, use an object literal.
+  # Never create an object using `new Object();`; it reduces elegance. Instead,
+  # use an object literal.
   no-new-object: error
 
   # Don't use unary operators such as `++` unless writing the final expression
-  # in a `for` statement; they lead to unexpected behavior due to automatic
-  # semicolon insertion. Instead, use `+=`.
+  # in a `for` statement; they reduce correctness and expressiveness, and reduce
+  # accessibility because it's not widely understood how white space and
+  # automatic semicolon injection can change the meaning of expressions that
+  # contain unary operators. Instead, use `+=`.
   no-plusplus:
     - error
     - allowForLoopAfterthoughts: true
 
-  # Never use arrow functions; they reduce readability and produce unclear stack
-  # traces. Instead, use named function expressions.
+  # Never use an arrow function; it reduces debuggability by producing a less
+  # informative stack trace. Instead, use a function expression, and manually
+  # give it a name when it's not automatically given one in ES6 based on
+  # context.
+  #
+  # Note that the `func-style` rule enforces the use of function expressions
+  # over function declarations and arrow functions.
   no-restricted-syntax:
     - error
     - ArrowFunctionExpression
 
-  # Never use tabs; they lead to unexpected alignment issues across development
-  # environments. Instead, use spaces.
+  # Never use tabs; they reduce maintainability by causing alignment issues
+  # across development environments. Instead, always use spaces.
   no-tabs: error
 
-  # Never use ternary operators; they add more complexity than value.
-  #
-  # Note that disallowing ternary operators is a difficult decision. They have
-  # clear benefit in terms of conciseness. However, the cost of using them is
-  # too steep due to how highly expressiveness and clarity are valued.
+  # Never use the ternary operator; it reduces correctness and expressiveness,
+  # and reduces accessibility because it's not widely understood. Instead, use
+  # an expressive alternative, such as `if`/`else`.
   no-ternary: error
 
-  # Never add extra spaces to the end of a line; it's pointless. It's a common
-  # accident to be left with extra spaces after refactoring.
+  # Never add extra spaces to the end of a line; it's pointless. This problem
+  # usually happens on accident.
   no-trailing-spaces:
     - error
     - skipBlankLines: false
@@ -1315,10 +1371,11 @@ rules:
   # because it's not a problem.
   no-underscore-dangle: off
 
-  # Never use ternaries in situations that have easier alternatives (e.g.,
-  # `let foo = bar ? bar : 1;` is better expressed as `let foo = bar || 1;`);
-  # it adds complexity without value.
-  #
+  # Never use a ternary expression in a situation that has an easier alternative
+  # (e.g., `let foo = bar ? bar : 1;` is better expressed as
+  # `let foo = bar || 1;`); it reduces correctness and expressiveness, and
+  # reduces accessibility because the ternary operator isn't widely understood.
+  # 
   # Note that the `no-ternary` rule disallows the ternary operator. This rule is
   # only enabled in case the `no-ternary` rule is disabled.
   no-unneeded-ternary:
@@ -1326,8 +1383,10 @@ rules:
     - defaultAssignment: false
 
   # Never add whitespace around the dot or before the bracket of object
-  # properties (except when indenting on a new line); it reduces readability
-  # without adding value.
+  # properties (except when indenting on a new line).
+  #
+  # The important thing is that this rule enforces a consistent style. Favoring
+  # no whitespace is personal preference.
   no-whitespace-before-property: error
 
   # Always be consistent when adding new lines after properties in an object
