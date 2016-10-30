@@ -1175,8 +1175,7 @@ rules:
     - error
     - always
 
-  # This rule is disabled because it's too subjective and doesn't offer enough
-  # value to be of use.
+  # This rule is disabled due to personal preference.
   max-depth: off
 
   # Always limit lines to 80 characters.
@@ -1194,29 +1193,23 @@ rules:
       ignoreStrings: false
       ignoreTemplateLiterals: false
 
-  # This rule is disabled because it's too subjective and doesn't offer enough
-  # value to be of use.
+  # This rule is disabled due to personal preference.
   max-lines: off
 
-  # This rule is disabled because it's too subjective and doesn't offer enough
-  # value to be of use.
+  # This rule is disabled due to personal preference.
   max-nested-callbacks: off
 
-  # This rule is disabled because it's too subjective and doesn't offer enough
-  # value to be of use.
+  # This rule is disabled due to personal preference.
   max-params: off
 
-  # This rule is disabled because it's too subjective and doesn't offer enough
-  # value to be of use.
+  # This rule is disabled due to personal preference.
   max-statements: off
 
-  # This rule is disabled because it's too subjective and doesn't offer enough
-  # value to be of use.
+  # This rule is disabled due to personal preference.
   max-statements-per-line: off
 
-  # This rule is disabled because it's too subjective and doesn't offer enough
-  # value to be of use. Note that the `no-ternary` rule disallows the ternary
-  # operator.
+  # This rule is disabled due to personal preference. Note that the `no-ternary`
+  # rule disallows the ternary operator.
   multiline-ternary: off
 
   # Only use `new` in conjunction with functions that begin with an uppercase,
@@ -1252,7 +1245,7 @@ rules:
 
   # When chaining multiple method calls, always put each call on a separate
   # line; it improves maintainability by producing cleaner diffs when one of the
-  # calls is changed.
+  # calls is modified.
   newline-per-chained-call:
     - error
     - ignoreChainWithDepth: 1
@@ -1277,12 +1270,12 @@ rules:
     - error
     - int32Hint: false
 
-  # Feel free to use the `continue` statement. This rule is disabled because
-  # it's not a problem.
+  # Feel free to use the `continue` statement. This rule is disabled due to
+  # personal preference.
   no-continue: off
 
-  # Feel free to add comments anywhere. This rule is disabled because it's not
-  # a problem.
+  # Feel free to add comments anywhere. This rule is disabled due to personal
+  # preference.
   no-inline-comments: off
 
   # Never nest a lone `if` inside of an `else`'s execution block. Instead, use
@@ -1389,41 +1382,40 @@ rules:
   # no whitespace is personal preference.
   no-whitespace-before-property: error
 
-  # Always be consistent when adding new lines after properties in an object
-  # literal or destructuring assignment; it improves readability. If all
-  # properties fit on the same line, then put them on the same line. Otherwise,
-  # put each property on its own line.
-  #
-  # Note that the `object-property-newline` rule enforces a similar style.
+  # When defining an object literal or destructuring assignment that contains
+  # line breaks, always add a line break after the opening curly and before the
+  # closing curly; it improves maintainability by producing cleaner diffs when a
+  # property is added to or removed from the beginning or end.
   object-curly-newline:
     - error
     - multiline: true
 
   # Never add spaces between object literal and destructuring assignment braces,
-  # and the tokens inside; it's harder to type, and it doesn't improve
-  # readability.
+  # and the tokens inside.
+  #
+  # The important thing is that this rule enforces a consistent style. The
+  # option is personal preference.
   object-curly-spacing:
     - error 
     - never
 
-  # Always be consistent when adding new lines after properties in an object
-  # literal; it improves readability. If all properties fit on the same line,
-  # then put them on the same line. Otherwise, put each property on its own
-  # line.
-  #
-  # Note that the `object-curly-newline` rule enforces a similar style.
+  # When defining a multiline object literal or destructuring assignment, always
+  # put each property on a separate line ; it improves maintainability by
+  # producing cleaner diffs when a property is modified, added, or removed.
   object-property-newline:
     - error
     - allowMultiplePropertiesPerLine: true
 
-  # Always use a separate declaration for each variable; it improves readability
-  # as well as diffs when changes are made.
+  # When declaring a group of variables, always use a separate declaration for
+  # each variable; it improves maintainability by producing cleaner diffs when a
+  # variable is added to or removed from the beginning or end of the group.
   one-var:
     - error
     - never
 
-  # Always put each variable declaration on its own line; it improves
-  # readability as well as diffs when changes are made.
+  # When declaring a group of variables, always put each declaration on a
+  # separate line; it improves maintainability by producing cleaner diffs when a
+  # declaration is modified, added, or removed.
   #
   # Note that the `one-var` rule enforces a separate declaration to be made for
   # each variable, whereas this rule only addresses multi-variable declarations.
@@ -1433,57 +1425,69 @@ rules:
     - always
 
   # Always use shorthand operators such as `+=` for simple math operations; it
-  # improves readability.
+  # improves elegance.
   operator-assignment:
     - error
     - always
 
   # Always place the operator at the end of the current line instead of the
   # start of the next line when breaking an expression across multiple lines;
-  # it improves readability by signaling that the expression continues on the
+  # it improves expressiveness by signaling that the expression continues on the
   # next line.
   operator-linebreak:
     - error
     - after
 
-  # Never add empty lines as padding inside of blocks; it takes up more space
-  # without improving readability.
+  # Never add empty lines as padding inside of blocks.
+  #
+  # The important thing is that this rule enforces a consistent style. The
+  # option is personal preference.
   padded-blocks:
     - error
     - never
 
-  # Only put quotes around property names when required. Otherwise, it decreases
-  # readability without adding value.
+  # When defining an object literal, always put double quotes around property
+  # names; it improves consistency both with JSON as well as within the code
+  # because sometimes quotes are needed but a lack of quotes is never needed.
+  #
+  # Note that the `quotes` rule enforces double quotes over single quotes. This
+  # rule only enforces that quotes of any kind are used around property names.
   quote-props:
     - error
-    - as-needed
+    - always
 
-  # Always use double quotes unless embedding an expression, in which case use
-  # a template literal; double quotes are consistent with JSON, and single
-  # quotes look too similar to backticks.
+  # When defining a string, always use double quotes or backticks (instead of
+  # single quotes).
+  #
+  # The important thing is that this rule enforces a consistent style. The
+  # option is personal preference.
   quotes:
     - error
     - double
-    - allowTemplateLiterals: true
-      avoidEscape: false
+    - avoidEscape: false
+      allowTemplateLiterals: true
 
   # This rule is disabled due to lack of jsdoc usage. It may be enabled in the
   # future.
   require-jsdoc: off
 
-  # Never add a space before semicolons; it reduces readability. Also, always
-  # add a space after semicolons when they're not at the end of a line; it
-  # improves readability.
+  # Never add a space before semicolons, and always add a space after semicolons
+  # when they're not at the end of a line.
+  #
+  # The important thing is that this rule enforces a consistent style. The
+  # options are personal preference.
   semi-spacing:
     - error
     - after: true
       before: false
  
   # Always add a semicolon at the end of each statement (except when the full
-  # statement is inside braces on a single line); it improves readability in
-  # much the same way that periods at the end of each sentence improves
-  # readability in the English language. In rare situations, it also avoids
-  # unexpected behavior due to automatic semicolon insertion.
+  # statement is inside braces on a single line); it improves correctness by
+  # avoiding unexpected behavior due to automatic semicolon insertion, and
+  # improves accessibility because it's not widely understood how automatic
+  # semicolor insertion works, and improves expressiveness by removing doubt:
+  # did the developer understand automatic semicolon insertion when they left
+  # off a semicolon at the end?
   semi:
     - error
     - always
@@ -1498,55 +1502,69 @@ rules:
   sort-vars: off
 
   # Always add a space before blocks; it improves readability.
+  #
+  # The important thing is that this rule enforces a consistent style. The
+  # option is personal preference.
   space-before-blocks:
     - error
     - always
 
-  # Always add a space before the opening parenthesis in a function definition;
-  # it helps distinguish a function definition from a function call.
+  # Always add a space before the opening parenthesis in a function definition.
+  #
+  # The important thing is that this rule enforces a consistent style. The
+  # options are personal preference.
   space-before-function-paren:
     - error
     - anonymous: always
       asyncArrow: always
       named: always
 
-  # Never add spaces between parentheses and the contents inside; it's harder to
-  # type, and it doesn't improve readability.
+  # Never add spaces between parentheses and the contents inside.
+  #
+  # The important thing is that this rule enforces a consistent style. The
+  # option is personal preference.
   space-in-parens:
     - error
     - never
 
-  # Always add spaces around operators such as `+`; it improves readability.
+  # Always add spaces around operators such as `+`.
+  #
+  # The important thing is that this rule enforces a consistent style. The
+  # option is personal preference.
   space-infix-ops:
     - error
     - int32Hint: false
 
-  # Always add spaces after unary word operators such as `new` and `delete`; it
-  # improves readability. Never add unnecessary spaces around unary non-word
-  # operators such as `++`; it reduces readability without adding value.
+  # Always add spaces after unary word operators such as `new` and `delete`, and
+  # never add unnecessary spaces around unary non-word operators such as `++`.
+  #
+  # The important thing is that this rule enforces a consistent style. The
+  # options are personal preference.
   space-unary-ops:
     - error
     - words: true
       nonwords: false
 
   # Always add a space after the opening `//` or `/*` in a comment, and before
-  # the closing `*/` when it's on the same line; it improves readability.
+  # the closing `*/` when it's on the same line.
+  #
+  # The important thing is that this rule enforces a consistent style. The
+  # options are personal preference.
   spaced-comment:
     - error
     - always
     - block:
         balanced: true
 
-  # Never specify whether or not a code unit is big or little endian; it's not
-  # relevant when using UTF-8 encoding.
+  # Never specify whether or not a code unit is big or little endian; it's
+  # pointless when using UTF-8 encoding.
   unicode-bom:
     - error
     - never
 
-  # Never wrap regex literals in parentheses; it reduces readability without
-  # adding value.
+  # Never wrap regex literals in parentheses.
   #
-  # This rule is disabled because it's not a problem.
+  # This rule is disabled because of personal preference.
   wrap-regex: off
 
   ################
