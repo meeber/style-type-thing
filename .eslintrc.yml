@@ -961,10 +961,10 @@ rules:
   # Stylistic Issues #
   ####################
 
-  # Never add spaces between array brackets and the tokens inside.
+  # Never add spaces between array brackets and the tokens inside; it reduces
+  # elegance.
   #
-  # The important thing is that this rule enforces a consistent style. The
-  # option is personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency.
   array-bracket-spacing:
     - error
     - never
@@ -973,28 +973,27 @@ rules:
       arraysInArrays: false
 
   # Always add a space between each brace and the code inside when writing a
-  # single-line block.
+  # single-line block; it improves elegance.
   #
-  # The important thing is that this rule enforces a consistent style. The
-  # option is personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency.
   block-spacing:
     - error
     - always
 
   # Always follow the one true brace style by putting the opening brace of a
-  # block on the same line as its corresponding statement or declaration.
+  # block on the same line as its corresponding statement or declaration; it
+  # improves elegance.
   #
-  # The important thing is that this rule enforces a consistent style. The
-  # options are personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency.
   brace-style:
     - error
     - 1tbs
     - allowSingleLine: true
 
-  # Always use camelcase instead of underscores when naming non-constants.
+  # Always use camelcase instead of underscores when naming non-constants; it
+  # improves elegance.
   #
-  # The important thing is that this rule enforces a consistent style. Favoring
-  # camelcase is personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency.
   camelcase:
     - error
     - properties: always
@@ -1010,10 +1009,9 @@ rules:
       imports: always-multiline
       objects: always-multiline
 
-  # Always add a space after commas instead of before.
+  # Always add a space after commas instead of before; it improves elegance.
   #
-  # The important thing is that this rule enforces a consistent style. The
-  # options are personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency.
   comma-spacing:
     - error
     - after: true
@@ -1026,18 +1024,18 @@ rules:
     - error
     - last
 
-  # Never add spaces between computed property brackets and the values inside.
+  # Never add spaces between computed property brackets and the values inside;
+  # it reduces elegance.
   #
-  # The important thing is that this rule enforces a consistent style. The
-  # option is personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency.
   computed-property-spacing:
     - error
     - never
 
-  # Always name a variable `self` when it's being used to capture `this`.
+  # Always name a variable `self` when it's being used to capture `this`; it
+  # improves elegance.
   #
-  # The important thing is that this rule enforces a consistent style. The
-  # option is personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency.
   consistent-this:
     - error
     - self
@@ -1050,10 +1048,9 @@ rules:
     - always
 
   # Never add a space between a function invocation and the opening parenthesis
-  # of the argument list.
+  # of the argument list; it reduces elegance.
   #
-  # The important thing is that this rule enforces a consistent style. The
-  # option is personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency.
   func-call-spacing:
     - error
     - never
@@ -1144,10 +1141,10 @@ rules:
       beforeColon: false
       mode: strict
 
-  # Always add a single space before and after keywords such as `if` and `else`.
+  # Always add a single space before and after keywords such as `if` and `else`;
+  # it improves elegance.
   #
-  # The important thing is that this rule enforces a consistent style. The
-  # option is personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency.
   keyword-spacing:
     - error
     - after: true
@@ -1167,10 +1164,10 @@ rules:
   # problem.
   lines-around-comment: off
 
-  # Always add empty lines before and after directives such as `"use strict";`.
+  # Always add empty lines before and after directives such as `"use strict";`;
+  # it improves elegance.
   #
-  # The important thing is that this rule enforces a consistent style. The
-  # option is personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency.
   lines-around-directive:
     - error
     - always
@@ -1178,10 +1175,9 @@ rules:
   # This rule is disabled due to personal preference.
   max-depth: off
 
-  # Always limit lines to 80 characters.
+  # Always limit lines to 80 characters; it improves elegance.
   #
-  # The important thing is that this rule enforces a consistent style. The
-  # options are personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency.
   max-len:
     - error
     - code: 80
@@ -1229,18 +1225,17 @@ rules:
   # `new`, even if not providing any arguments; it improves consistency.
   new-parens: error
 
-  # Always add a new line after variable declarations.
+  # Always add a new line after variable declarations; it improves elegance.
   #
-  # The important thing is that this rule enforces a consistent style. The
-  # option is personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency.
   newline-after-var:
     - error
     - always
 
-  # Always add a new line before `return` statements in multiline blocks.
+  # Always add a new line before `return` statements in multiline blocks; it
+  # improves elegance.
   #
-  # The important thing is that this rule enforces a consistent style. Favoring
-  # a new line is personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency.
   newline-before-return: error
 
   # When chaining multiple method calls, always put each call on a separate
@@ -1278,11 +1273,10 @@ rules:
   # preference.
   no-inline-comments: off
 
-  # Never nest a lone `if` inside of an `else`'s execution block. Instead, use
-  # `else if`.
+  # Never nest a lone `if` inside of an `else`'s execution block; it reduces
+  # elegance. Instead, use `else if`.
   #
-  # The important thing is that this rule enforces a consistent style. Favoring
-  # `else if` is personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency.
   no-lonely-if: error
 
   # When combining binary expressions of varying precedence, always add extra
@@ -1298,18 +1292,17 @@ rules:
   # Note that the `no-tabs` rule disallows the use of tabs.
   no-mixed-spaces-and-tabs: error
 
-  # Never put more than one empty line in a row.
+  # Never put more than one empty line in a row; it reduces elegance.
   #
-  # The important thing is that this rule enforces a consistent style. The max
-  # number of empty lines is personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency.
   no-multiple-empty-lines:
     - error
     - max: 1
 
   # Never negate conditions when writing an `if`/`else` statement or a ternary
-  # expression. Instead, invert the condition.
+  # expression; it reduces elegance. Instead, invert the condition.
   #
-  # The important thing is that this rule enforces a consistent style.
+  # This rule is highly subjective. Its main value is enforcing consistency.
   no-negated-condition: error
 
   # Never use a nested ternary expression; it reduces correctness and
@@ -1376,10 +1369,9 @@ rules:
     - defaultAssignment: false
 
   # Never add whitespace around the dot or before the bracket of object
-  # properties (except when indenting on a new line).
+  # properties (except when indenting on a new line); it reduces elegance.
   #
-  # The important thing is that this rule enforces a consistent style. Favoring
-  # no whitespace is personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency.
   no-whitespace-before-property: error
 
   # When defining an object literal or destructuring assignment that contains
@@ -1391,10 +1383,9 @@ rules:
     - multiline: true
 
   # Never add spaces between object literal and destructuring assignment braces,
-  # and the tokens inside.
+  # and the tokens inside; it reduces elegance.
   #
-  # The important thing is that this rule enforces a consistent style. The
-  # option is personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency.
   object-curly-spacing:
     - error 
     - never
@@ -1438,29 +1429,26 @@ rules:
     - error
     - after
 
-  # Never add empty lines as padding inside of blocks.
+  # Never add empty lines as padding inside of blocks; it reduces elegance.
   #
-  # The important thing is that this rule enforces a consistent style. The
-  # option is personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency.
   padded-blocks:
     - error
     - never
 
   # When defining an object literal, always put double quotes around property
-  # names; it improves consistency both with JSON as well as within the code
-  # because sometimes quotes are needed but a lack of quotes is never needed.
+  # names; it improves elegance.
   #
-  # Note that the `quotes` rule enforces double quotes over single quotes. This
-  # rule only enforces that quotes of any kind are used around property names.
+  # This rule is highly subjective. Its main value is enforcing consistency. 
+  # Note that the `quotes` rule enforces double quotes over single quotes.
   quote-props:
     - error
     - always
 
   # When defining a string, always use double quotes or backticks (instead of
-  # single quotes).
+  # single quotes); it improves elegance.
   #
-  # The important thing is that this rule enforces a consistent style. The
-  # option is personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency. 
   quotes:
     - error
     - double
@@ -1471,11 +1459,11 @@ rules:
   # future.
   require-jsdoc: off
 
-  # Never add a space before semicolons, and always add a space after semicolons
-  # when they're not at the end of a line.
+  # Never add a space before a semicolon; it reduces elegance. Also, always add
+  # a space after a semicolon when it's not at the end of a line; it improves
+  # elegance.
   #
-  # The important thing is that this rule enforces a consistent style. The
-  # options are personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency. 
   semi-spacing:
     - error
     - after: true
@@ -1501,55 +1489,52 @@ rules:
   # This rule is disabled because it's not a problem.
   sort-vars: off
 
-  # Always add a space before blocks; it improves readability.
+  # Always add a space before a block; it improves elegance.
   #
-  # The important thing is that this rule enforces a consistent style. The
-  # option is personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency. 
   space-before-blocks:
     - error
     - always
 
-  # Always add a space before the opening parenthesis in a function definition.
+  # Always add a space before the opening parenthesis in a function definition;
+  # it improves elegance.
   #
-  # The important thing is that this rule enforces a consistent style. The
-  # options are personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency. 
   space-before-function-paren:
     - error
     - anonymous: always
       asyncArrow: always
       named: always
 
-  # Never add spaces between parentheses and the contents inside.
+  # Never add spaces between parentheses and the contents inside; it reduces
+  # elegance.
   #
-  # The important thing is that this rule enforces a consistent style. The
-  # option is personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency. 
   space-in-parens:
     - error
     - never
 
-  # Always add spaces around operators such as `+`.
+  # Always add spaces around operators such as `+`; it improves elegance.
   #
-  # The important thing is that this rule enforces a consistent style. The
-  # option is personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency. 
   space-infix-ops:
     - error
     - int32Hint: false
 
-  # Always add spaces after unary word operators such as `new` and `delete`, and
-  # never add unnecessary spaces around unary non-word operators such as `++`.
+  # Always add spaces after unary word operators such as `new` and `delete`;
+  # they improve elegance. Also, never add unnecessary spaces around unary
+  # non-word operators such as `++`; they reduce elegance.
   #
-  # The important thing is that this rule enforces a consistent style. The
-  # options are personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency. 
   space-unary-ops:
     - error
     - words: true
       nonwords: false
 
   # Always add a space after the opening `//` or `/*` in a comment, and before
-  # the closing `*/` when it's on the same line.
+  # the closing `*/` when it's on the same line; it improves elegance.
   #
-  # The important thing is that this rule enforces a consistent style. The
-  # options are personal preference.
+  # This rule is highly subjective. Its main value is enforcing consistency. 
   spaced-comment:
     - error
     - always
@@ -1571,11 +1556,11 @@ rules:
   # ECMAScript 6 #
   ################
 
-  # Never use braces in conjunction with an arrow function; it adds more
-  # complexity than value. If braces aren't needed, then remove them. If braces
-  # are needed, then use a named function expression instead.
+  # Only use arrow functions to return single line expressions. If braces are
+  # needed, then use a function expression instead; it improves elegance.
   #
-  # Note that the `no-restricted-syntax` rule disallows the use of arrow
+  # This rule is highly subjective. Its main value is enforcing consistency. 
+  # Note that the `no-restricted-syntax` rule  disallows the use of arrow
   # functions. This rule is only enabled in case the `no-restricted-syntax` rule
   # is disabled.
   arrow-body-style:
@@ -1583,8 +1568,9 @@ rules:
     - never
 
   # Only add parentheses around an arrow function's arguments when there's more
-  # than one. Otherwise, it reduces readability without adding value.
+  # than one. Otherwise, it reduces elegance.
   #
+  # This rule is highly subjective. Its main value is enforcing consistency. 
   # Note that the `no-restricted-syntax` rule disallows the use of arrow
   # functions. This rule is only enabled in case the `no-restricted-syntax` rule
   # is disabled.
@@ -1594,8 +1580,9 @@ rules:
     - requireForBlockBody: false
 
   # Always add a space before and after the `=>` when defining an arrow
-  # function; it improves readability.
+  # function; it improves elegance.
   #
+  # This rule is highly subjective. Its main value is enforcing consistency. 
   # Note that the `no-restricted-syntax` rule disallows the use of arrow
   # functions. This rule is only enabled in case the `no-restricted-syntax` rule
   # is disabled.
@@ -1608,20 +1595,25 @@ rules:
   # Otherwise, it throws an error upon execution.
   constructor-super: error
 
-  # Always add a space after the star, not before, when defining a generator
-  # function; it improves readability.
+  # When defining a generator function, always add a space after the star, and
+  # never add a space before the start. Otherwise, it reduces elegance.
+  #
+  # This rule is highly subjective. Its main value is enforcing consistency. 
   generator-star-spacing:
     - error
     - after: true
       before: false
 
-  # Never reassign a class; there's an expectation that a class can always be
-  # created by name once defined.
+  # Never reassign a class; it reduces correctness and debuggability, and
+  # reduces consistency by defying the expectation that a class instance can
+  # always be created by name once the class is defined.
   no-class-assign: error
 
   # Never define an arrow function in a place where it can be confused with a
-  # `>=` comparison operator; it reduces readability and creates doubt about
-  # whether or not it's intentional. Instead, use a regular function.
+  # `>=` comparison operator; it reduces correctness, and reduces expressiveness
+  # by creating doubt: did the developer accidentally define an arrow function
+  # intsead of performing an equality comparison? Instead, use a function
+  # expression.
   #
   # Note that the `no-restricted-syntax` rule disallows the use of arrow
   # functions. This rule is only enabled in case the `no-restricted-syntax` rule
@@ -1631,17 +1623,20 @@ rules:
     - allowParens: false
 
   # Never reassign a variable defined via `const`; it'll throw an error upon
-  # execution. Instead, define the variable via `let`. It's common to forget
-  # that a variable was defined via `const` instead of `let`.
+  # execution. Instead, define the variable via `let`. This problem usually
+  # happens on accident.
   no-const-assign: error
 
-  # Never define a class that has multiple properties with the same name; the
-  # last occurrence shadows the one(s) before it.
+  # Never define a class that has multiple properties with the same name;
+  # it's pointless because the last occurrence shadows the one(s) before it.
+  # This problem usually happens on accident.
   no-dupe-class-members: error
 
   # Always use a single `import` statement per module unless exporting from an
   # imported module, in which case the export should occur in a separate
-  # statement. Otherwise, it adds complexity without value.
+  # statement. Otherwise, it reduces elegance.
+  #
+  # This rule is highly subjective. Its main value is enforcing consistency. 
   no-duplicate-imports:
     - error
     - includeExports: false
@@ -1659,74 +1654,82 @@ rules:
   no-this-before-super: error
 
   # Never use a computed property when it could be expressed as a non-computed
-  # property; it adds complexity without value.
+  # property; it's pointless.
   no-useless-computed-key: error
 
-  # Never define a class constructor if the implicit default constructor is
-  # identical; it adds complexity without value.
-  no-useless-constructor: error
+  # When defining a class, always define a constructor, even if it's identical
+  # to the default constructor. Otherwise, it reduces correctness, and reduces
+  # expressiveness by creating doubt: did the developer forget to define a
+  # constructor?
+  #
+  # This rule is disabled because it promotes an unexpressive style.
+  no-useless-constructor: off
 
-  # Never rename a reference without actually changing the name when
-  # destructing, importing, or exporting; it adds complexity without value.
+  # When destructuring, importing, or exporting, never rename a reference
+  # without actually changing the name; it's pointless.
   no-useless-rename:
     - error
     - ignoreDestructuring: false
       ignoreExport: false
       ignoreImport: false
 
-  # Never use `var` to declare a variable; it leads to unexpected behavior due
-  # to hoisting and not being block scoped. Instead, use `let` or `const`.
+  # Never use `var` to declare a variable; it reduces correctness, and reduces
+  # accessibility because variable hoisting and block scope aren't widely
+  # understood, and reduces expressiveness because it doesn't convey whether or
+  # not the value is intended to be reassigned. Instead, use `let` or `const`.
   no-var: error
 
-  # Always use object shorthand syntax when possible; it improves readability.
+  # Always use object shorthand syntax when possible; it improves elegance.
   object-shorthand:
     - error
     - always
     - avoidQuotes: false
       ignoreConstructors: false
 
-  # Only use an arrow function to return a single-line expression, and only when
-  # it won't noticeably impact stack trace debugging. In all other situations,
-  # use a function expression; it improves readability and stack traces.
+  # Never use arrow functions; they reduce debuggability by producing less
+  # informative stack traces. Instead, use function expressions with a name
+  # manually or automatically given.
   #
-  # Note that the `no-restricted-syntax` rule disallows the use of arrow
-  # functions. This rule is disabled because arrow functions should be used
-  # sparingly if the `no-restricted-syntax` rule is enabled. In most situations,
-  # the cost of using them is greater than the benefit.
+  # This rule is disabled because it promotes a less debuggable style. Note that
+  # the `no-restricted-syntax` rule disallows the use of arrow functions. This
+  # rule is only enabled in case the `no-restricted-syntax` rule is disabled.
   prefer-arrow-callback: off
 
-  # Always use `const` instead of `let` when the variable isn't reassigned; it's
-  # more expressive and protects against accidental reassignment.
+  # Never use `let` unless the variable is reassigned; it reduces correctness
+  # because it opens the door to accidental reassignment, and reduces
+  # expressiveness because it doesn't convey whether or not the variable is
+  # intended to be reassigned. Instead, use `const`.
   prefer-const:
     - error
     - destructuring: any
       ignoreReadBeforeAssign: false
 
-  # Never use `parseInt` with a radix value of `2`, `8`, or `16`. Instead, use
-  # the binary, octal, and hexadecimal literals added in ES6; they're more
-  # expressive.
-  prefer-numeric-literals: error
+  # Feel free to use `parseInt` with a radix value of `2`, `8`, or `16`.
+  #
+  # This rule is disabled because ES6 binary, octal, and hexademical literals
+  # don't add sufficient expressiveness over `parseInt`.
+  prefer-numeric-literals: off
 
   # Always prefer ES6 `Reflect` methods over their pre-ES6 alternatives; they
   # more closely represent the inner workings of JavaScript without sacrificing
   # readability.
   prefer-reflect: error
 
-  # Always use rest parameters (e.g., `...`) instead of `arguments` when
-  # converting a list of arguments into a single variable; unlike `arguments`,
-  # it creates a proper array, and also adds flexibility in choosing which
-  # arguments are converted.
+  # When converting a list of arguments into a single variable, always use rest
+  # parameters (e.g., `...`) instead of `arguments`; they improve correctness,
+  # and improve accessibility because it's not widely understood that
+  # `arguments` isn't an actual array, and improve elegance by allowing a subset
+  # of arguments to be captured.
   prefer-rest-params: error
 
-  # Always use the spread operator (e.g., `...vals`) to convert an array into a
-  # list of arguments when passing them to a function, instead of calling the
-  # function via `.apply`; it's more expressive, and also adds flexibility in
-  # choosing which arguments are converted.
+  # When passing a list of arguments in array form to a function, always invoke
+  # the function normally and use the spread operator (e.g., `...vals`) instead
+  # of invoking the function via `.apply`; it improves elegance by allowing a
+  # subset of the arguments to be passed via an array.
   prefer-spread: error
 
   # Always use template literals instead of string concatenation when embedding
-  # expressions into a string; it's more expressive, and it improves
-  # readability.
+  # expressions into a string; it improves elegance.
   prefer-template: error
 
   # Never define a generator function that doesn't call `yield`; it's pointless.
@@ -1734,7 +1737,9 @@ rules:
   require-yield: error
 
   # Never add a space between the spread operator and its expression; it reduces
-  # readability without adding value.
+  # elegance.
+  #
+  # This rule is highly subjective. Its main value is enforcing consistency. 
   rest-spread-spacing:
     - error
     - never
@@ -1744,17 +1749,21 @@ rules:
   sort-imports: error
 
   # Always provide a description when defining a `Symbol`; it improves
-  # debugging.
+  # debuggability by producing more informative stack traces.
   symbol-description: error
 
   # Never add spaces between template literal braces and the expression inside;
-  # it's harder to type, and it doesn't improve readability.
+  # they reduce elegance.
+  #
+  # This rule is highly subjective. Its main value is enforcing consistency. 
   template-curly-spacing:
     - error
     - never
 
-  # Always add a space after the star, not before, when using the `yield`
-  # statement; it improves readability.
+  # When using the `yield` statement, always add a space after the star, and
+  # never add a space before the star. Otherwise, it reduces elegance.
+  #
+  # This rule is highly subjective. Its main value is enforcing consistency. 
   yield-star-spacing:
     - error
     - after: true
