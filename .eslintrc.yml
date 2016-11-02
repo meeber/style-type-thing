@@ -752,6 +752,11 @@ rules:
   # due to escaping the wrong character.
   no-useless-escape: error
 
+  # When writing a function that doesn't return a value, never add a `return`
+  # statement to anywhere that doesn't have any code after it to execute anyway;
+  # it's pointless.
+  no-useless-return: error
+
   # Never use the `void` operator; it reduces accessibility because it's not
   # widely understood that `void` always returns `undefined`. Instead, reference
   # `undefined` explicitly. Better yet, use `null` instead of `undefined`
@@ -858,10 +863,6 @@ rules:
 
   # Never use `delete` on a variable; it only works on object properties. If
   # resetting a variable, then reassign it to `null`.
-  #
-  # Note that the `prefer-reflect` rule enforces the use of
-  # `Reflect.deleteProperty` over `delete`. This rule is only enabled in case
-  # the `prefer-reflect` rule is disabled.
   no-delete-var: error
 
   # Never declare a variable with the same name as a label, or vice-versa; it
@@ -1158,6 +1159,7 @@ rules:
   # context; it doesn't disallow manually giving it the same name.
   func-name-matching:
     - error
+    - always
     - includeCommonJSModuleExports: false
 
   # Always manually give a name to a function expression when it's not
@@ -1217,6 +1219,8 @@ rules:
       FunctionExpression:
         parameters: 1
         body: 1
+      CallExpression:
+        arguments: 1
 
   # This rule is disabled due to lack of jsx usage.
   jsx-quotes: off
@@ -1274,7 +1278,8 @@ rules:
   # doesn't add enough value.
   max-depth: off
 
-  # Always limit a line to 80 characters. Otherwise, it reduces elegance.
+  # Never exceed 80 characters in a line unless defining a long regex literal.
+  # Otherwise, it reduces elegance.
   #
   # This rule is highly subjective.
   max-len:
@@ -1287,6 +1292,7 @@ rules:
       ignoreUrls: false
       ignoreStrings: false
       ignoreTemplateLiterals: false
+      ignoreRegExpLiterals: true
 
   # This rule is highly subjective. It's disabled because it's too arbitrary and
   # doesn't add enough value.
@@ -1855,11 +1861,6 @@ rules:
   # This rule is disabled because ES6 binary, octal, and hexadecimal literals
   # don't add sufficient expressiveness over `parseInt`.
   prefer-numeric-literals: off
-
-  # Always prefer ES6 `Reflect` methods over their pre-ES6 alternatives; they
-  # more closely represent the inner workings of JavaScript without sacrificing
-  # readability.
-  prefer-reflect: error
 
   # When converting a list of arguments into a single variable, always use rest
   # parameters (e.g., `...`) instead of `arguments`. Otherwise, it reduces
