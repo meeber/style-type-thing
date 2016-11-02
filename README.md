@@ -58,7 +58,7 @@ There aren't many ESLint rules that impact testability, but it's still worth not
 
 ### Maintainability
 
-In order for code to be maintainable, it must be easy to refactor and expand. A big part of maintainability exists at a high level in terms of the overall architecture. But there are low level practices too, such as avoiding duplication, and adhering to a style that produces clean diffs when changes are made.
+In order for code to be maintainable, it must be easy to refactor and build upon. A big part of maintainability exists at a high level in terms of the overall architecture. But there are low level practices too, such as avoiding duplication, and adhering to a style that produces clean diffs when changes are made.
 
 ESLint rules related to maintainability exist only at a low level.
 
@@ -76,7 +76,7 @@ Many ESLint rules disallow practices that create confusion, such as modifying bu
 
 ### Accessibility
 
-Every new thing that's added to a project, whether it be a language feature, framework, or library, reduces the accessibility of the code. Sometimes all that's gained in return is elegance or performance. This isn't a good exchange.
+Every new thing that's added to a project, whether it be a language feature, framework, or library, reduces the accessibility of the code. Sometimes all that's gained in return is elegance or performance. This often isn't a good exchange.
 
 The question isn't: "Does this new thing add any value?"
 
