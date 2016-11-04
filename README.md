@@ -136,6 +136,11 @@ Example test/.eslintrc.yml:
 env:
   mocha: true
 rules:
+  max-len:
+    - error
+    - ignorePattern: ^\s*(it|describe)\(
+      ignoreRegExpLiterals: true
+  no-magic-numbers: off
   no-unused-expressions: off
 ```
 
