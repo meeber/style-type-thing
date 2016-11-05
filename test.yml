@@ -1,5 +1,12 @@
 env:
   mocha: true
+globals:
+  assert: true
+  expect: true
+  mock: true
+  should: true
+  spy: true
+  stub: true
 rules:
   max-len:
     - error

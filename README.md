@@ -130,10 +130,12 @@ env:
   node: true
 ```
 
+There's also a set of modified rules available for Mocha / Chai / Sinon.
+
 Example test/.eslintrc.yml:
 
 ```yaml
-extends: tt/mocha
+extends: tt/test.yml
 ```
 
 Example package.json:
