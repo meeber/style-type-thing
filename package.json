@@ -8,7 +8,7 @@
   "engines": {
     "node": ">=4.0.0"
   },
-  "main": ".eslintrc.yml",
+  "main": "base.yml",
   "scripts": {
     "postversion": "git checkout dev && git merge master && git push && git push --tags && npm publish",
     "preversion": "git checkout master && git merge dev && npm test",

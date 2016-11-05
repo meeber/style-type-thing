@@ -133,15 +133,7 @@ env:
 Example test/.eslintrc.yml:
 
 ```yaml
-env:
-  mocha: true
-rules:
-  max-len:
-    - error
-    - ignorePattern: ^\s*(it|describe)\(
-      ignoreRegExpLiterals: true
-  no-magic-numbers: off
-  no-unused-expressions: off
+extends: tt/mocha
 ```
 
 Example package.json:
