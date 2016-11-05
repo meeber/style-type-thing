@@ -34,7 +34,7 @@ rules:
     - error
     - checkLoops: true
 
-  # When using a control character in a regular expressions, always express
+  # When using a control character in a regular expression, always express
   # intent by disabling this rule via an inline comment. Otherwise, it reduces
   # correctness because it's easy to accidentally type a control character, and
   # reduces expressiveness because it's unclear whether or not it's intentional.
@@ -128,8 +128,7 @@ rules:
   # to a variable using `let` so that it can later be reassigned as necessary.
   #
   # Note that the `func-style` rule enforces the use of function expressions
-  # over function declarations and arrow functions. This rule is only enabled in
-  # case the `func-style` rule is disabled.
+  # over function declarations.
   no-func-assign: error
 
   # Feel free to use a function declaration in a nested block; starting with
@@ -137,8 +136,8 @@ rules:
   # 
   # This rule is disabled because it only applies to pre-ES5 environments. Note
   # that the `func-style` rule enforces the use of function expressions over
-  # function declarations and arrow functions. Also, the `no-var` rule enforces
-  # the use of  `let` and `const` over `var`.
+  # function declarations. Also, the `no-var` rule enforces the use of  `let`
+  # and `const` over `var`.
   no-inner-declarations: off
 
   # Never put an invalid regular expression inside of a `RegExp` constructor; it
@@ -169,7 +168,7 @@ rules:
   # Never directly invoke an `Object.prototype` method on an object; it reduces
   # correctness because it's possible for such methods to be shadowed, or for an
   # object to not even have `Object.prototype` in its prototype chain. Instead,
-  # use `call`, or wrap them in stand-alone helper functions.
+  # use `call`.
   no-prototype-builtins: error
 
   # Never chain multiple spaces together in a regex; it reduces correctness
@@ -265,11 +264,11 @@ rules:
   # Never use a variable defined via `var` outside of the block in which it was
   # defined; it reduces accessibility because it's not widely understood that
   # variables defined via `var` are hoisted and aren't block-scoped, and reduces
-  # correctness because it's easy to forget about those concepts and make a
-  # mistake. Instead, move the `var` statement to the top of the variable scope.
+  # correctness because it's easy to forget those concepts and make a mistake.
+  # Instead, move the `var` statement to the top of the variable scope.
   #
   # Note that the `no-var` rule enforces the use of `let` and `const` over
-  # `var`. This rule is only enabled in case the `no-var` rule is disabled.
+  # `var`.
   block-scoped-var: error
 
   # Never define a class method that doesn't reference `this`; it reduces
@@ -387,7 +386,7 @@ rules:
   # always put braces around the block. Otherwise, it reduces accessibility
   # because it's not widely understood that the variable will be scoped to the
   # entire `switch` block instead of only the `case`'s execution block, and
-  # reduces correctness because it's easy to forget about that rule and make a
+  # reduces correctness because it's easy to forget that rule and make a
   # mistake.
   no-case-declarations: error
 
@@ -652,7 +651,7 @@ rules:
   # reassign the previously declared variable.
   #
   # Note that the `no-var` rule enforces the use of `let` and `const` over
-  # `var`. This rule is only enabled in case the `no-var` rule is disabled.
+  # `var`.
   no-redeclare:
     - error
     - builtinGlobals: true
@@ -753,7 +752,7 @@ rules:
   no-useless-escape: error
 
   # When writing a function that doesn't return a value, never add a `return`
-  # statement to anywhere that doesn't have any code after it to execute anyway;
+  # statement anywhere that doesn't have any code to execute after it anyway;
   # it's pointless.
   no-useless-return: error
 
@@ -806,7 +805,7 @@ rules:
   # correctness because it's easy to forget those concepts and make a mistake.
   #
   # Note that the `no-var` rule enforces the use of `let` and `const` over
-  # `var`. This rule is only enabled in case the `no-var` rule is disabled.
+  # `var`.
   vars-on-top: error
 
   # Always wrap an immediately-invoked function expression (even when invoked
@@ -999,7 +998,7 @@ rules:
   global-require: off
 
   # When defining a function with `err` as the first argument, always add error
-  # handling logic. Otherwise, it reduces correctness because errors go
+  # handling logic. Otherwise, it reduces correctness because errors are left
   # unhandled. This problem usually happens by accident.
   handle-callback-err: error
 
@@ -1173,19 +1172,26 @@ rules:
   # rule will be enabled with the `uninferred` option.
   func-names: off
 
-  # Always use a function expression instead of a function declaration or arrow
-  # function. Function declarations reduce correctness because it's easy to
-  # accidentally reassign them since they're not protected via `const`, and
-  # reduce expressiveness because when they're reassigned it's unclear whether
-  # or not it's intentional. Arrow functions reduce debuggability because they
-  # produce less informative stack traces.
+  # Always use a function expression instead of a function declaration. Function
+  # declarations reduce correctness because it's easy to accidentally reassign
+  # them since they're not protected via `const`, and reduce expressiveness
+  # because when they're reassigned it's unclear whether or not it's
+  # intentional.
   #
-  # Note that the `no-restricted-syntax` rule disallows the use of arrow
-  # functions.
+  # Only use an arrow function when it significantly improves elegance over a
+  # function expression, and isn't nested within another arrow function, and
+  # fits on a single line so that braces aren't needed, and doesn't involve
+  # complex expressions, and is either automatically given a name in ES6 based
+  # on context or the risk of it appearing in a stack trace is extremely low.
+  # Otherwise, it reduces debuggability by producing less informative stack
+  # traces, and reduces correctness because it's easy to get mixed up when
+  # nested within another arrow function or when complex expressions are
+  # involved, and reduces expressiveness because `=>` isn't as meaningful as
+  # `function`.
   func-style:
     - error
     - expression
-    - allowArrowFunctions: false
+    - allowArrowFunctions: true
 
   # This rule is highly subjective. It's disabled because there aren't any
   # identifiers that are important enough to disallow by default.
@@ -1433,14 +1439,8 @@ rules:
   # This rule is highly subjective.
   no-negated-condition: error
 
-  # Never use a nested ternary expression; it reduces accessibility because
-  # nested ternary operators aren't widely understood, and reduces correctness
-  # because it's easy to get confused and make a mistake, and reduces
-  # expressiveness because the symbols aren't as meaningful as similar keywords.
-  # Instead, use nested `if`/`else` statements.
-  #
-  # Note that the `no-ternary` rule disallows the ternary operator. This rule is
-  # only enabled in case the `no-ternary` rule is disabled.
+  # Never use a nested ternary expression; it reduces correctness because it's
+  # easy to get mixed up.
   no-nested-ternary: error
 
   # Never create an object using `new Object();`; it reduces elegance. Instead,
@@ -1459,27 +1459,26 @@ rules:
     - error
     - allowForLoopAfterthoughts: true
 
-  # Never use an arrow function; it reduces debuggability by producing less
-  # informative stack traces. Instead, use a function expression, and manually
-  # give it a name when it's not automatically given one in ES6 based on
-  # context.
-  #
-  # Note that the `func-style` rule enforces the use of function expressions
-  # over function declarations and arrow functions.
-  no-restricted-syntax:
-    - error
-    - ArrowFunctionExpression
+  # This rule is highly subjective. It's disabled because there isn't any syntax
+  # that's important enough to disallow by default.
+  no-restricted-syntax: off
 
   # Never use a tab; it reduces maintainability by causing alignment issues
   # across development environments. Instead, always use spaces.
   no-tabs: error
 
-  # Never use the ternary operator; it reduces accessibility because it's not
-  # widely understood, and reduces correctness because it's easy to accidentally
-  # mix up the order of expressions, and reduces expressiveness because the
-  # symbols aren't as meaningful as similar keywords. Instead, use `if`/`else`
-  # statements.
-  no-ternary: error
+  # Only use the ternary operator when it significantly improves elegance, and
+  # isn't nested within another ternary expression, and doesn't involve complex
+  # expressions. Otherwise, it reduces accessibility because it's not widely
+  # understood, and reduces correctness because it's easy to get mixed up when
+  # nested within another ternary expression or when complex expressions are
+  # involved, and reduces expressiveness because `?` and `:` aren't as
+  # meaningful as `if` and `else`.
+  #
+  # This rule is disabled because there are situations in which the ternary
+  # operator provides more value than cost. The decision should be made on a
+  # case-by-case basis.
+  no-ternary: off
 
   # Never add extra spaces to the end of a line; it's pointless. This problem
   # usually happens on accident.
@@ -1495,14 +1494,7 @@ rules:
 
   # Never use a ternary expression in a situation that has an easier alternative
   # (e.g., `let foo = bar ? bar : 1;` is better expressed as
-  # `let foo = bar || 1;`); it reduces accessibility because the ternary
-  # operator isn't widely understood, and reduces correctness because it's easy
-  # to accidentally mix up the order of expressions and make a mistake, and
-  # reduces expressiveness because the symbols aren't as meaningful as similar
-  # keywords.
-  # 
-  # Note that the `no-ternary` rule disallows the ternary operator. This rule is
-  # only enabled in case the `no-ternary` rule is disabled.
+  # `let foo = bar || 1;`); it reduces elegance.
   no-unneeded-ternary:
     - error
     - defaultAssignment: false
@@ -1555,7 +1547,7 @@ rules:
     - error
     - always
 
-  # Always use a shorthand operators such as `+=` for a simple math operation.
+  # Always use a shorthand operator such as `+=` for a simple math operation.
   # Otherwise, it reduces elegance.
   #
   # This rule is highly subjective.
@@ -1706,9 +1698,7 @@ rules:
   # single line expression). Otherwise, it reduces elegance. Instead, use a
   # function expression.
   #
-  # This rule is highly subjective. Note that the `no-restricted-syntax` rule
-  # disallows the use of arrow functions. This rule is only enabled in case the
-  # `no-restricted-syntax` rule is disabled.
+  # This rule is highly subjective.
   arrow-body-style:
     - error
     - never
@@ -1716,9 +1706,7 @@ rules:
   # Only add parentheses around an arrow function's arguments when there's more
   # than one. Otherwise, it reduces elegance.
   #
-  # This rule is highly subjective. Note that the `no-restricted-syntax` rule
-  # disallows the use of arrow functions. This rule is only enabled in case the
-  # `no-restricted-syntax` rule is disabled.
+  # This rule is highly subjective.
   arrow-parens:
     - error
     - as-needed
@@ -1727,9 +1715,7 @@ rules:
   # Always add a space before and after the `=>` when defining an arrow
   # function. Otherwise, it reduces elegance.
   #
-  # This rule is highly subjective. Note that the `no-restricted-syntax` rule
-  # disallows the use of arrow functions. This rule is only enabled in case the
-  # `no-restricted-syntax` rule is disabled.
+  # This rule is highly subjective.
   arrow-spacing:
     - error
     - after: true
@@ -1760,10 +1746,6 @@ rules:
   # accidentally type `>=` instead of `=>`, and reduces expressiveness because
   # it's unclear whether or not it's intentional. Instead, use a function
   # expression.
-  #
-  # Note that the `no-restricted-syntax` rule disallows the use of arrow
-  # functions. This rule is only enabled in case the `no-restricted-syntax` rule
-  # is disabled.
   no-confusing-arrow:
     - error
     - allowParens: false
@@ -1822,9 +1804,9 @@ rules:
   # Never use `var` to declare a variable; it reduces accessibility because it's
   # not widely understood that variables defined via `var` are hoisted and
   # aren't block-scoped, and reduces correctness because it's easy to forget
-  # about those concepts and make a mistake. It also reduces correctness because
-  # it's easy to accidentally reassign a variable declared via `var`, and
-  # reduces expressiveness because it doesn't convey whether or not the value is
+  # those concepts and make a mistake. It also reduces correctness because it's
+  # easy to accidentally reassign a variable declared via `var`, and reduces
+  # expressiveness because it doesn't convey whether or not the value is
   # intended to be reassigned. Instead, use `let` or `const`.
   no-var: error
 
@@ -1838,13 +1820,20 @@ rules:
     - avoidQuotes: false
       ignoreConstructors: false
 
-  # Never use an arrow function; it reduces debuggability by producing a less
-  # informative stack trace. Instead, use a function expression and manually
-  # give it a name when it's not automatically give one in ES6 based on context.
+  # Only use an arrow function when it significantly improves elegance over a
+  # function expression, and isn't nested within another arrow function, and
+  # fits on a single line so that braces aren't needed, and doesn't involve
+  # complex expressions, and is either automatically given a name in ES6 based
+  # on context or the risk of it appearing in a stack trace is extremely low.
+  # Otherwise, it reduces debuggability by producing less informative stack
+  # traces, and reduces correctness because it's easy to get mixed up when
+  # nested within another arrow function or when complex expressions are
+  # involved, and reduces expressiveness because `=>` isn't as meaningful as
+  # `function`.
   #
-  # This rule is disabled because it promotes a less debuggable style. Note that
-  # the `no-restricted-syntax` rule disallows the use of arrow functions. This
-  # rule is only enabled in case the `no-restricted-syntax` rule is disabled.
+  # This rule is disabled because in many situations the cost of using an arrow
+  # function over a function expression is greater than the benefit. The
+  # decision should be made on a case-by-case basis.
   prefer-arrow-callback: off
 
   # Never use `let` unless the variable is reassigned. Otherwise, it reduces
