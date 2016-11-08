@@ -1,16 +1,50 @@
 env:
   mocha: true
+
 globals:
+  # Chai's `assert` interface
   assert: true
+
+  # Chai's `expect` interface
   expect: true
+
+  # Sinon's `mock` method
   mock: true
+
+  # Chai's `should` interface
   should: true
+
+  # Sinon's `spy` method
   spy: true
+
+  # Sinon's `stub` method
   stub: true
+
 rules:
+  # This rule is modified from the base config to allow lines that begin with
+  # `it` or `describe` to exceed the 80 character limit. The reason for this
+  # change is to improve the quality of life while writing tests with Mocha.
+  # It's common to write a description for an `it` or `describe` statement that
+  # causes the line to exceed 80 characters, and it's inconvenient and inelegant
+  # to split the description across multiple lines, especially given that the
+  # second parameter is a function.
   max-len:
     - error
-    - ignorePattern: ^\s*(it|describe)\(
+    - code: 80
+      tabWidth: 2
+      comments: 80
+      ignoreComments: false
+      ignoreTrailingComments: false
+      ignoreUrls: false
+      ignoreStrings: false
+      ignoreTemplateLiterals: false
       ignoreRegExpLiterals: true
+      ignorePattern: ^\s*(it|describe)\(
+
+  # This rule is disabled because the `it` or `describe` descriptions should
+  # provide sufficient context to give meaning to numbers used during the test.
   no-magic-numbers: off
+
+  # This rule is disabled because Chai's property-based accessors create the
+  # appearance that test expressions don't do anything when they actually do.
   no-unused-expressions: off
