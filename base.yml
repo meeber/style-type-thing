@@ -673,6 +673,12 @@ rules:
     - error
     - always
 
+  # Never combine `await` with `return`; it's pointless because the return value
+  # inside of an `async function` is already wrapped inside a promise. All it'll
+  # do is add an extra tick of the event loop before the promise is resolved.
+  # Instead, just return the value directly.
+  no-return-await: error
+
   # Never use `location.href = "javascript:<code>"`; it reduces security by
   # opening the door for injection attacks, and reduces performance.
   no-script-url: error
@@ -1116,6 +1122,17 @@ rules:
   comma-style:
     - error
     - last
+    - exceptions:
+        ArrayExpression: false
+        ArrayPattern: false
+        ArrowFunctionExpression: false
+        CallExpression: false
+        FunctionDeclaration: false
+        FunctionExpression: false
+        ImportDeclaration: false
+        ObjectExpression: false
+        ObjectPattern: false
+        VariableDeclaration: false
 
   # Never add spaces between a computed property bracket and the value inside;
   # it reduces elegance.
@@ -1167,10 +1184,12 @@ rules:
   # manually give a name to a function expression when it's automatically given
   # one in ES6 based on context; it's pointless.
   #
-  # This rule is disabled because it doesn't currently support the desired
-  # policy. If https://github.com/eslint/eslint/pull/7244 is merged, then this
-  # rule will be enabled with the `uninferred` option.
-  func-names: off
+  # Note that this rule only enforces giving a name to a function expression
+  # when it's not automatically given one in ES6 based on context; it doesn't
+  # disallow giving a name to a function when it's automatically given one.
+  func-names:
+    - error
+    - as-needed
 
   # Always use a function expression instead of a function declaration. Function
   # declarations reduce correctness because it's easy to accidentally reassign
