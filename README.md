@@ -7,7 +7,7 @@ JavaScript style guide and ESLint config.
 
 ## Introduction
 
-This project contains my personal ESLint config. Every ESLint rule is documented in the config file, regardless of whether or not it's enabled. Documentation consists of analysis, justification, and guidance. In some instances, this amounts to little more than paraphrasing of the official ESLint documentation. However, in many cases, there are fresh insights to be gained.
+This project contains my personal ESLint config. Every ESLint rule is documented in the [base config file](base.yml), regardless of whether or not it's enabled. Documentation consists of analysis, justification, and guidance. In some instances, this amounts to little more than paraphrasing of the official ESLint documentation. However, in many cases, there are fresh insights to be gained.
 
 ## Can this help you?
 
