@@ -805,6 +805,11 @@ rules:
     - error
     - always
 
+  # Never define an `async function` that doesn't contain at least one `await`
+  # statement; it's pointless because it adds no functionality over a standard
+  # function.
+  require-await: error
+
   # Always put a `var` declaration at the top of the function or program.
   # Otherwise, it reduces accessibility because it's not widely understood that
   # variables defined via `var` are hoisted and aren't block-scoped, and reduces
@@ -1095,6 +1100,13 @@ rules:
   camelcase:
     - error
     - properties: always
+
+  # Feel free to start a comment with any character, including an uppercase or
+  # lowercase letter.
+  #
+  # This rule is highly subjective. It's disabled because it protects against
+  # something that's not a problem.
+  capitalized-comments: off
 
   # When defining a multiline list, always include a comma at the end of the
   # last item. Otherwise, it reduces maintainability by producing noisy diffs
