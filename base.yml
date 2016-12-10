@@ -7,6 +7,17 @@ rules:
   # Possible Errors #
   ###################
 
+  # Don't put an `await` statement inside of a loop unless it's intentional that
+  # each promise resolve before iterating, in which case express intent by
+  # disabling this rule via an inline comment. Otherwise, it reduces correctness
+  # and performance because it's easy to make a mistake in logic that results in
+  # independent asynchronous operations running in serial instead of parallel,
+  # and reduces expressiveness because it's unclear whether or not it's
+  # intentional. If intending to run asynchronous operations in parallel, then
+  # store all of the promises in an array and use `await Promise.all(myArray)`
+  # after the loop.
+  no-await-in-loop: error
+
   # Never put an assignment expression inside of a conditional; it reduces
   # correctness because it's easy to accidentally type `=` instead of `===`, and
   # reduces expressiveness because it's unclear whether or not it's intentional.
@@ -1258,6 +1269,8 @@ rules:
         body: 1
       CallExpression:
         arguments: 1
+      ArrayExpression: 1
+      ObjectExpression: 1
 
   # This rule is disabled due to lack of jsx usage.
   jsx-quotes: off
