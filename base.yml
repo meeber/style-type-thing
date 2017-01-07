@@ -1855,13 +1855,16 @@ rules:
   no-var: error
 
   # Always use object shorthand syntax when possible. Otherwise, it reduces
-  # elegance.
+  # elegance. Also, never use arrow functions that explicitly return. Otherwise,
+  # it reduces elegance.
   #
-  # This rule is highly subjective.
+  # This rule is highly subjective. Note that the 'arrow-body-style' disallows
+  # arrow functions being used with braces.
   object-shorthand:
     - error
     - always
-    - avoidQuotes: false
+    - avoidExplicitReturnArrows: true
+      avoidQuotes: false
       ignoreConstructors: false
 
   # Only use an arrow function when it significantly improves elegance over a
@@ -1888,6 +1891,21 @@ rules:
     - error
     - destructuring: any
       ignoreReadBeforeAssign: false
+
+  # When assigning an object's property to an identically-named variable, always
+  # use destructuring. Otherwise, it reduces elegance.
+  #
+  # This rule is highly subjective. The `array` option is set to `false` because
+  # it's only practical to use destructuring with arrays when assigning one or
+  # more values sequentially starting from the first element. The
+  # `enforceForRenamedProperties` option is set to `false` because the syntax
+  # for assigning an object's property to a differently-named variable isn't
+  # elegant enough to justify it being required.
+  prefer-destructuring:
+    - error
+    - array: false
+      object: true
+    - enforceForRenamedProperties: false
 
   # Feel free to use `parseInt` with a radix value of `2`, `8`, or `16`.
   #
