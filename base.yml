@@ -121,6 +121,7 @@ rules:
     - error
     - all
     - conditionalAssign: false
+      ignoreJSX: none
       nestedBinaryExpressions: true
       returnAssign: false
 
@@ -801,6 +802,14 @@ rules:
   # error-prone and misunderstood feature.
   no-with: error
 
+  # When rejecting a promise, always provide an `Error` object, or an object
+  # that extends `Error`. Otherwise, it reduces debuggability due to the lack of
+  # a stack trace, and reduces consistency because it defies the expectation
+  # that a rejected promise is an instance of `Error` with a `stack` property.
+  prefer-promise-reject-errors:
+    - error
+    - allowEmptyReject: false
+
   # When using `parseInt`, always provide the radix. Otherwise, it reduces
   # correctness because the engine auto-detects which type of number it should
   # return based on the first argument, thus opening the door to mistakes. It
@@ -1469,6 +1478,12 @@ rules:
   #
   # Note that the `no-tabs` rule disallows the use of tabs.
   no-mixed-spaces-and-tabs: error
+
+  # Never chain together multiple assignment expressions; it reduces elegance.
+  # Instead, put each assignment on its own line.
+  #
+  # This rule is highly subjective.
+  no-multi-assign: error
 
   # Never put more than one empty line in a row; it reduces elegance.
   #
