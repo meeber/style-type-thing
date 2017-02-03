@@ -16,9 +16,9 @@
     "test": "echo '// just validating eslint config' | eslint --stdin"
   },
   "devDependencies": {
-    "eslint": "^3.14.1"
+    "eslint": "^3.15.0"
   },
   "peerDependencies": {
-    "eslint": "^3.14.1"
+    "eslint": "^3.15.0"
   }
 }

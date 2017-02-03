@@ -994,6 +994,7 @@ rules:
     - vars: all
       args: all
       caughtErrors: all
+      ignoreRestSiblings: false
 
   # Never reference a variable, function, or class before defining it; it
   # reduces accessibility because it's not widely understood that variables
@@ -1005,6 +1006,7 @@ rules:
     - error
     - functions: true
       classes: true
+      variables: true
 
   ########################
   # Node.js and CommonJS #
@@ -1736,6 +1738,14 @@ rules:
     - always
     - block:
         balanced: true
+
+  # When invoking a tagged template literal, never add a space between the
+  # function name and backtick; it reduces elegance.
+  #
+  # This rule is highly subjective.
+  template-tag-spacing:
+    - error
+    - never
 
   # Never specify whether or not a code unit is big or little endian; it's
   # pointless when using UTF-8 encoding.
