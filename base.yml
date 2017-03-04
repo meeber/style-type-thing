@@ -7,15 +7,18 @@ rules:
   # Possible Errors #
   ###################
 
-  # Don't put an `await` statement inside of a loop unless it's intentional that
-  # each promise resolve before iterating, in which case express intent by
-  # disabling this rule via an inline comment. Otherwise, it reduces correctness
-  # and performance because it's easy to make a mistake in logic that results in
-  # independent asynchronous operations running in serial instead of parallel,
-  # and reduces expressiveness because it's unclear whether or not it's
-  # intentional. If intending to run asynchronous operations in parallel, then
-  # store all of the promises in an array and use `await Promise.all(myArray)`
-  # after the loop.
+  # Don't put an `await` statement inside of a loop unless it's intentional
+  # that each promise resolve before iterating, in which case express intent by
+  # disabling this rule via an inline comment. Otherwise, it reduces
+  # correctness and performance because it's easy to make a mistake in logic
+  # that results in independent asynchronous operations running in serial
+  # instead of parallel, and reduces expressiveness because it's unclear
+  # whether or not it's intentional. If intending to run asynchronous
+  # operations in parallel, then store all of the promises in an array and use
+  # `await Promise.all(myArray)` after the loop.
+  #
+  # If frequent use of `await` statements inside of loops is expected in a
+  # project, then disable this rule in the local config file.
   no-await-in-loop: error
 
   # When comparing a value to `-0`, always use `Object.is` instead of a `===`.
@@ -24,8 +27,9 @@ rules:
   no-compare-neg-zero: error
 
   # Never put an assignment expression inside of a conditional; it reduces
-  # correctness because it's easy to accidentally type `=` instead of `===`, and
-  # reduces expressiveness because it's unclear whether or not it's intentional.
+  # correctness because it's easy to accidentally type `=` instead of `===`,
+  # and reduces expressiveness because it's unclear whether or not it's
+  # intentional.
   #
   # The `always` option is set instead of the default `except-parens` option
   # because wrapping the assignment in an extra set of parentheses doesn't
@@ -35,17 +39,17 @@ rules:
     - always
 
   # Don't release code containing a `console` statement unless in a development
-  # environment, in which case set this rule to `warn` instead of `error` in the
-  # local config file so that the build doesn't fail but reminders are still
-  # provided. Otherwise, it reduces security by leaking debugging information to
-  # users.
+  # environment, in which case set this rule to `warn` instead of `error` in
+  # the local config file so that the build doesn't fail but reminders are
+  # still provided. Otherwise, it reduces security by leaking debugging
+  # information to users.
   no-console: error
 
   # When using a constant expression as a conditional, always express intent by
-  # disabling this rule via an inline comment. Otherwise, it reduces correctness
-  # because it's easy to make a mistake in logic that results in an infinite
-  # loop, and reduces expressiveness because it's unclear whether or not it's
-  # intentional.
+  # disabling this rule via an inline comment. Otherwise, it reduces
+  # correctness because it's easy to make a mistake in logic that results in an
+  # infinite loop, and reduces expressiveness because it's unclear whether or
+  # not it's intentional.
   no-constant-condition:
     - error
     - checkLoops: true
@@ -53,21 +57,23 @@ rules:
   # When using a control character in a regular expression, always express
   # intent by disabling this rule via an inline comment. Otherwise, it reduces
   # correctness because it's easy to accidentally type a control character, and
-  # reduces expressiveness because it's unclear whether or not it's intentional.
-  # If frequent use of control characters is expected in a project, then disable
-  # this rule in the local config file.
+  # reduces expressiveness because it's unclear whether or not it's
+  # intentional.
+  #
+  # If frequent use of control characters is expected in a project, then
+  # disable this rule in the local config file.
   no-control-regex: error
 
-  # Don't release code containing a `debugger` statement unless in a development
-  # environment, in which case set this rule to `warn` instead of `error` in the
-  # local config file so that the build doesn't fail but reminders are still
-  # provided. Otherwise, it reduces security by leaking debugging information to
-  # users.
+  # Don't release code containing a `debugger` statement unless in a
+  # development environment, in which case set this rule to `warn` instead of
+  # `error` in the local config file so that the build doesn't fail but
+  # reminders are still provided. Otherwise, it reduces security by leaking
+  # debugging information to users.
   no-debugger: error
 
-  # Never define a function that has multiple arguments with the same name; it's
-  # pointless because the last occurrence shadows the one(s) before it. This
-  # problem usually happens on accident.
+  # Never define a function that has multiple arguments with the same name;
+  # it's pointless because the last occurrence shadows the one(s) before it.
+  # This problem usually happens on accident.
   no-dupe-args: error
 
   # Never define an object literal that has multiple properties with the same
@@ -89,19 +95,19 @@ rules:
     - error
     - allowEmptyCatch: false
 
-  # Never include empty brackets in a regular expression; it's pointless because
-  # an empty character set doesn't match anything. If needing to include "[]" as
-  # part of the pattern, then escape each bracket. This problem usually happens
-  # on accident.
+  # Never include empty brackets in a regular expression; it's pointless
+  # because an empty character set doesn't match anything. If needing to
+  # include "[]" as part of the pattern, then escape each bracket. This problem
+  # usually happens on accident.
   no-empty-character-class: error
 
   # Never reassign the exception parameter in a `catch` block; it reduces
   # correctness because it's easy to accidentally reassign the exception
   # parameter since it's not protected via `const`, and reduces debuggability
-  # because the original error might be lost, and reduces consistency by defying
-  # the expectation that the exception parameter will always reference the
-  # caught error. Instead, assign the exception to a separate variable that can
-  # later be reassigned as necessary.
+  # because the original error might be lost, and reduces consistency by
+  # defying the expectation that the exception parameter will always reference
+  # the caught error. Instead, assign the exception to a separate variable that 
+  # can later be reassigned as necessary.
   no-ex-assign: error
 
   # Never cast a variable to a boolean as part of a test condition; it's
@@ -157,16 +163,16 @@ rules:
   # and `const` over `var`.
   no-inner-declarations: off
 
-  # Never put an invalid regular expression inside of a `RegExp` constructor; it
-  # throws a `SyntaxError` when executed. This problem usually happens on
+  # Never put an invalid regular expression inside of a `RegExp` constructor;
+  # it throws a `SyntaxError` when executed. This problem usually happens on
   # accident.
   no-invalid-regexp: error
 
   # Don't use a non-standard whitespace character unless necessary for a reason
-  # other than elegance, in which case express intent by disabling this rule via
-  # an inline comment. Otherwise, it reduces correctness because it's easy to
-  # accidentally copy and paste a non-standard whitespace character, resulting
-  # in unexpected behavior during string operations. It also reduces
+  # other than elegance, in which case express intent by disabling this rule
+  # via an inline comment. Otherwise, it reduces correctness because it's easy
+  # to accidentally copy and paste a non-standard whitespace character,
+  # resulting in unexpected behavior during string operations. It also reduces
   # expressiveness because it's unclear whether or not it's intentional, and
   # reduces debuggability because it's not visually obvious that a non-standard
   # whitespace character is present.
@@ -178,14 +184,14 @@ rules:
       skipTemplates: false
 
   # Never invoke a non-function global object such as `Math` or `JSON` as if
-  # it's a function; it throws a `TypeError` when executed. This problem usually
-  # happens on accident.
+  # it's a function; it throws a `TypeError` when executed. This problem
+  # usually happens on accident.
   no-obj-calls: error
 
   # Never directly invoke an `Object.prototype` method on an object; it reduces
-  # correctness because it's possible for such methods to be shadowed, or for an
-  # object to not even have `Object.prototype` in its prototype chain. Instead,
-  # use `call`.
+  # correctness because it's possible for such methods to be shadowed, or for
+  # an object to not even have `Object.prototype` in its prototype chain.
+  # Instead, use `call`.
   no-prototype-builtins: error
 
   # Never chain multiple spaces together in a regex; it reduces correctness
@@ -196,20 +202,21 @@ rules:
   no-regex-spaces: error
 
   # When creating a sparse array via an array literal, always express intent by
-  # disabling this rule via an inline comment. Otherwise, it reduces correctness
-  # because it's easy to accidentally type `,,` instead of `,`, and reduces 
-  # expressiveness because it's unclear whether or not it's intentional, and
-  # reduces accessibility because it's not widely understood that a sparse array
-  # is created when an extra comma is added in an array literal. Better yet,
-  # don't use sparse arrays at all; they're not widely understood.
+  # disabling this rule via an inline comment. Otherwise, it reduces
+  # correctness because it's easy to accidentally type `,,` instead of `,`, and
+  # reduces expressiveness because it's unclear whether or not it's
+  # intentional, and reduces accessibility because it's not widely understood
+  # that a sparse array is created when an extra comma is added in an array
+  # literal. Better yet, don't use sparse arrays at all; they're not widely
+  # understood.
   no-sparse-arrays: error
 
   # Don't put a template literal placeholder such as `${var}` inside of a
   # single- or double-quoted string unless necessary for a reason other than
   # elegance, in which case express intent by disabling this rule via an inline
-  # comment. Otherwise, it reduces correctness because it's easy to accidentally
-  # use single or double quotes instead of backticks, and reduces expressiveness
-  # because it's unclear whether or not it's intentional.
+  # comment. Otherwise, it reduces correctness because it's easy to
+  # accidentally use single or double quotes instead of backticks, and reduces
+  # expressiveness because it's unclear whether or not it's intentional.
   no-template-curly-in-string: error
 
   # Never split an expression across multiple lines in such a way that the
@@ -220,8 +227,8 @@ rules:
   # automatic semicolon insertion isn't widely understood.
   no-unexpected-multiline: error
 
-  # Never put code after an unconditional exit statement; it's pointless because
-  # it's never executed. This problem usually happens on accident.
+  # Never put code after an unconditional exit statement; it's pointless
+  # because it's never executed. This problem usually happens on accident.
   no-unreachable: error
 
   # Never put a control flow statement such as `return` inside of a `finally`
@@ -271,18 +278,19 @@ rules:
       getWithoutSet: true
   
   # When invoking one of Array's map/reduce methods, always return a value in
-  # the callback. Otherwise, it reduces correctness because such methods rely on
-  # a return value in order to complete their task, but it's easy to forget to
-  # add a `return` statement. If the method was just being used to invoke a
+  # the callback. Otherwise, it reduces correctness because such methods rely
+  # on a return value in order to complete their task, but it's easy to forget
+  # to add a `return` statement. If the method was just being used to invoke a
   # function for each entry in an array, then use `Array.prototype.forEach`
   # instead.
   array-callback-return: error
 
   # Never use a variable defined via `var` outside of the block in which it was
   # defined; it reduces accessibility because it's not widely understood that
-  # variables defined via `var` are hoisted and aren't block-scoped, and reduces
-  # correctness because it's easy to forget those concepts and make a mistake.
-  # Instead, move the `var` statement to the top of the variable scope.
+  # variables defined via `var` are hoisted and aren't block-scoped, and
+  # reduces correctness because it's easy to forget those concepts and make a
+  # mistake. Instead, move the `var` statement to the top of the variable
+  # scope.
   #
   # Note that the `no-var` rule enforces the use of `let` and `const` over
   # `var`.
@@ -305,9 +313,9 @@ rules:
   # Never define a function that returns a value in one code path but not
   # another; it reduces correctness because it's easy to forget to add a
   # `return` statement at the end of a function, and reduces expressiveness
-  # because it's unclear whether or not it's intentional. If one code path needs
-  # to return a value, but another doesn't, then express intent by having the
-  # latter return `null` instead of `undefined`. Otherwise, it reduces
+  # because it's unclear whether or not it's intentional. If one code path
+  # needs to return a value, but another doesn't, then express intent by having
+  # the latter return `null` instead of `undefined`. Otherwise, it reduces
   # correctness, debuggability, expressiveness, and accessibility due to the
   # ambiguity of `undefined` (which can mean either "undeclared", "declared but
   # unassigned", or "declared and explicitly assigned to `undefined`").
@@ -315,25 +323,26 @@ rules:
     - error
     - treatUndefinedAsUnspecified: false
 
-  # When writing a conditional execution block that doesn't fit on the same line
-  # as its conditional expression, always add braces, even if it's only a single
-  # line. Otherwise, it reduces correctness because it's easy to forget to add
-  # braces later on when a second statement is added to the execution block, and
-  # reduces maintainability by producing noisy diffs when the number of
-  # statements in the execution block is increased from (or decreased to) one.
+  # When writing a conditional execution block that doesn't fit on the same
+  # line as its conditional expression, always add braces, even if it's only a
+  # single line. Otherwise, it reduces correctness because it's easy to forget
+  # to add braces later on when a second statement is added to the execution
+  # block, and reduces maintainability by producing noisy diffs when the number
+  # of statements in the execution block is increased from (or decreased to)
+  # one.
   #
-  # When writing a conditional execution block that fits on the same line as its
-  # conditional expression, then consider putting the execution block on its own
-  # line anyway (along with braces), especially if the conditional expression
-  # and/or execution block are complex. Otherwise, it reduces maintainability
-  # for the same reason as above, as well as because it produces less specific
-  # diffs when either the conditional expression or execution block is modified.
-  # If the conditional expression and execution block are both simple and
-  # unlikely to change (e.g., `if (x) return;`), and all other conditionals in
-  # the grouping are also same-line, then the improvement in maintainability is
-  # insignificant, so it's fine to improve elegance by putting the execution
-  # block on the same line as the conditional expression, in which case no
-  # braces are needed.
+  # When writing a conditional execution block that fits on the same line as
+  # its conditional expression, then consider putting the execution block on
+  # its own line anyway (along with braces), especially if the conditional
+  # expression and/or execution block are complex. Otherwise, it reduces
+  # maintainability for the same reason as above, as well as because it
+  # produces less specific diffs when either the conditional expression or
+  # execution block is modified. If the conditional expression and execution
+  # block are both simple and unlikely to change (e.g., `if (x) return;`), and
+  # all other conditionals in the grouping are also same-line, then the
+  # improvement in maintainability is insignificant, so it's fine to improve
+  # elegance by putting the execution block on the same line as the conditional
+  # expression, in which case no braces are needed.
   # 
   # The `multi-line` option is highly subjective.
   curly:
@@ -348,9 +357,9 @@ rules:
   default-case: error
 
   # When writing a multiline member expression, always place the dot at the
-  # beginning of the property instead of at the end of the object. Otherwise, it
-  # reduces elegance because of confusion caused by the role of periods in the
-  # English language to indicate the end of a sentence.
+  # beginning of the property instead of at the end of the object. Otherwise,
+  # it reduces elegance because of confusion caused by the role of periods in
+  # the English language to indicate the end of a sentence.
   #
   # The `property` option is highly subjective.
   dot-location:
@@ -358,13 +367,13 @@ rules:
     - property
 
   # When accessing an object's property, use dot notation unless it's not
-  # allowed, in which case use bracket notation. Otherwise, it reduces elegance,
-  # and reduces the effectiveness of minifiers.
+  # allowed, in which case use bracket notation. Otherwise, it reduces
+  # elegance, and reduces the effectiveness of minifiers.
   #
   # This rule is highly subjective. Note that the `allowKeywords` option is set
-  # to `true` because maintaining ES3 compatibility usually isn't a requirement.
-  # If it's a requirement, then set `allowKeywords` to `false` in the local
-  # config file.
+  # to `true` because maintaining ES3 compatibility usually isn't a
+  # requirement. If it's a requirement, then set `allowKeywords` to `false` in
+  # the local config file.
   dot-notation:
     - error
     - allowKeywords: true
@@ -418,8 +427,8 @@ rules:
   # When defining an `if` block that always returns when executed, never define
   # an `else` block; it reduces elegance because the code after the `if` block
   # will only be executed when the `if` block isn't executed, regardless of
-  # whether or not the code is contained inside of an `else` block. Instead, put
-  # the code outside, directly after the end of the `if` block.
+  # whether or not the code is contained inside of an `else` block. Instead,
+  # put the code outside, directly after the end of the `if` block.
   #
   # This rule is highly subjective.
   no-else-return: error
@@ -438,17 +447,17 @@ rules:
   # Never define an empty pattern (e.g., `let {a: {}} = obj`) when
   # destructuring; it's pointless because no properties are ever assigned. If
   # setting the default value of a property to an empty object, then type `=`
-  # instead of `:` (e.g., `let {a = {}} = obj`). This problem usually happens on
-  # accident.
+  # instead of `:` (e.g., `let {a = {}} = obj`). This problem usually happens
+  # on accident.
   no-empty-pattern: error
 
   # When comparing a value against `null`, always use `===` instead of `==`.
   # Otherwise, it reduces accessibility because it's not widely understood that
   # `true` will be returned if the value is either `null` or `undefined`, and
   # reduces correctness because it's easy to forget that rule and make a
-  # mistake, and reduces expressiveness because it's unclear whether or not it's
-  # intentional. If testing for both `null` or `undefined`, then express intent
-  # by performing two separate comparisons using `===`.
+  # mistake, and reduces expressiveness because it's unclear whether or not
+  # it's intentional. If testing for both `null` or `undefined`, then express
+  # intent by performing two separate comparisons using `===`.
   #
   # Note that the `eqeqeq` rule enforces the use of `===` over `==`. This rule
   # is only enabled in case the `eqeqeq` rule is disabled.
@@ -495,10 +504,10 @@ rules:
   # This rule is highly subjective.
   no-floating-decimal: error
 
-  # Never reassign a built-in global variable; it reduces consistency by defying
-  # the expectation that built-in global variables always behave the same way
-  # across projects, and reduces correctness because it breaks code that relies
-  # on the default implementation.
+  # Never reassign a built-in global variable; it reduces consistency by
+  # defying the expectation that built-in global variables always behave the
+  # same way across projects, and reduces correctness because it breaks code
+  # that relies on the default implementation.
   no-global-assign: error
 
   # Always perform a coercion explicitly (e.g., `Boolean(val)`) instead of
@@ -514,12 +523,13 @@ rules:
 
   # Only declare a `var` or function declaration in the global scope when
   # necessary for a reason other than elegance, in which case express intent by
-  # explicitly assigning it to the global object (e.g., `window` in the browser,
-  # or `global` in Node.js). Otherwise, it reduces accessibility because it's
-  # not widely understood that top-level `var` and function declarations are
-  # added as properties to the global object, and reduces correctness because
-  # it's easy to forget that rule and make a mistake, and reduces expressiveness
-  # because it's unclear whether or not it's intentional.
+  # explicitly assigning it to the global object (e.g., `window` in the
+  # browser, or `global` in Node.js). Otherwise, it reduces accessibility
+  # because it's not widely understood that top-level `var` and function
+  # declarations are added as properties to the global object, and reduces
+  # correctness because it's easy to forget that rule and make a mistake, and
+  # reduces expressiveness because it's unclear whether or not it's
+  # intentional.
   #
   # Note that the `func-style` enforces the use of function expressions over
   # function declarations and arrow functions. Also, the `no-var` rule enforces
@@ -527,31 +537,31 @@ rules:
   no-implicit-globals: error
 
   # Never indirectly invoke `eval`-like behavior (e.g., by passing code as the
-  # first argument to `setTimeout`); it reduces security by opening the door for
-  # injection attacks, and reduces performance.
+  # first argument to `setTimeout`); it reduces security by opening the door
+  # for injection attacks, and reduces performance.
   no-implied-eval: error
 
-  # Don't use `this` outside of expected blocks, such as constructors and object
-  # methods, unless necessary for a reason other than elegance, in which case
-  # disable this rule via an inline comment, and provide a comment that explains
-  # how the code is supposed to be used. Otherwise, it reduces expressiveness
-  # because it's unclear what `this` represents in such a context, and reduces
-  # correctness because it's easy to accidentally execute the code the wrong way
-  # by providing the wrong value for `this`, and reduces consistency because it
-  # defies the expectation that `this` is reserved for constructors and object
-  # methods. Better yet, don't use classes or `this` at all; they reduce
-  # correctness, expressiveness, and accessibility due to the ambiguity of
-  # `this`. 
+  # Don't use `this` outside of expected blocks, such as constructors and
+  # object methods, unless necessary for a reason other than elegance, in which
+  # case disable this rule via an inline comment, and provide a comment that
+  # explains how the code is supposed to be used. Otherwise, it reduces
+  # expressiveness because it's unclear what `this` represents in such a
+  # context, and reduces correctness because it's easy to accidentally execute
+  # the code the wrong way by providing the wrong value for `this`, and reduces
+  # consistency because it defies the expectation that `this` is reserved for
+  # constructors and object methods. Better yet, don't use classes or `this` at
+  # all; they reduce correctness, expressiveness, and accessibility due to the
+  # ambiguity of `this`. 
   no-invalid-this: error
 
   # Never use the __iterator__ property; it's deprecated. Instead, use ES6
   # ES6 iterators and generators.
   no-iterator: error
 
-  # Only use a label in conjunction with a nested loop, and only when necessary.
-  # Otherwise, it reduces consistency because it defies the expectation of how
-  # labels should be used, and reduces accessibility because labels aren't
-  # widely used.
+  # Only use a label in conjunction with a nested loop, and only when
+  # necessary. Otherwise, it reduces consistency because it defies the
+  # expectation of how labels should be used, and reduces accessibility because
+  # labels aren't widely used.
   #
   # Note that the `no-extra-label` rule disallows the use of labels in
   # non-nested loops.
@@ -564,17 +574,19 @@ rules:
   # than elegance, in which case express intent by disabling this rule via an
   # inline comment. Otherwise, it reduces correctness because it's easy to
   # accidentally delete a related conditional statement during refactoring, and
-  # reduces expressiveness because it's unclear whether or not it's intentional.
+  # reduces expressiveness because it's unclear whether or not it's
+  # intentional.
   no-lone-blocks: error
 
-  # Don't define a function inside of a loop unless necessary for a reason other
-  # than elegance, in which case express intent by disabling this rule via an
-  # inline comment. Otherwise, it reduces accessibility because it's not widely
-  # understood that all instances of an inner function will reference the same
-  # outer incremental variable declared via `var`, and reduces correctness
-  # because it's easy to forget that rule and make a mistake, and reduces
-  # expressiveness because it's unclear whether or not it's intentional, and
-  # reduces performance because the same function is redefined many times.
+  # Don't define a function inside of a loop unless necessary for a reason
+  # other than elegance, in which case express intent by disabling this rule
+  # via an inline comment. Otherwise, it reduces accessibility because it's not
+  # widely understood that all instances of an inner function will reference
+  # the same outer incremental variable declared via `var`, and reduces
+  # correctness because it's easy to forget that rule and make a mistake, and
+  # reduces expressiveness because it's unclear whether or not it's
+  # intentional, and reduces performance because the same function is redefined
+  # many times.
   #
   # Note that the `no-var` rule enforces the use of `let` and `const` over
   # `var`.
@@ -593,15 +605,15 @@ rules:
       enforceConst: true
       ignoreArrayIndexes: true
 
-  # Don't chain multiple spaces together for purposes other than indentation; it
-  # reduces maintainability, especially when adding spaces to align object
+  # Don't chain multiple spaces together for purposes other than indentation;
+  # it reduces maintainability, especially when adding spaces to align object
   # property values across multiple lines, because whenever a new property is
   # added to the object with a longer name than the existing properties, all
   # properties in the object must be realigned, resulting in noisy diffs.
   #
   # Note that the `key-spacing` rule also prevents multiple spaces from being
-  # added after the colon in object property values. This rule prevents multiple
-  # spaces everywhere.
+  # added after the colon in object property values. This rule prevents
+  # multiple spaces everywhere.
   no-multi-spaces:
     - error
     - exceptions:
@@ -640,11 +652,11 @@ rules:
   # Never use an octal literal (e.g., `071`); it's deprecated in ES5.
   no-octal: error
 
-  # Never reassign a function argument; it reduces correctness because it's easy
-  # to accidentally reassign a function argument since it's not protected via
-  # `const`, and reduces expressiveness because it's unclear whether or not it's
-  # intentional, and reduces consistency because it defies the expectation that
-  # an argument always references the variable that was passed in when the
+  # Never reassign a function argument; it reduces correctness because it's
+  # easy to accidentally reassign a function argument since it's not protected
+  # via `const`, and reduces expressiveness because it's unclear whether or not
+  # it's intentional, and reduces consistency because it defies the expectation
+  # that an argument always references the variable that was passed in when the
   # function was invoked. Instead, assign the argument to a local variable that
   # can later be reassigned as necessary.
   #
@@ -690,10 +702,10 @@ rules:
     - error
     - always
 
-  # Never combine `await` with `return`; it's pointless because the return value
-  # inside of an `async function` is already wrapped inside a promise. All it'll
-  # do is add an extra tick of the event loop before the promise is resolved.
-  # Instead, just return the value directly.
+  # Never combine `await` with `return`; it's pointless because the return
+  # value inside of an `async function` is already wrapped inside a promise.
+  # All it'll do is add an extra tick of the event loop before the promise is
+  # resolved. Instead, just return the value directly.
   no-return-await: error
 
   # Never use `location.href = "javascript:<code>"`; it reduces security by
@@ -737,22 +749,22 @@ rules:
   # not it's intentional.
   no-unmodified-loop-condition: error
 
-  # Never write an expression that doesn't have any effect; it's pointless. This
-  # problem usually happens on accident due to a mistake in logic.
+  # Never write an expression that doesn't have any effect; it's pointless.
+  # This problem usually happens on accident due to a mistake in logic.
   no-unused-expressions:
     - error
     - allowShortCircuit: false
       allowTernary: false
 
-  # Never define a label that's never used; it's pointless. This problem usually
-  # happens on accident as a result of refactoring.
+  # Never define a label that's never used; it's pointless. This problem
+  # usually happens on accident as a result of refactoring.
   no-unused-labels: error
 
-  # Only use `.call` or `.apply` when necessary, such as when explicitly setting
-  # `this`, or, in the case of `.apply`, when passing in arguments as an array.
-  # Otherwise, it's pointless because it's the same as invoking the function
-  # normally, except it reduces elegance and performance. This problem usually
-  # happens on accident as a result of refactoring.
+  # Only use `.call` or `.apply` when necessary, such as when explicitly
+  # setting `this`, or, in the case of `.apply`, when passing in arguments as
+  # an array. Otherwise, it's pointless because it's the same as invoking the
+  # function normally, except it reduces elegance and performance. This problem
+  # usually happens on accident as a result of refactoring.
   #
   # Note that the `prefer-spread` rule enforces the use of the spread operator
   # over using `.apply`.
@@ -770,8 +782,8 @@ rules:
   no-useless-concat: error
 
   # Never escape a non-special character in a string, template literal, or
-  # regular expression; it's pointless. This problem usually happens on accident
-  # due to escaping the wrong character.
+  # regular expression; it's pointless. This problem usually happens on
+  # accident due to escaping the wrong character.
   no-useless-escape: error
 
   # When writing a function that doesn't return a value, never add a `return`
@@ -780,12 +792,12 @@ rules:
   no-useless-return: error
 
   # Never use the `void` operator; it reduces accessibility because it's not
-  # widely understood that `void` always returns `undefined`. Instead, reference
-  # `undefined` explicitly. Better yet, use `null` instead of `undefined`
-  # whenever possible. Otherwise, it reduces correctness, debuggability,
-  # expressiveness, and accessibility due to the ambiguity of `undefined` (which
-  # can mean either "undeclared", "declared but unassigned", or "declared and
-  # explicitly assigned to `undefined`"). 
+  # widely understood that `void` always returns `undefined`. Instead,
+  # reference `undefined` explicitly. Better yet, use `null` instead of
+  # `undefined` whenever possible. Otherwise, it reduces correctness,
+  # debuggability, expressiveness, and accessibility due to the ambiguity of
+  # `undefined` (which can mean either "undeclared", "declared but unassigned",
+  # or "declared and explicitly assigned to `undefined`"). 
   #
   # Note that some guides recommend using `void` instead of referencing
   # `undefined` explicitly because `undefined` can be redefined or shadowed,
@@ -803,13 +815,13 @@ rules:
   no-warning-comments: warn
 
   # Never use the `with` statement; it's disallowed in strict mode, and it
-  # reduces correctness, expressiveness, and accessibility because it's a highly
-  # error-prone and misunderstood feature.
+  # reduces correctness, expressiveness, and accessibility because it's a
+  # highly error-prone and misunderstood feature.
   no-with: error
 
   # When rejecting a promise, always provide an `Error` object, or an object
-  # that extends `Error`. Otherwise, it reduces debuggability due to the lack of
-  # a stack trace, and reduces consistency because it defies the expectation
+  # that extends `Error`. Otherwise, it reduces debuggability due to the lack
+  # of a stack trace, and reduces consistency because it defies the expectation
   # that a rejected promise is an instance of `Error` with a `stack` property.
   prefer-promise-reject-errors:
     - error
@@ -837,8 +849,9 @@ rules:
 
   # Always put a `var` declaration at the top of the function or program.
   # Otherwise, it reduces accessibility because it's not widely understood that
-  # variables defined via `var` are hoisted and aren't block-scoped, and reduces
-  # correctness because it's easy to forget those concepts and make a mistake.
+  # variables defined via `var` are hoisted and aren't block-scoped, and
+  # reduces correctness because it's easy to forget those concepts and make a
+  # mistake.
   #
   # Note that the `no-var` rule enforces the use of `let` and `const` over
   # `var`.
@@ -885,9 +898,10 @@ rules:
   # initialization, and reduces expressiveness because it's unclear whether or
   # not it's intentional. If declaring a variable before its value has been
   # determined, then assign it to `null` instead of `undefined`. Otherwise, it
-  # reduces correctness, debuggability, expressiveness, and accessibility due to
-  # the ambiguity of `undefined` (which can mean either "undeclared", "declared
-  # but unassigned", or "declared and explicitly assigned to `undefined`").
+  # reduces correctness, debuggability, expressiveness, and accessibility due
+  # to the ambiguity of `undefined` (which can mean either "undeclared",
+  # "declared but unassigned", or "declared and explicitly assigned to
+  # `undefined`").
   init-declarations:
     - error
     - always
@@ -916,13 +930,13 @@ rules:
   # objects and identifiers can be referenced anywhere in the project by name.
   no-shadow-restricted-names: error
 
-  # Never declare a variable in an inner scope with the same name as an existing
-  # variable in an outer scope (including global variables); it reduces
-  # correctness because it's easy to forget that the variable is being shadowed,
-  # and reduces expressiveness because whenever the name is referenced it's
-  # unclear if the intention is to reference the inner-scoped variable or the
-  # outer-scoped one, and reduces debuggability because it's often difficult to
-  # recognize that a variable is being shadowed.
+  # Never declare a variable in an inner scope with the same name as an
+  # existing variable in an outer scope (including global variables); it
+  # reduces correctness because it's easy to forget that the variable is being
+  # shadowed, and reduces expressiveness because whenever the name is
+  # referenced it's unclear if the intention is to reference the inner-scoped
+  # variable or the outer-scoped one, and reduces debuggability because it's
+  # often difficult to recognize that a variable is being shadowed.
   #
   # The `hoist` option is set to `all` because although it's not technically
   # shadowing when the variable in the outer scope is declared after the inner
@@ -933,21 +947,21 @@ rules:
     - builtinGlobals: true
       hoist: all
  
-  # When initializing a variable to `undefined`, always do so explicitly instead
-  # of implicitly. Otherwise, it reduces correctness because it's easy to
-  # accidentally implicitly initialize a variable to `undefined`, and reduces
-  # expressiveness because it's unclear whether or not it's intentional. Better
-  # yet, initialize the variable to `null` instead of `undefined` whenever
-  # possible. Otherwise, it reduces correctness, debuggability, expressiveness,
-  # and accessibility due to the ambiguity of `undefined` (which can mean either
-  # "undeclared", "declared but unassigned", or "declared and explicitly
-  # assigned to `undefined`").
+  # When initializing a variable to `undefined`, always do so explicitly
+  # instead of implicitly. Otherwise, it reduces correctness because it's easy
+  # to accidentally implicitly initialize a variable to `undefined`, and
+  # reduces expressiveness because it's unclear whether or not it's
+  # intentional. Better yet, initialize the variable to `null` instead of
+  # `undefined` whenever possible. Otherwise, it reduces correctness,
+  # debuggability, expressiveness, and accessibility due to the ambiguity of
+  # `undefined` (which can mean either "undeclared", "declared but unassigned",
+  # or "declared and explicitly assigned to `undefined`").
   #
-  # This rule is disabled because it promotes implicitly initializing a variable
-  # to `undefined` instead of doing so explicitly. Some guides recommend only
-  # referencing `undefined` implicitly because `undefined` can be redefined or
-  # shadowed, thus opening the door for unexpected behavior. But starting with
-  # ES5, the global `undefined` can't be redefined, and the
+  # This rule is disabled because it promotes implicitly initializing a
+  # variable to `undefined` instead of doing so explicitly. Some guides
+  # recommend only referencing `undefined` implicitly because `undefined` can
+  # be redefined or shadowed, thus opening the door for unexpected behavior.
+  # But starting with ES5, the global `undefined` can't be redefined, and the
   # `no-shadow-restricted-names` rule disallows shadowing `undefined`.
   #
   # Note that the `init-declarations` rule disallows declaring a variable
@@ -956,31 +970,31 @@ rules:
 
   # Never reference a variable that hasn't been declared, not even when using
   # the `typeof` operator; it reduces correctness because it's easy to mistype
-  # or misspell a variable name, and reduces expressiveness because it's unclear
-  # whether or not it's intentional. If the variable is a global that's not
-  # recognized by ESLint for the specified environment, then add the variable to
-  # the `globals` section of the local config file.
+  # or misspell a variable name, and reduces expressiveness because it's
+  # unclear whether or not it's intentional. If the variable is a global that's
+  # not recognized by ESLint for the specified environment, then add the
+  # variable to the `globals` section of the local config file.
   no-undef:
     - error
     - typeof: true
 
-  # When referencing `undefined`, always do so explicitly instead of implicitly.
-  # Otherwise, it reduces correctness because it's easy to accidentally
-  # implicitly initialize a variable to `undefined` by not assigning an initial
-  # value, and reduces expressiveness because it's unclear whether or not it's
-  # intentional, and reduces accessibility because it's not widely understood
-  # that `void` always returns `undefined`. Better yet, use `null` instead of
-  # `undefined` whenever possible. Otherwise, it reduces correctness,
-  # debuggability, expressiveness, and accessibility due to the ambiguity of
-  # `undefined` (which can mean either "undeclared", "declared but unassigned",
-  # or "declared and explicitly assigned to `undefined`").
+  # When referencing `undefined`, always do so explicitly instead of
+  # implicitly. Otherwise, it reduces correctness because it's easy to
+  # accidentally implicitly initialize a variable to `undefined` by not
+  # assigning an initial value, and reduces expressiveness because it's unclear
+  # whether or not it's intentional, and reduces accessibility because it's not
+  # widely understood that `void` always returns `undefined`. Better yet, use
+  # `null` instead of `undefined` whenever possible. Otherwise, it reduces
+  # correctness, debuggability, expressiveness, and accessibility due to the
+  # ambiguity of `undefined` (which can mean either "undeclared", "declared but
+  # unassigned", or "declared and explicitly assigned to `undefined`").
   #
-  # This rule is disabled because it promotes referencing `undefined` implicitly
-  # instead of explicitly. Some guides recommend only referencing `undefined`
-  # implicitly because `undefined` can be redefined or shadowed, thus opening
-  # the door for unexpected behavior. But starting with ES5, the global
-  # `undefined` can't be redefined, and the `no-shadow-restricted-names` rule
-  # disallows shadowing `undefined`.
+  # This rule is disabled because it promotes referencing `undefined`
+  # implicitly instead of explicitly. Some guides recommend only referencing
+  # `undefined` implicitly because `undefined` can be redefined or shadowed,
+  # thus opening the door for unexpected behavior. But starting with ES5, the
+  # global `undefined` can't be redefined, and the `no-shadow-restricted-names`
+  # rule disallows shadowing `undefined`.
   # 
   # Note that the `no-void` rule disallows the use of `void`, and the
   # `init-declarations` rule disallows declaring a variable without explicitly
@@ -1005,8 +1019,8 @@ rules:
   # reduces accessibility because it's not widely understood that variables
   # defined via `var` are hoisted and aren't block-scoped, and reduces
   # correctness because it's easy to forget those concepts and make a mistake.
-  # In the case of ES6 bindings such as `let`, it throws a `ReferenceError` when
-  # executed.
+  # In the case of ES6 bindings such as `let`, it throws a `ReferenceError`
+  # when executed.
   no-use-before-define:
     - error
     - functions: true
@@ -1050,11 +1064,11 @@ rules:
       allowCall: true
 
   # Never use `new` in conjunction with a `require` statement; it reduces
-  # accessibility because it's not widely understood that it only works properly
-  # if parentheses are added around the full `require` statement, and reduces
-  # correctness because it's easy to forget that rule and make a mistake.
-  # Instead, assign the result of the `require` statement to a variable, and
-  # then use `new` in conjunction with the variable.
+  # accessibility because it's not widely understood that it only works
+  # properly if parentheses are added around the full `require` statement, and
+  # reduces correctness because it's easy to forget that rule and make a
+  # mistake. Instead, assign the result of the `require` statement to a
+  # variable, and then use `new` in conjunction with the variable.
   no-new-require: error
 
   # When combining strings containing parts of a directory or file path, always
@@ -1071,8 +1085,8 @@ rules:
   no-process-env: error
 
   # Never use `process.exit`; it reduces testability because it's difficult to
-  # test a code path that immediately terminates the application. Instead, throw
-  # an error.
+  # test a code path that immediately terminates the application. Instead,
+  # throw an error.
   no-process-exit: error
 
   # This rule is highly subjective. It's disabled because there aren't any
@@ -1135,14 +1149,19 @@ rules:
   # something that's not a problem.
   capitalized-comments: off
 
-  # When defining a multiline list, always include a comma at the end of the
-  # last item. Otherwise, it reduces maintainability by producing noisy diffs
-  # when an item is added to or removed from the end.
+  # When defining a multiline list in any context except for a function call or
+  # declaration, always include a comma at the end of the last item. Otherwise,
+  # it reduces maintainability by producing noisy diffs when an item is added
+  # to or removed from the end.
+  #
+  # Note that once Node.js natively supports the ES2017 feature of allowing
+  # trailing commas in function calls and declarations, then the `functions`
+  # option will be changed to `always-multiline`.
   comma-dangle:
     - error
     - arrays: always-multiline
       exports: always-multiline
-      functions: always-multiline
+      functions: never
       imports: always-multiline
       objects: always-multiline
 
@@ -1205,8 +1224,8 @@ rules:
     - never
 
   # When defining a function expression (other than `module.exports`) that's
-  # automatically given a name in ES6 based on context, never manually give it a
-  # different name; it reduces consistency. Instead, don't manually give it a
+  # automatically given a name in ES6 based on context, never manually give it
+  # a different name; it reduces consistency. Instead, don't manually give it a
   # name at all; the one assigned automatically is sufficient.
   #
   # Note that this rule only disallows manually giving a function expression a
@@ -1230,11 +1249,11 @@ rules:
     - error
     - as-needed
 
-  # Always use a function expression instead of a function declaration. Function
-  # declarations reduce correctness because it's easy to accidentally reassign
-  # them since they're not protected via `const`, and reduce expressiveness
-  # because when they're reassigned it's unclear whether or not it's
-  # intentional.
+  # Always use a function expression instead of a function declaration.
+  # Function declarations reduce correctness because it's easy to accidentally
+  # reassign them since they're not protected via `const`, and reduce
+  # expressiveness because when they're reassigned it's unclear whether or not
+  # it's intentional.
   #
   # Only use an arrow function when it significantly improves elegance over a
   # function expression, and isn't nested within another arrow function, and
@@ -1258,8 +1277,8 @@ rules:
   # Feel free to use an identifier of any length; even `i` is expressive enough
   # in many situations where iteration is obvious.
   #
-  # This rule is highly subjective. It's disabled because it's too arbitrary and
-  # protects against something that's not a problem.
+  # This rule is highly subjective. It's disabled because it's too arbitrary
+  # and protects against something that's not a problem.
   id-length: off
 
   # This rule is highly subjective. It's disabled because it doesn't add enough
@@ -1267,7 +1286,8 @@ rules:
   id-match: off
 
   # Always use two-space indentation instead of a tab. Otherwise, it reduces
-  # maintainability by causing alignment issues across development environments.
+  # maintainability by causing alignment issues across development
+  # environments.
   #
   # The `2` option is highly subjective.
   indent:
@@ -1305,8 +1325,8 @@ rules:
       beforeColon: false
       mode: strict
 
-  # Always add a single space before and after a keyword such as `if` or `else`.
-  # Otherwise, it reduces elegance.
+  # Always add a single space before and after a keyword such as `if` or
+  # `else`. Otherwise, it reduces elegance.
   #
   # This rule is highly subjective.
   keyword-spacing:
@@ -1320,8 +1340,8 @@ rules:
   # limiting.
   line-comment-position: off
 
-  # Always use a Unix line ending; Unix is a more common development environment
-  # for Node.js than Windows.
+  # Always use a Unix line ending; Unix is a more common development
+  # environment for Node.js than Windows.
   linebreak-style:
     - error
     - unix
@@ -1340,19 +1360,20 @@ rules:
     - error
     - always
 
-  # This rule is highly subjective. It's disabled because it's too arbitrary and
-  # doesn't add enough value.
+  # This rule is highly subjective. It's disabled because it's too arbitrary
+  # and doesn't add enough value.
   max-depth: off
 
-  # Never exceed 80 characters in a line unless defining a long regex literal.
-  # Otherwise, it reduces elegance.
+  # Never exceed 79 characters in a line unless defining a long regex literal.
+  # Otherwise, it reduces elegance. Note that 79 is used so that the cursor
+  # never wraps over to the next line when using a terminal width of 80.
   #
   # This rule is highly subjective.
   max-len:
     - error
-    - code: 80
+    - code: 79
       tabWidth: 2
-      comments: 80
+      comments: 79
       ignoreComments: false
       ignoreTrailingComments: false
       ignoreUrls: false
@@ -1360,24 +1381,24 @@ rules:
       ignoreTemplateLiterals: false
       ignoreRegExpLiterals: true
 
-  # This rule is highly subjective. It's disabled because it's too arbitrary and
-  # doesn't add enough value.
+  # This rule is highly subjective. It's disabled because it's too arbitrary
+  # and doesn't add enough value.
   max-lines: off
 
-  # This rule is highly subjective. It's disabled because it's too arbitrary and
-  # doesn't add enough value.
+  # This rule is highly subjective. It's disabled because it's too arbitrary
+  # and doesn't add enough value.
   max-nested-callbacks: off
 
-  # This rule is highly subjective. It's disabled because it's too arbitrary and
-  # doesn't add enough value.
+  # This rule is highly subjective. It's disabled because it's too arbitrary
+  # and doesn't add enough value.
   max-params: off
 
-  # This rule is highly subjective. It's disabled because it's too arbitrary and
-  # doesn't add enough value.
+  # This rule is highly subjective. It's disabled because it's too arbitrary
+  # and doesn't add enough value.
   max-statements: off
 
-  # This rule is highly subjective. It's disabled because it's too arbitrary and
-  # doesn't add enough value.
+  # This rule is highly subjective. It's disabled because it's too arbitrary
+  # and doesn't add enough value.
   max-statements-per-line: off
 
   # This rule is highly subjective. It's disabled because sometimes it's more
@@ -1385,13 +1406,13 @@ rules:
   # elegant. The decision should be made on a case-by-case basis.
   multiline-ternary: off
 
-  # Only use `new` in conjunction with a function that begins with an uppercase,
-  # and only invoke a function that begins with an uppercase by using `new`.
-  # Otherwise, it reduces consistency by defying the expectation that functions
-  # that start with a capital letter are constructors, and ones that don't
-  # aren't. If using a 3rd-party library that violates this expectation, then
-  # use the `newIsCapExceptions` or `capIsNewExceptions` option to add an
-  # exception to this rule in the local config file.
+  # Only use `new` in conjunction with a function that begins with an
+  # uppercase, and only invoke a function that begins with an uppercase by
+  # using `new`. Otherwise, it reduces consistency by defying the expectation
+  # that functions that start with a capital letter are constructors, and ones
+  # that don't aren't. If using a 3rd-party library that violates this
+  # expectation, then use the `newIsCapExceptions` or `capIsNewExceptions`
+  # option to add an exception to this rule in the local config file.
   #
   # Note that builtin globals such as `Symbol` are automatically exempted.
   new-cap:
@@ -1400,8 +1421,8 @@ rules:
       newIsCap: true
       properties: true
 
-  # When invoking a constructor with `new`, always add parentheses to the end of
-  # it, even if not providing any arguments. Otherwise, it reduces elegance.
+  # When invoking a constructor with `new`, always add parentheses to the end
+  # of it, even if not providing any arguments. Otherwise, it reduces elegance.
   #
   # This rule is highly subjective.
   new-parens: error
@@ -1422,25 +1443,26 @@ rules:
 
   # When chaining multiple method calls, consider putting each one on its own
   # line, especially when passing numerous and/or complex arguments. Otherwise,
-  # it reduces maintainability by producing noisy diffs when one of the calls is
-  # modified, and sometimes reduces elegance.
+  # it reduces maintainability by producing noisy diffs when one of the calls
+  # is modified, and sometimes reduces elegance.
   #
-  # This rule is disabled because in many situations putting each method call on
-  # its own line drastically reduces elegance without sufficiently improving
+  # This rule is disabled because in many situations putting each method call
+  # on its own line drastically reduces elegance without sufficiently improving
   # maintainability. The decision to add a new line should be made on a
   # case-by-case basis.
   newline-per-chained-call: off
 
   # Only use the `Array` constructor when a sparse array is needed, in which
-  # case express intent by disabling this rule via an inline comment. Otherwise,
-  # it reduces accessibility because it's not widely understood that providing
-  # a single argument creates a sparse array of the given size whereas providing
-  # multiple arguments creates an array with the given elements, and reduces
-  # correctness because it's easy to forget those rules and make a mistake, and
-  # reduces expressiveness when providing a single argument because it's unclear
-  # whether the intention is to create a sparse array, or a normal array with a
-  # single value. Instead, use array literal notation whenever possible. Better
-  # yet, don't use sparse arrays at all; they're not widely understood.
+  # case express intent by disabling this rule via an inline comment.
+  # Otherwise, it reduces accessibility because it's not widely understood that
+  # providing a single argument creates a sparse array of the given size
+  # whereas providing multiple arguments creates an array with the given
+  # elements, and reduces correctness because it's easy to forget those rules
+  # and make a mistake, and reduces expressiveness when providing a single
+  # argument because it's unclear whether the intention is to create a sparse
+  # array, or a normal array with a single value. Instead, use array literal
+  # notation whenever possible. Better yet, don't use sparse arrays at all;
+  # they're not widely understood.
   no-array-constructor: error
 
   # Don't use a bitwise operator (e.g., `&` and `|`) unless necessary for a
@@ -1518,15 +1540,15 @@ rules:
   # Don't use a unary operator such as `++` unless writing the final expression
   # in a `for` statement; it reduces accessibility because it's not widely
   # understood how white space and automatic semicolon injection can change the
-  # meaning of expressions that contain unary operators, and reduces correctness
-  # because it's easy to forget those concepts and make a mistake. Instead, use
-  # `+=`.
+  # meaning of expressions that contain unary operators, and reduces
+  # correctness because it's easy to forget those concepts and make a mistake.
+  # Instead, use `+=`.
   no-plusplus:
     - error
     - allowForLoopAfterthoughts: true
 
-  # This rule is highly subjective. It's disabled because there isn't any syntax
-  # that's important enough to disallow by default.
+  # This rule is highly subjective. It's disabled because there isn't any
+  # syntax that's important enough to disallow by default.
   no-restricted-syntax: off
 
   # Never use a tab; it reduces maintainability by causing alignment issues
@@ -1558,8 +1580,8 @@ rules:
   # something that's not a problem.
   no-underscore-dangle: off
 
-  # Never use a ternary expression in a situation that has an easier alternative
-  # (e.g., `let foo = bar ? bar : 1;` is better expressed as
+  # Never use a ternary expression in a situation that has an easier
+  # alternative (e.g., `let foo = bar ? bar : 1;` is better expressed as
   # `let foo = bar || 1;`); it reduces elegance.
   no-unneeded-ternary:
     - error
@@ -1572,9 +1594,9 @@ rules:
   no-whitespace-before-property: error
 
   # This rule is highly subjective. It's disabled because deciding whether a
-  # single-line statement should appear beside or below a conditional depends on
-  # the complexity of both the conditional and the single-line statement. The
-  # decision should be made on a case-by-case basis.
+  # single-line statement should appear beside or below a conditional depends
+  # on the complexity of both the conditional and the single-line statement.
+  # The decision should be made on a case-by-case basis.
   nonblock-statement-body-position: off
 
   # When defining an object literal or destructuring assignment that contains
@@ -1593,9 +1615,10 @@ rules:
     - error 
     - never
 
-  # When defining a multiline object literal or destructuring assignment, always
-  # put each property on a separate line. Otherwise, it reduces maintainability
-  # by producing noisy diffs when a property is modified, added, or removed.
+  # When defining a multiline object literal or destructuring assignment,
+  # always put each property on a separate line. Otherwise, it reduces
+  # maintainability by producing noisy diffs when a property is modified,
+  # added, or removed.
   object-property-newline:
     - error
     - allowMultiplePropertiesPerLine: true
@@ -1613,8 +1636,9 @@ rules:
   # diffs when a declaration is modified, added, or removed.
   #
   # Note that the `one-var` rule enforces a separate declaration to be made for
-  # each variable, whereas this rule only addresses multi-variable declarations.
-  # Therefore, this rule is only enabled in case the `one-var` rule is disabled.
+  # each variable, whereas this rule only addresses multi-variable
+  # declarations. Therefore, this rule is only enabled in case the `one-var`
+  # rule is disabled.
   one-var-declaration-per-line:
     - error
     - always
@@ -1680,8 +1704,8 @@ rules:
   # inside braces on a single line. Otherwise, it reduces accessibility because
   # it's not widely understood how automatic semicolon insertion works, and
   # reduces correctness because it's easy to forget that concept and make a
-  # mistake, and reduces expressiveness because it's unclear whether or not it's
-  # intentional.
+  # mistake, and reduces expressiveness because it's unclear whether or not
+  # it's intentional.
   semi:
     - error
     - always
@@ -1692,7 +1716,8 @@ rules:
   # This rule is highly subjective. It's disabled because it's too limiting.
   sort-keys: off
 
-  # Feel free to sort variable declarations in whichever order that makes sense.
+  # Feel free to sort variable declarations in whichever order that makes
+  # sense.
   
   # This rule is highly subjective. It's disabled because it's too limiting.
   sort-vars: off
@@ -1730,9 +1755,9 @@ rules:
     - error
     - int32Hint: false
 
-  # Always add spaces after a unary word operator such as `new` or `delete`, and
-  # never add unnecessary spaces around a unary non-word operator such as `++`.
-  # Otherwise, it reduces elegance.
+  # Always add spaces after a unary word operator such as `new` or `delete`,
+  # and never add unnecessary spaces around a unary non-word operator such as
+  # `++`. Otherwise, it reduces elegance.
   #
   # This rule is highly subjective.
   space-unary-ops:
@@ -1741,7 +1766,8 @@ rules:
       nonwords: false
 
   # Always add a space after the opening `//` or `/*` in a comment, and before
-  # the closing `*/` when it's on the same line. Otherwise, it reduces elegance.
+  # the closing `*/` when it's on the same line. Otherwise, it reduces
+  # elegance.
   #
   # This rule is highly subjective.
   spaced-comment:
@@ -1774,8 +1800,8 @@ rules:
   # ECMAScript 6 #
   ################
 
-  # Only use an arrow function when braces aren't needed (e.g., when returning a
-  # single line expression). Otherwise, it reduces elegance. Instead, use a
+  # Only use an arrow function when braces aren't needed (e.g., when returning
+  # a single line expression). Otherwise, it reduces elegance. Instead, use a
   # function expression.
   #
   # This rule is highly subjective.
@@ -1857,8 +1883,8 @@ rules:
   # imports that are important enough to disallow by default.
   no-restricted-imports: off
 
-  # Never reference `this` before `super` in the constructor of a derived class;
-  # it throws a `ReferenceError`.
+  # Never reference `this` before `super` in the constructor of a derived
+  # class; it throws a `ReferenceError`.
   no-this-before-super: error
 
   # Never use a computed property when it could be expressed as a non-computed
@@ -1881,8 +1907,8 @@ rules:
       ignoreExport: false
       ignoreImport: false
 
-  # Never use `var` to declare a variable; it reduces accessibility because it's
-  # not widely understood that variables defined via `var` are hoisted and
+  # Never use `var` to declare a variable; it reduces accessibility because
+  # it's not widely understood that variables defined via `var` are hoisted and
   # aren't block-scoped, and reduces correctness because it's easy to forget
   # those concepts and make a mistake. It also reduces correctness because it's
   # easy to accidentally reassign a variable declared via `var`, and reduces
@@ -1891,8 +1917,8 @@ rules:
   no-var: error
 
   # Always use object shorthand syntax when possible. Otherwise, it reduces
-  # elegance. Also, never use arrow functions that explicitly return. Otherwise,
-  # it reduces elegance.
+  # elegance. Also, never use arrow functions that explicitly return.
+  # Otherwise, it reduces elegance.
   #
   # This rule is highly subjective. Note that the 'arrow-body-style' disallows
   # arrow functions being used with braces.
@@ -1928,12 +1954,12 @@ rules:
     - destructuring: any
       ignoreReadBeforeAssign: false
 
-  # When assigning an object's property to an identically-named variable, always
-  # use destructuring. Otherwise, it reduces elegance.
+  # When assigning an object's property to an identically-named variable,
+  # always use destructuring. Otherwise, it reduces elegance.
   #
-  # This rule is highly subjective. The `array` option is set to `false` because
-  # it's only practical to use destructuring with arrays when assigning one or
-  # more values sequentially starting from the first element. The
+  # This rule is highly subjective. The `array` option is set to `false`
+  # because it's only practical to use destructuring with arrays when assigning
+  # one or more values sequentially starting from the first element. The
   # `enforceForRenamedProperties` option is set to `false` because the syntax
   # for assigning an object's property to a differently-named variable isn't
   # elegant enough to justify it being required.
@@ -1964,16 +1990,16 @@ rules:
   # when using `.apply`.
   prefer-spread: error
 
-  # Always use a template literal instead of string concatenation when embedding
-  # an expression into a string. Otherwise, it reduces elegance.
+  # Always use a template literal instead of string concatenation when
+  # embedding an expression into a string. Otherwise, it reduces elegance.
   prefer-template: error
 
-  # Never define a generator function that doesn't call `yield`; it's pointless.
-  # Instead, use a regular function.
+  # Never define a generator function that doesn't call `yield`; it's
+  # pointless. Instead, use a regular function.
   require-yield: error
 
-  # Never add a space between the spread operator and its expression; it reduces
-  # elegance.
+  # Never add a space between the spread operator and its expression; it
+  # reduces elegance.
   #
   # This rule is highly subjective.
   rest-spread-spacing:
@@ -1985,12 +2011,12 @@ rules:
   # This rule is highly subjective. It's disabled because it's too limiting.
   sort-imports: error
 
-  # Always provide a description when defining a `Symbol`. Otherwise, it reduces
-  # debuggability by producing less informative stack traces.
+  # Always provide a description when defining a `Symbol`. Otherwise, it
+  # reduces debuggability by producing less informative stack traces.
   symbol-description: error
 
-  # Never add spaces between the braces of a template literal and the expression
-  # inside; it reduces elegance.
+  # Never add spaces between the braces of a template literal and the
+  # expression inside; it reduces elegance.
   #
   # This rule is highly subjective.
   template-curly-spacing:
