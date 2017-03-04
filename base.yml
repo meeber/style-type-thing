@@ -18,6 +18,11 @@ rules:
   # after the loop.
   no-await-in-loop: error
 
+  # When comparing a value to `-0`, always use `Object.is` instead of a `===`.
+  # Otherwise, it reduces correctness because `x === -0` passes for both `+0`
+  # and `-0`.
+  no-compare-neg-zero: error
+
   # Never put an assignment expression inside of a conditional; it reduces
   # correctness because it's easy to accidentally type `=` instead of `===`, and
   # reduces expressiveness because it's unclear whether or not it's intentional.
@@ -1565,6 +1570,12 @@ rules:
   #
   # This rule is highly subjective.
   no-whitespace-before-property: error
+
+  # This rule is highly subjective. It's disabled because deciding whether a
+  # single-line statement should appear beside or below a conditional depends on
+  # the complexity of both the conditional and the single-line statement. The
+  # decision should be made on a case-by-case basis.
+  nonblock-statement-body-position: off
 
   # When defining an object literal or destructuring assignment that contains
   # line breaks, always add a line break after the opening curly and before the
