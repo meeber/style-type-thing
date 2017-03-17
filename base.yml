@@ -749,12 +749,20 @@ rules:
   # not it's intentional.
   no-unmodified-loop-condition: error
 
-  # Never write an expression that doesn't have any effect; it's pointless.
-  # This problem usually happens on accident due to a mistake in logic.
+  # Never write an expression that doesn't have any effect; in most cases, it's
+  # pointless. In other cases, such as when used to short-circuit logic using
+  # logical operators or the ternary operator, or when used with a tagged
+  # template that has side-effects, it reduces accessibility because it's
+  # difficult to understand the resulting logic, and reduces correctness
+  # because it's easy to make a mistake that results in an unused expression,
+  # and reduces expressiveness because it's unclear whether or not it's
+  # intentional. Instead of short-circuiting logic, use an `if` statement.
+  # Instead of tagged templates with side-effects, use a normal function.
   no-unused-expressions:
     - error
     - allowShortCircuit: false
       allowTernary: false
+      allowTaggedTemplates: false
 
   # Never define a label that's never used; it's pointless. This problem
   # usually happens on accident as a result of refactoring.
