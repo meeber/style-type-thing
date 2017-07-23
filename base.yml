@@ -27,8 +27,8 @@ rules:
   # "declared but unassigned", or "declared and explicitly assigned to
   # `undefined`").
   getter-return:
-    - error
-    - allowImplicit: false
+  - error
+  - allowImplicit: false
 
   # Don't put an `await` statement inside of a loop unless it's intentional
   # that each promise resolve before iterating, in which case express intent by
@@ -58,8 +58,8 @@ rules:
   # because wrapping the assignment in an extra set of parentheses doesn't
   # sufficiently express intent.
   no-cond-assign:
-    - error
-    - always
+  - error
+  - always
 
   # Don't release code containing a `console` statement unless in a development
   # environment, in which case set this rule to `warn` instead of `error` in
@@ -74,8 +74,8 @@ rules:
   # infinite loop, and reduces expressiveness because it's unclear whether or
   # not it's intentional.
   no-constant-condition:
-    - error
-    - checkLoops: true
+  - error
+  - checkLoops: true
 
   # When using a control character in a regular expression, always express
   # intent by disabling this rule via an inline comment. Otherwise, it reduces
@@ -115,8 +115,8 @@ rules:
   # refactoring. It also reduces expressiveness because it's unclear whether or
   # not it's intentional.
   no-empty:
-    - error
-    - allowEmptyCatch: false
+  - error
+  - allowEmptyCatch: false
 
   # Never include empty brackets in a regular expression; it's pointless
   # because an empty character set doesn't match anything. If needing to
@@ -152,13 +152,13 @@ rules:
   # rule merely gets out of the way of the `no-mixed-operators` rule while also
   # preventing extra parentheses in other situations.
   no-extra-parens:
-    - error
-    - all
-    - conditionalAssign: false
-      ignoreJSX: none
-      nestedBinaryExpressions: true
-      returnAssign: false
-      enforceForArrowConditionals: true
+  - error
+  - all
+  - conditionalAssign: false
+    ignoreJSX: none
+    nestedBinaryExpressions: true
+    returnAssign: false
+    enforceForArrowConditionals: true
 
   # Never put a semicolon anywhere that not even automatic semicolon insertion
   # would add one; it's pointless. This problem usually happens on accident by
@@ -201,11 +201,11 @@ rules:
   # reduces debuggability because it's not visually obvious that a non-standard
   # whitespace character is present.
   no-irregular-whitespace:
-    - error
-    - skipStrings: false
-      skipComments: false
-      skipRegExps: false
-      skipTemplates: false
+  - error
+  - skipStrings: false
+    skipComments: false
+    skipRegExps: false
+    skipTemplates: false
 
   # Never invoke a non-function global object such as `Math` or `JSON` as if
   # it's a function; it throws a `TypeError` when executed. This problem
@@ -284,8 +284,8 @@ rules:
   # `typeof` expression to a variable is a normal thing to do, and it doesn't
   # inherently reduce correctness.
   valid-typeof:
-    - error
-    - requireStringLiterals: false
+  - error
+  - requireStringLiterals: false
 
   ##################
   # Best Practices #
@@ -297,9 +297,9 @@ rules:
   # that can be assigned a value via an assignment operator can also have the
   # value retrieved via simple property access, and vice-versa.
   accessor-pairs:
-    - error
-    - setWithoutGet: true
-      getWithoutSet: true
+  - error
+  - setWithoutGet: true
+    getWithoutSet: true
   
   # When invoking one of Array's map/reduce methods, always return a value in
   # the callback. Otherwise, it reduces correctness because such methods rely
@@ -344,8 +344,8 @@ rules:
   # ambiguity of `undefined` (which can mean either "undeclared", "declared but
   # unassigned", or "declared and explicitly assigned to `undefined`").
   consistent-return:
-    - error
-    - treatUndefinedAsUnspecified: false
+  - error
+  - treatUndefinedAsUnspecified: false
 
   # When writing a conditional execution block that doesn't fit on the same
   # line as its conditional expression, always add braces, even if it's only a
@@ -370,9 +370,9 @@ rules:
   # 
   # The `multi-line` option is highly subjective.
   curly:
-    - error
-    - multi-line
-    - consistent
+  - error
+  - multi-line
+  - consistent
 
   # When defining a `switch` block without a default case, always add a
   # `// no default` comment at the bottom. Otherwise, it reduces correctness
@@ -387,8 +387,8 @@ rules:
   #
   # The `property` option is highly subjective.
   dot-location:
-    - error
-    - property
+  - error
+  - property
 
   # When accessing an object's property, use dot notation unless it's not
   # allowed, in which case use bracket notation. Otherwise, it reduces
@@ -399,8 +399,8 @@ rules:
   # requirement. If it's a requirement, then set `allowKeywords` to `false` in
   # the local config file.
   dot-notation:
-    - error
-    - allowKeywords: true
+  - error
+  - allowKeywords: true
 
   # Always use `===` instead of `==`. Otherwise, it reduces correctness because
   # it's easy to accidentally type `==` instead of `===`, and reduces
@@ -408,9 +408,9 @@ rules:
   # reduces accessibility because the rules of `==` regarding type coercion
   # aren't widely understood.
   eqeqeq:
-    - error
-    - always
-    - null: always
+  - error
+  - always
+  - null: always
 
   # When looping through keys via `for`/`in`, filter out inherited properties
   # via `Object.prototype.hasOwnProperty` unless inherited properties are
@@ -490,8 +490,8 @@ rules:
   # Never use `eval`; it reduces security by opening the door for injection
   # attacks, and reduces performance.
   no-eval:
-    - error
-    - allowIndirect: false
+  - error
+  - allowIndirect: false
 
   # Never modify a native object such as `Object`; it reduces consistency by
   # defying the expectation that native objects always behave the same way
@@ -540,10 +540,10 @@ rules:
   # because it's unclear whether or not it's intentional, and reduces
   # accessibility because operators such as `~` aren't widely understood.
   no-implicit-coercion:
-    - error
-    - boolean: true
-      number: true
-      string: true
+  - error
+  - boolean: true
+    number: true
+    string: true
 
   # Only declare a `var` or function declaration in the global scope when
   # necessary for a reason other than elegance, in which case express intent by
@@ -590,9 +590,9 @@ rules:
   # Note that the `no-extra-label` rule disallows the use of labels in
   # non-nested loops.
   no-labels:
-    - error
-    - allowLoop: true
-      allowSwitch: false
+  - error
+  - allowLoop: true
+    allowSwitch: false
 
   # Don't create a standalone code block unless necessary for a reason other
   # than elegance, in which case express intent by disabling this rule via an
@@ -624,10 +624,10 @@ rules:
   # It'd be nice if the `ignoreArrayIndexes` option also applied to `indexOf`.
   # If this rule proves too onerous, then disable it in the local config file.
   no-magic-numbers:
-    - error
-    - detectObjects: false
-      enforceConst: true
-      ignoreArrayIndexes: true
+  - error
+  - detectObjects: false
+    enforceConst: true
+    ignoreArrayIndexes: true
 
   # Don't chain multiple spaces together for purposes other than indentation;
   # it reduces maintainability, especially when adding spaces to align object
@@ -640,10 +640,10 @@ rules:
   # multiple spaces everywhere (except for indenting comments at the end of
   # lines; sometimes the extra spaces increase readability).
   no-multi-spaces:
-    - error
-    - ignoreEOLComments: true
-      exceptions:
-        Property: false
+  - error
+  - ignoreEOLComments: true
+    exceptions:
+      Property: false
 
   # Never create a multiline string by putting `\` at the end of each line; it
   # reduces elegance. Instead, use string concatenation or a template literal.
@@ -695,8 +695,8 @@ rules:
   # objects are constantly recreated, and reduces elegance due to the amount of
   # boilerplate needed to support the management of immutable objects.
   no-param-reassign:
-    - error
-    - props: false
+  - error
+  - props: false
 
   # Never use the `__proto__` property; it's deprecated in ES3.1. Instead, use
   # `Object.getPrototypeOf`.
@@ -708,8 +708,8 @@ rules:
   # Note that the `no-var` rule enforces the use of `let` and `const` over
   # `var`.
   no-redeclare:
-    - error
-    - builtinGlobals: true
+  - error
+  - builtinGlobals: true
 
   # This rule is highly subjective. It's disabled because there aren't any
   # properties that are important enough to disallow by default.
@@ -725,8 +725,8 @@ rules:
   # wrapping the assignment in an extra set of parentheses doesn't sufficiently
   # express intent.
   no-return-assign:
-    - error
-    - always
+  - error
+  - always
 
   # Never combine `await` with `return`; it's pointless because the return
   # value inside of an `async function` is already wrapped inside a promise.
@@ -741,8 +741,8 @@ rules:
   # Never assign a variable or object property to itself; it's pointless. It's
   # common for this to be done on accident.
   no-self-assign:
-    - error
-    - props: true
+  - error
+  - props: true
 
   # Never compare a variable to itself; it reduces accessibility because it's
   # not widely understood that `NaN` is the only value in JavaScript that
@@ -785,10 +785,10 @@ rules:
   # intentional. Instead of short-circuiting logic, use an `if` statement.
   # Instead of tagged templates with side-effects, use a normal function.
   no-unused-expressions:
-    - error
-    - allowShortCircuit: false
-      allowTernary: false
-      allowTaggedTemplates: false
+  - error
+  - allowShortCircuit: false
+    allowTernary: false
+    allowTaggedTemplates: false
 
   # Never define a label that's never used; it's pointless. This problem
   # usually happens on accident as a result of refactoring.
@@ -858,8 +858,8 @@ rules:
   # of a stack trace, and reduces consistency because it defies the expectation
   # that a rejected promise is an instance of `Error` with a `stack` property.
   prefer-promise-reject-errors:
-    - error
-    - allowEmptyReject: false
+  - error
+  - allowEmptyReject: false
 
   # When using `parseInt`, always provide the radix. Otherwise, it reduces
   # correctness because the engine auto-detects which type of number it should
@@ -873,8 +873,8 @@ rules:
   # wrong radix via auto-detection due to an errant leading zero is reduced. It
   # can still auto-detect hexadecimal values (starting with "0x").
   radix:
-    - error
-    - always
+  - error
+  - always
 
   # Never define an `async function` that doesn't contain at least one `await`
   # statement; it's pointless because it adds no functionality over a standard
@@ -896,9 +896,9 @@ rules:
   #
   # This rule is highly subjective.
   wrap-iife:
-    - error
-    - inside
-    - functionPrototypeMethods: true
+  - error
+  - inside
+  - functionPrototypeMethods: true
 
   # Never use the yoda style (e.g., `if (5 === x)`); it reduces consistency
   # because it's not widely used in other projects, and reduces accessibility
@@ -907,8 +907,8 @@ rules:
   # variables in conditionals, overlapping any benefit of the yoda style in
   # terms of correctness.
   yoda:
-    - error
-    - never
+  - error
+  - never
 
   ###############
   # Strict Mode #
@@ -920,8 +920,8 @@ rules:
   # transpiling via babel, disable this rule in the local config file; strict
   # mode is either implied or enabled automatically.
   strict:
-    - error
-    - global
+  - error
+  - global
 
   #############
   # Variables #
@@ -937,8 +937,8 @@ rules:
   # "declared but unassigned", or "declared and explicitly assigned to
   # `undefined`").
   init-declarations:
-    - error
-    - always
+  - error
+  - always
 
   # This rule is disabled because it protects against a bug that's only present
   # in IE8 and earlier.
@@ -977,9 +977,9 @@ rules:
   # function, and thus the chance of closure-related mistakes is lowered, it
   # still reduces expressiveness and debuggability.
   no-shadow:
-    - error
-    - builtinGlobals: true
-      hoist: all
+  - error
+  - builtinGlobals: true
+    hoist: all
  
   # When initializing a variable to `undefined`, always do so explicitly
   # instead of implicitly. Otherwise, it reduces correctness because it's easy
@@ -1009,8 +1009,8 @@ rules:
   # not recognized by ESLint for the specified environment, then add the
   # variable to the `globals` section of the local config file.
   no-undef:
-    - error
-    - typeof: true
+  - error
+  - typeof: true
 
   # When referencing `undefined`, always do so explicitly instead of
   # implicitly. Otherwise, it reduces correctness because it's easy to
@@ -1043,11 +1043,11 @@ rules:
   # comment. This problem usually happens on accident as a result of
   # refactoring.
   no-unused-vars:
-    - error
-    - vars: all
-      args: all
-      caughtErrors: all
-      ignoreRestSiblings: false
+  - error
+  - vars: all
+    args: all
+    caughtErrors: all
+    ignoreRestSiblings: false
 
   # Never reference a variable, function, or class before defining it; it
   # reduces accessibility because it's not widely understood that variables
@@ -1056,10 +1056,10 @@ rules:
   # In the case of ES6 bindings such as `let`, it throws a `ReferenceError`
   # when executed.
   no-use-before-define:
-    - error
-    - functions: true
-      classes: true
-      variables: true
+  - error
+  - functions: true
+    classes: true
+    variables: true
 
   ########################
   # Node.js and CommonJS #
@@ -1103,9 +1103,9 @@ rules:
   #
   # This rule is highly subjective.
   no-mixed-requires:
-    - error
-    - grouping: false
-      allowCall: true
+  - error
+  - grouping: false
+    allowCall: true
 
   # Never use `new` in conjunction with a `require` statement; it reduces
   # accessibility because it's not widely understood that it only works
@@ -1144,8 +1144,8 @@ rules:
   # used instead of the asynchronous version. If a project exclusively uses
   # synchronous I/O, then disable this rule in the local config file.
   no-sync:
-    - error
-    - allowAtRootLevel: false
+  - error
+  - allowAtRootLevel: false
 
   ####################
   # Stylistic Issues #
@@ -1170,11 +1170,11 @@ rules:
   #
   # This rule is highly subjective.
   array-bracket-spacing:
-    - error
-    - never
-    - singleValue: false
-      objectsInArrays: false
-      arraysInArrays: false
+  - error
+  - never
+  - singleValue: false
+    objectsInArrays: false
+    arraysInArrays: false
 
   # When declaring an array with elements that contain line breaks, always add
   # line breaks between the elements. Otherwise, it reduces elegance. In all
@@ -1185,17 +1185,17 @@ rules:
   # declaration. Adding line breaks in that case improves maintainability by
   # producing cleaner diffs when elements are added and removed.
   array-element-newline:
-    - error
-    - multiline: true
-      minItems: null
+  - error
+  - multiline: true
+    minItems: null
 
   # When writing a single-line block, always add a space between each brace and
   # the code inside. Otherwise, it reduces elegance.
   #
   # This rule is highly subjective.
   block-spacing:
-    - error
-    - always
+  - error
+  - always
 
   # Always follow the one true brace style by putting the opening brace of a
   # block on the same line as its corresponding statement or declaration.
@@ -1203,17 +1203,17 @@ rules:
   #
   # This rule is highly subjective.
   brace-style:
-    - error
-    - 1tbs
-    - allowSingleLine: true
+  - error
+  - 1tbs
+  - allowSingleLine: true
 
   # When naming a non-constant, always use camelcase instead of underscores.
   # Otherwise, it reduces elegance.
   #
   # This rule is highly subjective.
   camelcase:
-    - error
-    - properties: always
+  - error
+  - properties: always
 
   # Feel free to start a comment with any character, including an uppercase or
   # lowercase letter.
@@ -1231,70 +1231,70 @@ rules:
   # trailing commas in function calls and declarations, then the `functions`
   # option will be changed to `always-multiline`.
   comma-dangle:
-    - error
-    - arrays: always-multiline
-      exports: always-multiline
-      functions: never
-      imports: always-multiline
-      objects: always-multiline
+  - error
+  - arrays: always-multiline
+    exports: always-multiline
+    functions: never
+    imports: always-multiline
+    objects: always-multiline
 
   # Always add a space after commas instead of before. Otherwise, it reduces
   # elegance.
   #
   # This rule is highly subjective.
   comma-spacing:
-    - error
-    - after: true
-      before: false
+  - error
+  - after: true
+    before: false
 
   # Always add a comma after (instead of before) each item in a multiline list.
   # Otherwise, it reduces maintainability by producing noisy diffs when an item
   # is added to or removed from the beginning.
   comma-style:
-    - error
-    - last
-    - exceptions:
-        ArrayExpression: false
-        ArrayPattern: false
-        ArrowFunctionExpression: false
-        CallExpression: false
-        FunctionDeclaration: false
-        FunctionExpression: false
-        ImportDeclaration: false
-        ObjectExpression: false
-        ObjectPattern: false
-        VariableDeclaration: false
+  - error
+  - last
+  - exceptions:
+      ArrayExpression: false
+      ArrayPattern: false
+      ArrowFunctionExpression: false
+      CallExpression: false
+      FunctionDeclaration: false
+      FunctionExpression: false
+      ImportDeclaration: false
+      ObjectExpression: false
+      ObjectPattern: false
+      VariableDeclaration: false
 
   # Never add spaces between a computed property bracket and the value inside;
   # it reduces elegance.
   #
   # This rule is highly subjective.
   computed-property-spacing:
-    - error
-    - never
+  - error
+  - never
 
   # Always name a variable `self` when it's being used to capture `this`.
   # Otherwise, it reduces elegance.
   #
   # This rule is highly subjective.
   consistent-this:
-    - error
-    - self
+  - error
+  - self
 
   # Always add a trailing newline at the end of a file; it makes it easier to
   # append files as well as output files to the terminal without messing up the
   # shell prompt.
   eol-last:
-    - error
-    - always
+  - error
+  - always
 
   # Never add a space between a function invocation and the opening parenthesis
   # of the argument list; it reduces elegance.
   #
   # This rule is highly subjective.
   func-call-spacing:
-    - error
-    - never
+  - error
+  - never
 
   # When defining a function expression (other than `module.exports`) that's
   # automatically given a name in ES6 based on context, never manually give it
@@ -1305,9 +1305,9 @@ rules:
   # different name than the one that's automatically given in ES6 based on
   # context; it doesn't disallow manually giving it the same name.
   func-name-matching:
-    - error
-    - always
-    - includeCommonJSModuleExports: false
+  - error
+  - always
+  - includeCommonJSModuleExports: false
 
   # Always manually give a name to a function expression when it's not
   # automatically given one in ES6 based on context. Otherwise, it reduces
@@ -1319,8 +1319,8 @@ rules:
   # when it's not automatically given one in ES6 based on context; it doesn't
   # disallow giving a name to a function when it's automatically given one.
   func-names:
-    - error
-    - as-needed
+  - error
+  - as-needed
 
   # Always use a function expression instead of a function declaration.
   # Function declarations reduce correctness because it's easy to accidentally
@@ -1339,9 +1339,9 @@ rules:
   # involved, and reduces expressiveness because `=>` isn't as meaningful as
   # `function`.
   func-style:
-    - error
-    - expression
-    - allowArrowFunctions: true
+  - error
+  - expression
+  - allowArrowFunctions: true
 
   # This rule is highly subjective. It's disabled because there aren't any
   # identifiers that are important enough to disallow by default.
@@ -1364,23 +1364,23 @@ rules:
   #
   # The `2` option is highly subjective.
   indent:
-    - error
-    - 2
-    - SwitchCase: 1
-      VariableDeclarator: 1
-      outerIIFEBody: 1
-      MemberExpression: 1
-      FunctionDeclaration:
-        parameters: 1
-        body: 1
-      FunctionExpression:
-        parameters: 1
-        body: 1
-      CallExpression:
-        arguments: 1
-      ArrayExpression: 1
-      ObjectExpression: 1
-      flatTernaryExpressions: true
+  - error
+  - 2
+  - SwitchCase: 1
+    VariableDeclarator: 1
+    outerIIFEBody: 1
+    MemberExpression: 1
+    FunctionDeclaration:
+      parameters: 1
+      body: 1
+    FunctionExpression:
+      parameters: 1
+      body: 1
+    CallExpression:
+      arguments: 1
+    ArrayExpression: 1
+    ObjectExpression: 1
+    flatTernaryExpressions: true
 
   # This rule is disabled due to lack of jsx usage.
   jsx-quotes: off
@@ -1394,19 +1394,19 @@ rules:
   # Note that the `no-multi-spaces` rule also disallows the use of multiple
   # spaces.
   key-spacing:
-    - error
-    - afterColon: true
-      beforeColon: false
-      mode: strict
+  - error
+  - afterColon: true
+    beforeColon: false
+    mode: strict
 
   # Always add a single space before and after a keyword such as `if` or
   # `else`. Otherwise, it reduces elegance.
   #
   # This rule is highly subjective.
   keyword-spacing:
-    - error
-    - after: true
-      before: true
+  - error
+  - after: true
+    before: true
 
   # Feel free to add a comment anywhere.
   #
@@ -1417,8 +1417,8 @@ rules:
   # Always use a Unix line ending; Unix is a more common development
   # environment for Node.js than Windows.
   linebreak-style:
-    - error
-    - unix
+  - error
+  - unix
 
   # Feel free to add a comment anywhere.
   #
@@ -1436,16 +1436,16 @@ rules:
   #
   # This rule is highly subjective.
   max-len:
-    - error
-    - code: 79
-      tabWidth: 2
-      comments: 79
-      ignoreComments: false
-      ignoreTrailingComments: false
-      ignoreUrls: false
-      ignoreStrings: false
-      ignoreTemplateLiterals: false
-      ignoreRegExpLiterals: true
+  - error
+  - code: 79
+    tabWidth: 2
+    comments: 79
+    ignoreComments: false
+    ignoreTrailingComments: false
+    ignoreUrls: false
+    ignoreStrings: false
+    ignoreTemplateLiterals: false
+    ignoreRegExpLiterals: true
 
   # This rule is highly subjective. It's disabled because it's too arbitrary
   # and doesn't add enough value.
@@ -1472,8 +1472,8 @@ rules:
   #
   # This rule is highly subjective.
   multiline-ternary:
-    - error
-    - always-multiline
+  - error
+  - always-multiline
 
   # Only use `new` in conjunction with a function that begins with an
   # uppercase, and only invoke a function that begins with an uppercase by
@@ -1485,10 +1485,10 @@ rules:
   #
   # Note that builtin globals such as `Symbol` are automatically exempted.
   new-cap:
-    - error
-    - capIsNew: true
-      newIsCap: true
-      properties: true
+  - error
+  - capIsNew: true
+    newIsCap: true
+    properties: true
 
   # When invoking a constructor with `new`, always add parentheses to the end
   # of it, even if not providing any arguments. Otherwise, it reduces elegance.
@@ -1527,8 +1527,8 @@ rules:
   # because it's unclear whether or not it's intentional, and reduces
   # accessibility because bitwise operators aren't widely understood.
   no-bitwise:
-    - error
-    - int32Hint: false
+  - error
+  - int32Hint: false
 
   # Feel free to use the `continue` statement.
   #
@@ -1554,8 +1554,8 @@ rules:
   # whether or not it was written with a solid understanding of the order of
   # operations.
   no-mixed-operators:
-    - error
-    - allowSamePrecedence: true
+  - error
+  - allowSamePrecedence: true
 
   # Never mix tabs and spaces; it reduces maintainability by causing alignment
   # issues across development environments. Instead, always use spaces.
@@ -1573,8 +1573,8 @@ rules:
   #
   # This rule is highly subjective.
   no-multiple-empty-lines:
-    - error
-    - max: 1
+  - error
+  - max: 1
 
   # Never negate a condition when writing an `if`/`else` statement or a ternary
   # expression; it reduces elegance. Instead, invert the condition.
@@ -1599,8 +1599,8 @@ rules:
   # correctness because it's easy to forget those concepts and make a mistake.
   # Instead, use `+=`.
   no-plusplus:
-    - error
-    - allowForLoopAfterthoughts: true
+  - error
+  - allowForLoopAfterthoughts: true
 
   # This rule is highly subjective. It's disabled because there isn't any
   # syntax that's important enough to disallow by default.
@@ -1626,9 +1626,9 @@ rules:
   # Never add extra spaces to the end of a line; it's pointless. This problem
   # usually happens on accident.
   no-trailing-spaces:
-    - error
-    - ignoreComments: false
-      skipBlankLines: false
+  - error
+  - ignoreComments: false
+    skipBlankLines: false
 
   # Feel free to use dangling underscores in an identifier.
   #
@@ -1640,8 +1640,8 @@ rules:
   # alternative (e.g., `let foo = bar ? bar : 1;` is better expressed as
   # `let foo = bar || 1;`); it reduces elegance.
   no-unneeded-ternary:
-    - error
-    - defaultAssignment: false
+  - error
+  - defaultAssignment: false
 
   # Never add whitespace around the dot or before the bracket of an object's
   # property (except when indenting on a new line); it reduces elegance.
@@ -1665,37 +1665,37 @@ rules:
   # the opening curly and before the closing curly, or don't add any line
   # breaks at all.
   object-curly-newline:
-    - error
-    - ObjectExpression:
-        multiline: true
-        consistent: true
-      ObjectPattern:
-        multiline: true
-        consistent: true
+  - error
+  - ObjectExpression:
+      multiline: true
+      consistent: true
+    ObjectPattern:
+      multiline: true
+      consistent: true
 
   # Never add spaces between the braces of an object literal or destructuring
   # assignment, and the tokens inside; it reduces elegance.
   #
   # This rule is highly subjective.
   object-curly-spacing:
-    - error 
-    - never
+  - error 
+  - never
 
   # When defining a multiline object literal or destructuring assignment,
   # always put each property on a separate line. Otherwise, it reduces
   # maintainability by producing noisy diffs when a property is modified,
   # added, or removed.
   object-property-newline:
-    - error
-    - allowMultiplePropertiesPerLine: true
+  - error
+  - allowMultiplePropertiesPerLine: true
 
   # When declaring a group of variables, always use a separate declaration for
   # each variable. Otherwise, it reduces maintainability by producing noisy
   # diffs when a variable is added to or removed from the beginning or end of
   # the group.
   one-var:
-    - error
-    - never
+  - error
+  - never
 
   # When declaring a group of variables, always put each declaration on a
   # separate line. Otherwise, it reduces maintainability by producing noisy
@@ -1706,33 +1706,33 @@ rules:
   # declarations. Therefore, this rule is only enabled in case the `one-var`
   # rule is disabled.
   one-var-declaration-per-line:
-    - error
-    - always
+  - error
+  - always
 
   # Always use a shorthand operator such as `+=` for a simple math operation.
   # Otherwise, it reduces elegance.
   #
   # This rule is highly subjective.
   operator-assignment:
-    - error
-    - always
+  - error
+  - always
 
   # Always place the operator at the end of the current line instead of the
   # start of the next line when breaking an expression across multiple lines.
   # Otherwise, it reduces expressiveness because it doesn't signal that the
   # expression continues onto the next line.
   operator-linebreak:
-    - error
-    - after
+  - error
+  - after
 
   # Never add an empty line as padding inside of a block; it reduces elegance.
   #
   # This rule is highly subjective.
   padded-blocks:
-    - error
-    - blocks: never
-      classes: never
-      switches: never
+  - error
+  - blocks: never
+    classes: never
+    switches: never
 
   # This rule is disabled because the use of padding lines between different
   # types of statements is highly subjective and situational.
@@ -1746,8 +1746,8 @@ rules:
   # This rule is highly subjective. Note that the `quotes` rule enforces double
   # quotes over single quotes.
   quote-props:
-    - error
-    - always
+  - error
+  - always
 
   # When defining a string, always use double quotes or backticks (instead of
   # single quotes). Otherwise, it reduces elegance because single quotes look
@@ -1755,10 +1755,10 @@ rules:
   #
   # This rule is highly subjective.
   quotes:
-    - error
-    - double
-    - avoidEscape: false
-      allowTemplateLiterals: true
+  - error
+  - double
+  - avoidEscape: false
+    allowTemplateLiterals: true
 
   # This rule is disabled due to lack of jsdoc usage.
   require-jsdoc: off
@@ -1770,26 +1770,26 @@ rules:
   # mistake, and reduces expressiveness because it's unclear whether or not
   # it's intentional.
   semi:
-    - error
-    - always
-    - omitLastInOneLineBlock: true
+  - error
+  - always
+  - omitLastInOneLineBlock: true
 
   # Never add a space before a semicolon, and always add a space after a
   # semicolon unless it's at the end of a line. Otherwise, it reduces elegance.
   #
   # This rule is highly subjective.
   semi-spacing:
-    - error
-    - after: true
-      before: false
+  - error
+  - after: true
+    before: false
 
   # Always place the semicolon at the end of the current line (instead of the
   # beginning of the next line). Otherwise, it reduces elegance.
   #
   # Note that the `semi` rule enforces the use of semicolons.
   semi-style:
-    - error
-    - last
+  - error
+  - last
 
   # Feel free to sort object properties in whichever order that makes sense.
   #
@@ -1806,34 +1806,34 @@ rules:
   #
   # This rule is highly subjective.
   space-before-blocks:
-    - error
-    - always
+  - error
+  - always
 
   # Always add a space before the opening parenthesis in a function definition.
   # Otherwise, it reduces elegance.
   #
   # This rule is highly subjective.
   space-before-function-paren:
-    - error
-    - anonymous: always
-      asyncArrow: always
-      named: always
+  - error
+  - anonymous: always
+    asyncArrow: always
+    named: always
 
   # Never add spaces between parentheses and the contents inside; it reduces
   # elegance.
   #
   # This rule is highly subjective.
   space-in-parens:
-    - error
-    - never
+  - error
+  - never
 
   # Always add spaces around an operator such as `+`. Otherwise, it reduces
   # elegance.
   #
   # This rule is highly subjective.
   space-infix-ops:
-    - error
-    - int32Hint: false
+  - error
+  - int32Hint: false
 
   # Always add spaces after a unary word operator such as `new` or `delete`,
   # and never add unnecessary spaces around a unary non-word operator such as
@@ -1841,9 +1841,9 @@ rules:
   #
   # This rule is highly subjective.
   space-unary-ops:
-    - error
-    - words: true
-      nonwords: false
+  - error
+  - words: true
+    nonwords: false
 
   # Always add a space after the opening `//` or `/*` in a comment, and before
   # the closing `*/` when it's on the same line. Otherwise, it reduces
@@ -1851,10 +1851,10 @@ rules:
   #
   # This rule is highly subjective.
   spaced-comment:
-    - error
-    - always
-    - block:
-        balanced: true
+  - error
+  - always
+  - block:
+      balanced: true
 
   # When writing a `case` or `default` clause within a `switch` statement,
   # never add a space before the colon; it reduces elegance. Also, if the
@@ -1863,23 +1863,23 @@ rules:
   #
   # This rule is highly subjective.
   switch-colon-spacing:
-    - error
-    - after: true
-      before: false
+  - error
+  - after: true
+    before: false
 
   # When invoking a tagged template literal, never add a space between the
   # function name and backtick; it reduces elegance.
   #
   # This rule is highly subjective.
   template-tag-spacing:
-    - error
-    - never
+  - error
+  - never
 
   # Never specify whether or not a code unit is big or little endian; it's
   # pointless when using UTF-8 encoding.
   unicode-bom:
-    - error
-    - never
+  - error
+  - never
 
   # Never wrap a regex literal in parentheses; it reduces elegance.
   #
@@ -1897,26 +1897,26 @@ rules:
   #
   # This rule is highly subjective.
   arrow-body-style:
-    - error
-    - never
+  - error
+  - never
 
   # Only add parentheses around an arrow function's arguments when there's more
   # than one. Otherwise, it reduces elegance.
   #
   # This rule is highly subjective.
   arrow-parens:
-    - error
-    - as-needed
-    - requireForBlockBody: false
+  - error
+  - as-needed
+  - requireForBlockBody: false
 
   # Always add a space before and after the `=>` when defining an arrow
   # function. Otherwise, it reduces elegance.
   #
   # This rule is highly subjective.
   arrow-spacing:
-    - error
-    - after: true
-      before: true
+  - error
+  - after: true
+    before: true
 
   # Always call `super()` from within the constructor of a derived class.
   # Otherwise, it throws an error upon execution.
@@ -1927,9 +1927,9 @@ rules:
   #
   # This rule is highly subjective.
   generator-star-spacing:
-    - error
-    - after: true
-      before: false
+  - error
+  - after: true
+    before: false
 
   # Never reassign a class; it reduces correctness because it's easy to
   # accidentally reassign a class since it's not protected via `const`, and
@@ -1944,8 +1944,8 @@ rules:
   # it's unclear whether or not it's intentional. Instead, use a function
   # expression.
   no-confusing-arrow:
-    - error
-    - allowParens: false
+  - error
+  - allowParens: false
 
   # Never reassign a variable defined via `const`; it'll throw an error upon
   # execution. Instead, define the variable via `let`. This problem usually
@@ -1963,8 +1963,8 @@ rules:
   #
   # This rule is highly subjective.
   no-duplicate-imports:
-    - error
-    - includeExports: false
+  - error
+  - includeExports: false
 
   # Never use `new` when creating a `Symbol`; it's designed to be called as a
   # function.
@@ -1993,10 +1993,10 @@ rules:
   # When destructuring, importing, or exporting, never rename a reference
   # without actually changing the name; it's pointless.
   no-useless-rename:
-    - error
-    - ignoreDestructuring: false
-      ignoreExport: false
-      ignoreImport: false
+  - error
+  - ignoreDestructuring: false
+    ignoreExport: false
+    ignoreImport: false
 
   # Never use `var` to declare a variable; it reduces accessibility because
   # it's not widely understood that variables defined via `var` are hoisted and
@@ -2014,11 +2014,11 @@ rules:
   # This rule is highly subjective. Note that the 'arrow-body-style' rule
   # disallows arrow functions being used with braces.
   object-shorthand:
-    - error
-    - always
-    - avoidExplicitReturnArrows: true
-      avoidQuotes: false
-      ignoreConstructors: false
+  - error
+  - always
+  - avoidExplicitReturnArrows: true
+    avoidQuotes: false
+    ignoreConstructors: false
 
   # Only use an arrow function when it significantly improves elegance over a
   # function expression, and isn't nested within another arrow function, and
@@ -2041,9 +2041,9 @@ rules:
   # expressiveness because it doesn't convey whether or not the variable is
   # intended to be reassigned. Instead, use `const`.
   prefer-const:
-    - error
-    - destructuring: any
-      ignoreReadBeforeAssign: false
+  - error
+  - destructuring: any
+    ignoreReadBeforeAssign: false
 
   # When assigning an object's property to an identically-named variable,
   # always use destructuring. Otherwise, it reduces elegance.
@@ -2055,14 +2055,14 @@ rules:
   # for assigning an object's property to a differently-named variable isn't
   # elegant enough to justify it being required.
   prefer-destructuring:
-    - error
-    - VariableDeclarator:
-        array: false
-        object: true
-      AssignmentExpression:
-        array: false
-        object: true
-    - enforceForRenamedProperties: false
+  - error
+  - VariableDeclarator:
+      array: false
+      object: true
+    AssignmentExpression:
+      array: false
+      object: true
+  - enforceForRenamedProperties: false
 
   # Feel free to use `parseInt` with a radix value of `2`, `8`, or `16`.
   #
@@ -2098,8 +2098,8 @@ rules:
   #
   # This rule is highly subjective.
   rest-spread-spacing:
-    - error
-    - never
+  - error
+  - never
 
   # Feel free to sort imports in whichever order that makes sense.
   #
@@ -2115,14 +2115,14 @@ rules:
   #
   # This rule is highly subjective.
   template-curly-spacing:
-    - error
-    - never
+  - error
+  - never
 
   # When using the `yield` statement, always add a space after the star, and
   # never add a space before the star. Otherwise, it reduces elegance.
   #
   # This rule is highly subjective.
   yield-star-spacing:
-    - error
-    - after: true
-      before: false
+  - error
+  - after: true
+    before: false

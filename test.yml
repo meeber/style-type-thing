@@ -29,17 +29,17 @@ rules:
   # to split the description across multiple lines, especially given that the
   # second parameter is a function.
   max-len:
-    - error
-    - code: 80
-      tabWidth: 2
-      comments: 80
-      ignoreComments: false
-      ignoreTrailingComments: false
-      ignoreUrls: false
-      ignoreStrings: false
-      ignoreTemplateLiterals: false
-      ignoreRegExpLiterals: true
-      ignorePattern: ^\s*(it|describe)\(
+  - error
+  - code: 80
+    tabWidth: 2
+    comments: 80
+    ignoreComments: false
+    ignoreTrailingComments: false
+    ignoreUrls: false
+    ignoreStrings: false
+    ignoreTemplateLiterals: false
+    ignoreRegExpLiterals: true
+    ignorePattern: ^\s*(it|describe)\(
 
   # This rule is disabled because the `it` or `describe` descriptions should
   # provide sufficient context to give meaning to numbers used during the test.
