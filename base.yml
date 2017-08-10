@@ -1380,6 +1380,7 @@ rules:
       arguments: 1
     ArrayExpression: 1
     ObjectExpression: 1
+    ImportDeclaration: 1
     flatTernaryExpressions: true
 
   # This rule is disabled due to lack of jsx usage.
