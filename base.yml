@@ -1226,15 +1226,11 @@ rules:
   # declaration, always include a comma at the end of the last item. Otherwise,
   # it reduces maintainability by producing noisy diffs when an item is added
   # to or removed from the end.
-  #
-  # Note that once Node.js natively supports the ES2017 feature of allowing
-  # trailing commas in function calls and declarations, then the `functions`
-  # option will be changed to `always-multiline`.
   comma-dangle:
   - error
   - arrays: always-multiline
     exports: always-multiline
-    functions: never
+    functions: always-multiline
     imports: always-multiline
     objects: always-multiline
 
