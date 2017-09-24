@@ -1339,6 +1339,24 @@ rules:
   - expression
   - allowArrowFunctions: true
 
+  # When writing function parameters or arguments, either add a line break
+  # after the opening parenthesis and before the closing parenthesis, or don't
+  # add a line break in either place. Otherwise, it reduces elegance. Also,
+  # always add line breaks if any of the parameters or arguments contain line
+  # breaks or have line breaks between them. Otherwise, it reduces elegance.
+  #
+  # This rule is highly subjective. Note that the `consistent` option only
+  # enforces that line breaks either be added in both places or neither; it
+  # doesn't enforce that line breaks must also be used if any of the parameters
+  # or arguments contain line breaks or have line breaks between them. The
+  # `multiline` option isn't used here because it disallows line breaks when
+  # there aren't any line breaks between parameters or arguments; sometimes
+  # line breaks are desired in this scenario, such as when there's a single
+  # parameter or argument consisting of a long string.
+  function-paren-newline:
+  - error
+  - consistent
+
   # This rule is highly subjective. It's disabled because there aren't any
   # identifiers that are important enough to disallow by default.
   id-blacklist: off
@@ -1920,7 +1938,7 @@ rules:
   constructor-super: error
 
   # When defining a generator function, always add a space after the star, and
-  # never add a space before the start. Otherwise, it reduces elegance.
+  # never add a space before the star. Otherwise, it reduces elegance.
   #
   # This rule is highly subjective.
   generator-star-spacing:
