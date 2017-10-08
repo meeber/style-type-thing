@@ -10,7 +10,7 @@
   },
   "main": "base.yml",
   "scripts": {
-    "postversion": "git checkout dev && git merge master && git push && git push --tags && npm publish",
+    "postversion": "git checkout dev && git merge master && git push --all --follow-tags && npm publish",
     "preversion": "git checkout master && git merge dev && npm test",
     "release": "npm version -m 'Finalize v%s'",
     "test": "echo '// just validating eslint config' | eslint --stdin"
