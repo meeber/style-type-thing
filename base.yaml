@@ -2,7 +2,31 @@ parserOptions:
   ecmaVersion: 2017
 env:
   es6: true
+plugins:
+- prettier
 rules:
+  ###########
+  # Plugins #
+  ###########
+ 
+  # Prettier's default config is used here in order to promote consistency,
+  # even though my personal preference would be to make the following changes:
+  #
+  # - `bracketSpacing: false`: Never add spaces between the braces of an object
+  #   literal or destructuring assignment, and the tokens inside; it reduces
+  #   elegance. This rule is highly subjective.
+  #
+  # - `printWidth: 79`: Never exceed 79 characters in a line. Otherwise, it
+  #   reduces elegance. Note that 79 is used so that the cursor never wraps
+  #   over to the next line when using a terminal width of 80. This rule is
+  #   highly subjective.
+  #
+  # - `trailingComma: all`: When defining a multiline list in any context,
+  #   always include a comma at the end of the last item. Otherwise, it reduces
+  #   maintainability by producing noisy diffs when an item is added to or
+  #   removed from the end.
+  prettier/prettier: error
+
   ###################
   # Possible Errors #
   ###################
@@ -133,32 +157,11 @@ rules:
   # needed.
   no-extra-boolean-cast: error
 
-  # When combining binary expressions of varying precedence, always add extra
-  # parentheses. Otherwise, it reduces correctness because it's easy to forget
-  # the order of operations, and reduces expressiveness because it's unclear
-  # whether or not it was written with a solid understanding of the order of
-  # operations. Also, never add extra parentheses in other situations; it
-  # reduces elegance as part of a misguided attempt to add expressiveness where
-  # none is needed.
-  #
-  # Note that the `no-mixed-operators` rule enforces the use of extra
-  # parentheses when combining binary expressions of varying precedence. This
-  # rule merely gets out of the way of the `no-mixed-operators` rule while also
-  # preventing extra parentheses in other situations.
-  no-extra-parens:
-  - error
-  - all
-  - conditionalAssign: false
-    ignoreJSX: none
-    nestedBinaryExpressions: true
-    returnAssign: false
-    enforceForArrowConditionals: true
+  # This rule is disabled due to being handled by Prettier.
+  no-extra-parens: off
 
-  # Never put a semicolon anywhere that not even automatic semicolon insertion
-  # would add one; it's pointless. This problem usually happens on accident by
-  # typing `;;` instead of `;`, or by adding a `;` after the closing brace of a
-  # function declaration.
-  no-extra-semi: error
+  # This rule is disabled due to being handled by Prettier.
+  no-extra-semi: off
 
   # Never reassign a function declaration; it reduces correctness because it's
   # easy to accidentally reassign a function declaration since it's not
@@ -339,32 +342,19 @@ rules:
   - error
   - treatUndefinedAsUnspecified: false
 
-  # When writing a conditional execution block that doesn't fit on the same
-  # line as its conditional expression, always add braces, even if it's only a
-  # single line. Otherwise, it reduces correctness because it's easy to forget
-  # to add braces later on when a second statement is added to the execution
-  # block, and reduces maintainability by producing noisy diffs when the number
-  # of statements in the execution block is increased from (or decreased to)
-  # one.
+  # When writing a conditional execution block, always add braces. Otherwise,
+  # it reduces correctness because it's easy to forget to add braces later on
+  # when a second statement is added to the execution block, and reduces
+  # maintainability by producing noisy diffs when the number of statements in
+  # the execution block is increased from (or decreased to) one.
   #
-  # When writing a conditional execution block that fits on the same line as
-  # its conditional expression, then consider putting the execution block on
-  # its own line anyway (along with braces), especially if the conditional
-  # expression and/or execution block are complex. Otherwise, it reduces
-  # maintainability for the same reason as above, as well as because it
-  # produces less specific diffs when either the conditional expression or
-  # execution block is modified. If the conditional expression and execution
-  # block are both simple and unlikely to change (e.g., `if (x) return;`), and
-  # all other conditionals in the grouping are also same-line, then the
-  # improvement in maintainability is insignificant, so it's fine to improve
-  # elegance by putting the execution block on the same line as the conditional
-  # expression, in which case no braces are needed.
-  # 
-  # The `multi-line` option is highly subjective.
+  # Note that the above reasoning doesn't really apply when writing a
+  # conditional execution block that fits on the same line as its conditional
+  # expression. However, the `all` option is still used instead of `multi-line`
+  # due to `multi-line` being incompatible with Prettier.
   curly:
   - error
-  - multi-line
-  - consistent
+  - all
 
   # When defining a `switch` block without a default case, always add a
   # `// no default` comment at the bottom. Otherwise, it reduces correctness
@@ -372,15 +362,8 @@ rules:
   # expressiveness because it's unclear whether or not it's intentional.
   default-case: error
 
-  # When writing a multiline member expression, always place the dot at the
-  # beginning of the property instead of at the end of the object. Otherwise,
-  # it reduces elegance because of confusion caused by the role of periods in
-  # the English language to indicate the end of a sentence.
-  #
-  # The `property` option is highly subjective.
-  dot-location:
-  - error
-  - property
+  # This rule is disabled due to being handled by Prettier.
+  dot-location: off
 
   # When accessing an object's property, use dot notation unless it's not
   # allowed, in which case use bracket notation. Otherwise, it reduces
@@ -513,12 +496,8 @@ rules:
   # unclear whether or not it's intentional.
   no-fallthrough: error
 
-  # Never leave either side of the decimal point blank in a decimal number; it
-  # reduces elegance. Instead, add a zero (e.g., `0.3` instead of `.3`, and
-  # `3.0` instead of `3.`).
-  #
-  # This rule is highly subjective.
-  no-floating-decimal: error
+  # This rule is disabled due to being handled by Prettier.
+  no-floating-decimal: off
 
   # Never reassign a built-in global variable; it reduces consistency by
   # defying the expectation that built-in global variables always behave the
@@ -621,21 +600,8 @@ rules:
     enforceConst: true
     ignoreArrayIndexes: true
 
-  # Don't chain multiple spaces together for purposes other than indentation;
-  # it reduces maintainability, especially when adding spaces to align object
-  # property values across multiple lines, because whenever a new property is
-  # added to the object with a longer name than the existing properties, all
-  # properties in the object must be realigned, resulting in noisy diffs.
-  #
-  # Note that the `key-spacing` rule also prevents multiple spaces from being
-  # added after the colon in object property values. This rule prevents
-  # multiple spaces everywhere (except for indenting comments at the end of
-  # lines; sometimes the extra spaces increase readability).
-  no-multi-spaces:
-  - error
-  - ignoreEOLComments: true
-    exceptions:
-      Property: false
+  # This rule is disabled due to being handled by Prettier.
+  no-multi-spaces: off
 
   # Never create a multiline string by putting `\` at the end of each line; it
   # reduces elegance. Instead, use string concatenation or a template literal.
@@ -874,14 +840,8 @@ rules:
   # `var`.
   vars-on-top: error
 
-  # Always wrap an immediately-invoked function expression (even when invoked
-  # via `.call` or `.apply`) in parentheses. Otherwise, it reduces elegance.
-  #
-  # This rule is highly subjective.
-  wrap-iife:
-  - error
-  - inside
-  - functionPrototypeMethods: true
+  # This rule is disabled due to being handled by Prettier.
+  wrap-iife: off
 
   # Never use the yoda style (e.g., `if (5 === x)`); it reduces consistency
   # because it's not widely used in other projects, and reduces accessibility
@@ -1120,61 +1080,20 @@ rules:
   # Stylistic Issues #
   ####################
 
-  # Always add newlines after opening array brackets and before closing ones
-  # when there are line breaks inside or between elements. Otherwise, it
-  # reduces elegance. Consider adding linebreaks even if there's only a single
-  # element that fits on a single line, especially when there's a reasonable
-  # chance that elements will later be added or removed from the declaration.
-  # Adding line breaks in that case improves maintainability by producing
-  # cleaner diffs when elements are added and removed.
-  #
-  # This rule is highly subjective. It's disabled because there's no option
-  # that requires line breaks to be used when there are line breaks inside or
-  # between elements, but also allows (but doesn't require) line breaks to be
-  # used even if there's only a single element that fits on a single line.
+  # This rule is disabled due to being handled by Prettier.
   array-bracket-newline: off
 
-  # Never add spaces between array brackets and the tokens inside; it reduces
-  # elegance.
-  #
-  # This rule is highly subjective.
-  array-bracket-spacing:
-  - error
-  - never
-  - singleValue: false
-    objectsInArrays: false
-    arraysInArrays: false
+  # This rule is disabled due to being handled by Prettier.
+  array-bracket-spacing: off
 
-  # When declaring an array with elements that contain line breaks, always add
-  # line breaks between the elements. Otherwise, it reduces elegance. In all
-  # other situations, the decision to add line breaks between elements should
-  # be made on an array-by-array basis. In general, line breaks should be added
-  # when declaring an array with multiple elements, especially when there's a
-  # reasonable chance that elements will later be added or removed from the
-  # declaration. Adding line breaks in that case improves maintainability by
-  # producing cleaner diffs when elements are added and removed.
-  array-element-newline:
-  - error
-  - multiline: true
-    minItems: null
+  # This rule is disabled due to being handled by Prettier.
+  array-element-newline: off
 
-  # When writing a single-line block, always add a space between each brace and
-  # the code inside. Otherwise, it reduces elegance.
-  #
-  # This rule is highly subjective.
-  block-spacing:
-  - error
-  - always
+  # This rule is disabled due to being handled by Prettier.
+  block-spacing: off
 
-  # Always follow the one true brace style by putting the opening brace of a
-  # block on the same line as its corresponding statement or declaration.
-  # Otherwise, it reduces elegance.
-  #
-  # This rule is highly subjective.
-  brace-style:
-  - error
-  - 1tbs
-  - allowSingleLine: true
+  # This rule is disabled due to being handled by Prettier.
+  brace-style: off
 
   # When naming a non-constant, always use camelcase instead of underscores.
   # Otherwise, it reduces elegance.
@@ -1191,51 +1110,17 @@ rules:
   # something that's not a problem.
   capitalized-comments: off
 
-  # When defining a multiline list, always include a comma at the end of the
-  # last item. Otherwise, it reduces maintainability by producing noisy diffs
-  # when an item is added to or removed from the end.
-  comma-dangle:
-  - error
-  - arrays: always-multiline
-    exports: always-multiline
-    functions: always-multiline
-    imports: always-multiline
-    objects: always-multiline
+  # This rule is disabled due to being handled by Prettier.
+  comma-dangle: off
 
-  # Always add a space after commas instead of before. Otherwise, it reduces
-  # elegance.
-  #
-  # This rule is highly subjective.
-  comma-spacing:
-  - error
-  - after: true
-    before: false
+  # This rule is disabled due to being handled by Prettier.
+  comma-spacing: off
 
-  # Always add a comma after (instead of before) each item in a multiline list.
-  # Otherwise, it reduces maintainability by producing noisy diffs when an item
-  # is added to or removed from the beginning.
-  comma-style:
-  - error
-  - last
-  - exceptions:
-      ArrayExpression: false
-      ArrayPattern: false
-      ArrowFunctionExpression: false
-      CallExpression: false
-      FunctionDeclaration: false
-      FunctionExpression: false
-      ImportDeclaration: false
-      ObjectExpression: false
-      ObjectPattern: false
-      VariableDeclaration: false
+  # This rule is disabled due to being handled by Prettier.
+  comma-style: off
 
-  # Never add spaces between a computed property bracket and the value inside;
-  # it reduces elegance.
-  #
-  # This rule is highly subjective.
-  computed-property-spacing:
-  - error
-  - never
+  # This rule is disabled due to being handled by Prettier.
+  computed-property-spacing: off
 
   # Always name a variable `self` when it's being used to capture `this`.
   # Otherwise, it reduces consistency by defying the expectation that no
@@ -1246,20 +1131,11 @@ rules:
   - error
   - self
 
-  # Always add a trailing newline at the end of a file; it makes it easier to
-  # append files as well as output files to the terminal without messing up the
-  # shell prompt.
-  eol-last:
-  - error
-  - always
+  # This rule is disabled due to being handled by Prettier.
+  eol-last: off
 
-  # Never add a space between a function invocation and the opening parenthesis
-  # of the argument list; it reduces elegance.
-  #
-  # This rule is highly subjective.
-  func-call-spacing:
-  - error
-  - never
+  # This rule is disabled due to being handled by Prettier.
+  func-call-spacing: off
 
   # When defining a function expression (other than `module.exports`) that's
   # automatically given a name in ES6 based on context, never manually give it
@@ -1308,23 +1184,8 @@ rules:
   - expression
   - allowArrowFunctions: true
 
-  # When writing function parameters or arguments, either add a line break
-  # after the opening parenthesis and before the closing parenthesis, or don't
-  # add a line break in either place. Otherwise, it reduces elegance. Also,
-  # always add line breaks if any of the parameters or arguments contain line
-  # breaks or have line breaks between them. Otherwise, it reduces elegance.
-  #
-  # This rule is highly subjective. Note that the `consistent` option only
-  # enforces that line breaks either be added in both places or neither; it
-  # doesn't enforce that line breaks must also be used if any of the parameters
-  # or arguments contain line breaks or have line breaks between them. The
-  # `multiline` option isn't used here because it disallows line breaks when
-  # there aren't any line breaks between parameters or arguments; sometimes
-  # line breaks are desired in this scenario, such as when there's a single
-  # parameter or argument consisting of a long string.
-  function-paren-newline:
-  - error
-  - consistent
+  # This rule is disabled due to being handled by Prettier.
+  function-paren-newline: off
 
   # This rule is highly subjective. It's disabled because there aren't any
   # identifiers that are important enough to disallow by default.
@@ -1341,56 +1202,17 @@ rules:
   # value over the `camelcase` rule.
   id-match: off
 
-  # Always use two-space indentation instead of a tab. Otherwise, it reduces
-  # maintainability by causing alignment issues across development
-  # environments.
-  #
-  # The `2` option is highly subjective.
-  indent:
-  - error
-  - 2
-  - SwitchCase: 1
-    VariableDeclarator: 1
-    outerIIFEBody: 1
-    MemberExpression: 1
-    FunctionDeclaration:
-      parameters: 1
-      body: 1
-    FunctionExpression:
-      parameters: 1
-      body: 1
-    CallExpression:
-      arguments: 1
-    ArrayExpression: 1
-    ObjectExpression: 1
-    ImportDeclaration: 1
-    flatTernaryExpressions: true
+  # This rule is disabled due to being handled by Prettier.
+  indent: off
 
   # This rule is disabled due to lack of jsx usage.
   jsx-quotes: off
 
-  # When defining a property in an object literal, never add spaces before the
-  # colon, and always add exactly one space after the colon. Otherwise, it
-  # reduces maintainability because whenever a new property is added to the
-  # object with a longer name than the existing properties, all properties in
-  # the object must be realigned, resulting in noisy diffs.
-  #
-  # Note that the `no-multi-spaces` rule also disallows the use of multiple
-  # spaces.
-  key-spacing:
-  - error
-  - afterColon: true
-    beforeColon: false
-    mode: strict
+  # This rule is disabled due to being handled by Prettier.
+  key-spacing: off
 
-  # Always add a single space before and after a keyword such as `if` or
-  # `else`. Otherwise, it reduces elegance.
-  #
-  # This rule is highly subjective.
-  keyword-spacing:
-  - error
-  - after: true
-    before: true
+  # This rule is disabled due to being handled by Prettier.
+  keyword-spacing: off
 
   # Feel free to add a comment anywhere.
   #
@@ -1414,19 +1236,23 @@ rules:
   # and doesn't add enough value.
   max-depth: off
 
-  # Never exceed 79 characters in a line unless defining a long regex literal.
-  # Otherwise, it reduces elegance. Note that 79 is used so that the cursor
-  # never wraps over to the next line when using a terminal width of 80.
+  # Never exceed 80 characters in a line unless defining a long regex literal
+  # or URL. Otherwise, it reduces elegance.
   #
-  # This rule is highly subjective.
+  # This rule is highly subjective. It's enabled because Prettier doesn't
+  # actually enforce a max line length. Instead, Prettier only breaks apart
+  # long lines that it's able to, and leaves other long lines unaltered. A
+  # length of 80 is used here to keep in synch with the default Prettier
+  # config, although there would be value in using 79 instead so that the
+  # cursor never wraps over to the next line when using a terminal width of 80.
   max-len:
   - error
-  - code: 79
+  - code: 80
     tabWidth: 2
-    comments: 79
+    comments: 80
     ignoreComments: false
     ignoreTrailingComments: false
-    ignoreUrls: false
+    ignoreUrls: true
     ignoreStrings: false
     ignoreTemplateLiterals: false
     ignoreRegExpLiterals: true
@@ -1451,13 +1277,8 @@ rules:
   # and doesn't add enough value.
   max-statements-per-line: off
 
-  # When writing a ternary expression that spans multiple lines, always add a
-  # newline between the operands. Otherwise, it reduces elegance.
-  #
-  # This rule is highly subjective.
-  multiline-ternary:
-  - error
-  - always-multiline
+  # This rule is disabled due to being handled by Prettier.
+  multiline-ternary: off
 
   # Only use `new` in conjunction with a function that begins with an
   # uppercase, and only invoke a function that begins with an uppercase by
@@ -1474,11 +1295,8 @@ rules:
     newIsCap: true
     properties: true
 
-  # When invoking a constructor with `new`, always add parentheses to the end
-  # of it, even if not providing any arguments. Otherwise, it reduces elegance.
-  #
-  # This rule is highly subjective.
-  new-parens: error
+  # This rule is disabled due to being handled by Prettier.
+  new-parens: off
 
   # When chaining multiple method calls, consider putting each one on its own
   # line, especially when passing numerous and/or complex arguments. Otherwise,
@@ -1532,20 +1350,11 @@ rules:
   # This rule is highly subjective.
   no-lonely-if: error
 
-  # When combining binary expressions of varying precedence, always add extra
-  # parentheses. Otherwise, it reduces correctness because it's easy to forget
-  # the order of operations, and reduces expressiveness because it's unclear
-  # whether or not it was written with a solid understanding of the order of
-  # operations.
-  no-mixed-operators:
-  - error
-  - allowSamePrecedence: true
+  # This rule is disabled due to being handled by Prettier.
+  no-mixed-operators: off
 
-  # Never mix tabs and spaces; it reduces maintainability by causing alignment
-  # issues across development environments. Instead, always use spaces.
-  #
-  # Note that the `no-tabs` rule disallows the use of tabs.
-  no-mixed-spaces-and-tabs: error
+  # This rule is disabled due to being handled by Prettier.
+  no-mixed-spaces-and-tabs: off
 
   # Never chain together multiple assignment expressions; it reduces elegance.
   # Instead, put each assignment on its own line.
@@ -1553,12 +1362,8 @@ rules:
   # This rule is highly subjective.
   no-multi-assign: error
 
-  # Never put more than one empty line in a row; it reduces elegance.
-  #
-  # This rule is highly subjective.
-  no-multiple-empty-lines:
-  - error
-  - max: 1
+  # This rule is disabled due to being handled by Prettier.
+  no-multiple-empty-lines: off
 
   # Never negate a condition when writing an `if`/`else` statement or a ternary
   # expression; it reduces elegance. Instead, invert the condition.
@@ -1590,9 +1395,8 @@ rules:
   # syntax that's important enough to disallow by default.
   no-restricted-syntax: off
 
-  # Never use a tab; it reduces maintainability by causing alignment issues
-  # across development environments. Instead, always use spaces.
-  no-tabs: error
+  # This rule is disabled due to being handled by Prettier.
+  no-tabs: off
 
   # Only use the ternary operator when it significantly improves elegance, and
   # isn't nested within another ternary expression, and doesn't involve complex
@@ -1607,12 +1411,8 @@ rules:
   # case-by-case basis.
   no-ternary: off
 
-  # Never add extra spaces to the end of a line; it's pointless. This problem
-  # usually happens on accident.
-  no-trailing-spaces:
-  - error
-  - ignoreComments: false
-    skipBlankLines: false
+  # This rule is disabled due to being handled by Prettier.
+  no-trailing-spaces: off
 
   # Feel free to use dangling underscores in an identifier.
   #
@@ -1627,11 +1427,8 @@ rules:
   - error
   - defaultAssignment: false
 
-  # Never add whitespace around the dot or before the bracket of an object's
-  # property (except when indenting on a new line); it reduces elegance.
-  #
-  # This rule is highly subjective.
-  no-whitespace-before-property: error
+  # This rule is disabled due to being handled by Prettier.
+  no-whitespace-before-property: off
 
   # This rule is highly subjective. It's disabled because deciding whether a
   # single-line statement should appear beside or below a conditional depends
@@ -1639,39 +1436,14 @@ rules:
   # The decision should be made on a case-by-case basis.
   nonblock-statement-body-position: off
 
-  # When defining an object literal or destructuring assignment that contains
-  # line breaks, always add a line break after the opening curly and before the
-  # closing curly. Otherwise, it reduces maintainability by producing noisy
-  # diffs when a property is added to or removed from the beginning or end.
-  #
-  # When defining an object literal or destructuring assignment that doesn't
-  # contain line breaks, then be consistent: either add a line break both after
-  # the opening curly and before the closing curly, or don't add any line
-  # breaks at all.
-  object-curly-newline:
-  - error
-  - ObjectExpression:
-      multiline: true
-      consistent: true
-    ObjectPattern:
-      multiline: true
-      consistent: true
+  # This rule is disabled due to being handled by Prettier.
+  object-curly-newline: off
 
-  # Never add spaces between the braces of an object literal or destructuring
-  # assignment, and the tokens inside; it reduces elegance.
-  #
-  # This rule is highly subjective.
-  object-curly-spacing:
-  - error 
-  - never
+  # This rule is disabled due to being handled by Prettier.
+  object-curly-spacing: off
 
-  # When defining a multiline object literal or destructuring assignment,
-  # always put each property on a separate line. Otherwise, it reduces
-  # maintainability by producing noisy diffs when a property is modified,
-  # added, or removed.
-  object-property-newline:
-  - error
-  - allowMultiplePropertiesPerLine: true
+  # This rule is disabled due to being handled by Prettier.
+  object-property-newline: off
 
   # When declaring a group of variables, always use a separate declaration for
   # each variable. Otherwise, it reduces maintainability by producing noisy
@@ -1681,17 +1453,8 @@ rules:
   - error
   - never
 
-  # When declaring a group of variables, always put each declaration on a
-  # separate line. Otherwise, it reduces maintainability by producing noisy
-  # diffs when a declaration is modified, added, or removed.
-  #
-  # Note that the `one-var` rule enforces a separate declaration to be made for
-  # each variable, whereas this rule only addresses multi-variable
-  # declarations. Therefore, this rule is only enabled in case the `one-var`
-  # rule is disabled.
-  one-var-declaration-per-line:
-  - error
-  - always
+  # This rule is disabled due to being handled by Prettier.
+  one-var-declaration-per-line: off
 
   # Always use a shorthand operator such as `+=` for a simple math operation.
   # Otherwise, it reduces elegance.
@@ -1701,79 +1464,33 @@ rules:
   - error
   - always
 
-  # Always place the operator at the end of the current line instead of the
-  # start of the next line when breaking an expression across multiple lines.
-  # Otherwise, it reduces expressiveness because it doesn't signal that the
-  # expression continues onto the next line.
-  operator-linebreak:
-  - error
-  - after
+  # This rule is disabled due to being handled by Prettier.
+  operator-linebreak: off
 
-  # Never add an empty line as padding inside of a block; it reduces elegance.
-  #
-  # This rule is highly subjective.
-  padded-blocks:
-  - error
-  - blocks: never
-    classes: never
-    switches: never
+  # This rule is disabled due to being handled by Prettier.
+  padded-blocks: off
 
   # This rule is disabled because the use of padding lines between different
   # types of statements is highly subjective and situational.
   padding-line-between-statements: off
 
-  # When defining an object literal, always put double quotes around property
-  # names. Otherwise, it reduces elegance by making it more difficult to 
-  # distinguish between an identifier and a property, especially with the rise
-  # in use of destructuring and shorthand syntax.
-  #
-  # This rule is highly subjective. Note that the `quotes` rule enforces double
-  # quotes over single quotes.
-  quote-props:
-  - error
-  - always
+  # This rule is disabled due to being handled by Prettier.
+  quote-props: off
 
-  # When defining a string, always use double quotes or backticks (instead of
-  # single quotes). Otherwise, it reduces elegance because single quotes look
-  # too much like backticks.
-  #
-  # This rule is highly subjective.
-  quotes:
-  - error
-  - double
-  - avoidEscape: false
-    allowTemplateLiterals: true
+  # This rule is disabled due to being handled by Prettier.
+  quotes: off
 
   # This rule is disabled due to lack of jsdoc usage.
   require-jsdoc: off
  
-  # Add a semicolon at the end of each statement unless the full statement is
-  # inside braces on a single line. Otherwise, it reduces accessibility because
-  # it's not widely understood how automatic semicolon insertion works, and
-  # reduces correctness because it's easy to forget that concept and make a
-  # mistake, and reduces expressiveness because it's unclear whether or not
-  # it's intentional.
-  semi:
-  - error
-  - always
-  - omitLastInOneLineBlock: true
+  # This rule is disabled due to being handled by Prettier.
+  semi: off
 
-  # Never add a space before a semicolon, and always add a space after a
-  # semicolon unless it's at the end of a line. Otherwise, it reduces elegance.
-  #
-  # This rule is highly subjective.
-  semi-spacing:
-  - error
-  - after: true
-    before: false
+  # This rule is disabled due to being handled by Prettier.
+  semi-spacing: off
 
-  # Always place the semicolon at the end of the current line (instead of the
-  # beginning of the next line). Otherwise, it reduces elegance.
-  #
-  # Note that the `semi` rule enforces the use of semicolons.
-  semi-style:
-  - error
-  - last
+  # This rule is disabled due to being handled by Prettier.
+  semi-style: off
 
   # Feel free to sort object properties in whichever order that makes sense.
   #
@@ -1786,48 +1503,20 @@ rules:
   # This rule is highly subjective. It's disabled because it's too limiting.
   sort-vars: off
 
-  # Always add a space before a block. Otherwise, it reduces elegance.
-  #
-  # This rule is highly subjective.
-  space-before-blocks:
-  - error
-  - always
+  # This rule is disabled due to being handled by Prettier.
+  space-before-blocks: off
 
-  # Always add a space before the opening parenthesis in a function definition.
-  # Otherwise, it reduces elegance.
-  #
-  # This rule is highly subjective.
-  space-before-function-paren:
-  - error
-  - anonymous: always
-    asyncArrow: always
-    named: always
+  # This rule is disabled due to being handled by Prettier.
+  space-before-function-paren: off
 
-  # Never add spaces between parentheses and the contents inside; it reduces
-  # elegance.
-  #
-  # This rule is highly subjective.
-  space-in-parens:
-  - error
-  - never
+  # This rule is disabled due to being handled by Prettier.
+  space-in-parens: off
 
-  # Always add spaces around an operator such as `+`. Otherwise, it reduces
-  # elegance.
-  #
-  # This rule is highly subjective.
-  space-infix-ops:
-  - error
-  - int32Hint: false
+  # This rule is disabled due to being handled by Prettier.
+  space-infix-ops: off
 
-  # Always add spaces after a unary word operator such as `new` or `delete`,
-  # and never add unnecessary spaces around a unary non-word operator such as
-  # `++`. Otherwise, it reduces elegance.
-  #
-  # This rule is highly subjective.
-  space-unary-ops:
-  - error
-  - words: true
-    nonwords: false
+  # This rule is disabled due to being handled by Prettier.
+  space-unary-ops: off
 
   # Always add a space after the opening `//` or `/*` in a comment, and before
   # the closing `*/` when it's on the same line. Otherwise, it reduces
@@ -1840,30 +1529,14 @@ rules:
   - block:
       balanced: true
 
-  # When writing a `case` or `default` clause within a `switch` statement,
-  # never add a space before the colon; it reduces elegance. Also, if the
-  # `case` clause and its statement(s) are on the same line, then always add a
-  # space after the colon. Otherwise, it reduces elegance.
-  #
-  # This rule is highly subjective.
-  switch-colon-spacing:
-  - error
-  - after: true
-    before: false
+  # This rule is disabled due to being handled by Prettier.
+  switch-colon-spacing: off
 
-  # When invoking a tagged template literal, never add a space between the
-  # function name and backtick; it reduces elegance.
-  #
-  # This rule is highly subjective.
-  template-tag-spacing:
-  - error
-  - never
+  # This rule is disabled due to being handled by Prettier.
+  template-tag-spacing: off
 
-  # Never specify whether or not a code unit is big or little endian; it's
-  # pointless when using UTF-8 encoding.
-  unicode-bom:
-  - error
-  - never
+  # This rule is disabled due to being handled by Prettier.
+  unicode-bom: off
 
   # Never wrap a regex literal in parentheses; it reduces elegance.
   #
@@ -1884,36 +1557,18 @@ rules:
   - error
   - never
 
-  # Only add parentheses around an arrow function's arguments when there's more
-  # than one. Otherwise, it reduces elegance.
-  #
-  # This rule is highly subjective.
-  arrow-parens:
-  - error
-  - as-needed
-  - requireForBlockBody: false
+  # This rule is disabled due to being handled by Prettier.
+  arrow-parens: off
 
-  # Always add a space before and after the `=>` when defining an arrow
-  # function. Otherwise, it reduces elegance.
-  #
-  # This rule is highly subjective.
-  arrow-spacing:
-  - error
-  - after: true
-    before: true
+  # This rule is disabled due to being handled by Prettier.
+  arrow-spacing: off
 
   # Always call `super()` from within the constructor of a derived class.
   # Otherwise, it throws an error upon execution.
   constructor-super: error
 
-  # When defining a generator function, always add a space after the star, and
-  # never add a space before the star. Otherwise, it reduces elegance.
-  #
-  # This rule is highly subjective.
-  generator-star-spacing:
-  - error
-  - after: true
-    before: false
+  # This rule is disabled due to being handled by Prettier.
+  generator-star-spacing: off
 
   # Never reassign a class; it reduces correctness because it's easy to
   # accidentally reassign a class since it's not protected via `const`, and
@@ -2077,13 +1732,8 @@ rules:
   # pointless. Instead, use a regular function.
   require-yield: error
 
-  # Never add a space between the spread operator and its expression; it
-  # reduces elegance.
-  #
-  # This rule is highly subjective.
-  rest-spread-spacing:
-  - error
-  - never
+  # This rule is disabled due to being handled by Prettier.
+  rest-spread-spacing: off
 
   # Feel free to sort imports in whichever order that makes sense.
   #
@@ -2094,19 +1744,8 @@ rules:
   # reduces debuggability by producing less informative stack traces.
   symbol-description: error
 
-  # Never add spaces between the braces of a template literal and the
-  # expression inside; it reduces elegance.
-  #
-  # This rule is highly subjective.
-  template-curly-spacing:
-  - error
-  - never
+  # This rule is disabled due to being handled by Prettier.
+  template-curly-spacing: off
 
-  # When using the `yield` statement, always add a space after the star, and
-  # never add a space before the star. Otherwise, it reduces elegance.
-  #
-  # This rule is highly subjective.
-  yield-star-spacing:
-  - error
-  - after: true
-    before: false
+  # This rule is disabled due to being handled by Prettier.
+  yield-star-spacing: off

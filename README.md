@@ -9,6 +9,8 @@ JavaScript style guide and ESLint config.
 
 This project contains my personal ESLint config. Every ESLint rule is documented in the [base config file](base.yaml), regardless of whether or not it's enabled. Documentation consists of analysis, justification, and guidance. In some instances, this amounts to little more than paraphrasing of the official ESLint documentation. However, in many cases, there are fresh insights to be gained.
 
+[Prettier](https://github.com/prettier/prettier) was added in v10 of this project even though the style it enforces is sometimes contrary to what was previously enforced by this project via ESLint rules. This change was made due to the enormous value Prettier adds in terms of consistency and accessibility across the JavaScript community.
+
 ## Can this help you?
 
 It's unlikely that this ESLint config will perfectly suit your tastes. Many of the rules are subjective, some extremely so. That's OK, because this project isn't intended to serve as the standard for anyone's projects but my own. But that doesn't mean it can't be of any use to you. An enormous amount of time went into the research and deliberation of these rules, and it's possible that the resulting documentation can help you to define your own ESLint config, even if it ends up being contrary to mine.

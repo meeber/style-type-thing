@@ -14,13 +14,18 @@
     "preversion": "git checkout master && git merge dev && npm test",
     "release": "npm version -m 'Finalize v%s'",
     "test": "npm run validate-base-config && npm run validate-test-config",
-    "validate-base-config": "echo '// just validating base config' | eslint --no-eslintrc -c base.yaml --stdin",
-    "validate-test-config": "echo '// just validating test config' | eslint --no-eslintrc -c test.yaml --stdin"
+    "validate-base-config": "eslint --no-eslintrc --print-config base.yaml | eslint-config-prettier-check",
+    "validate-test-config": "eslint --no-eslintrc --print-config test.yaml | eslint-config-prettier-check"
   },
   "devDependencies": {
-    "eslint": "^4.8.0"
+    "eslint": "^4.8.0",
+    "eslint-config-prettier": "^2.6.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "prettier": "^1.7.4"
   },
   "peerDependencies": {
-    "eslint": "^4.8.0"
+    "eslint": "^4.8.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "prettier": "^1.7.4"
   }
 }
