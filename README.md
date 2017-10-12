@@ -7,7 +7,7 @@ JavaScript style guide and ESLint config.
 
 ## Introduction
 
-This project contains my personal ESLint config. Every ESLint rule is documented in the [base config file](base.yml), regardless of whether or not it's enabled. Documentation consists of analysis, justification, and guidance. In some instances, this amounts to little more than paraphrasing of the official ESLint documentation. However, in many cases, there are fresh insights to be gained.
+This project contains my personal ESLint config. Every ESLint rule is documented in the [base config file](base.yaml), regardless of whether or not it's enabled. Documentation consists of analysis, justification, and guidance. In some instances, this amounts to little more than paraphrasing of the official ESLint documentation. However, in many cases, there are fresh insights to be gained.
 
 ## Can this help you?
 
@@ -122,7 +122,7 @@ npm install --save-dev eslint
 
 Modify the "extends" directive in your ESLint config file to include "tt".
 
-Example .eslintrc.yml:
+Example .eslintrc.yaml:
 
 ```yaml
 extends: tt
@@ -132,10 +132,10 @@ env:
 
 There's also a set of modified rules available for Mocha / Chai / Sinon.
 
-Example test/.eslintrc.yml:
+Example test/.eslintrc.yaml:
 
 ```yaml
-extends: tt/test.yml
+extends: tt/test.yaml
 ```
 
 Example package.json:

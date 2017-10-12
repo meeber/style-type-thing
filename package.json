@@ -8,7 +8,7 @@
   "engines": {
     "node": ">=4.0.0"
   },
-  "main": "base.yml",
+  "main": "base.yaml",
   "scripts": {
     "postversion": "git checkout dev && git merge master && git push --all --follow-tags && npm publish",
     "preversion": "git checkout master && git merge dev && npm test",
