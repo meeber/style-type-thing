@@ -25,14 +25,14 @@ rules:
   # `it` or `describe` to exceed the 80 character limit. The reason for this
   # change is to improve the quality of life while writing tests with Mocha.
   # It's common to write a description for an `it` or `describe` statement that
-  # causes the line to exceed 80 characters, and it's inconvenient and inelegant
-  # to split the description across multiple lines, especially given that the
-  # second parameter is a function.
+  # causes the line to exceed 80 characters, and it's inconvenient and
+  # inelegant to split the description across multiple lines, especially given
+  # that the second parameter is a function.
   max-len:
   - error
-  - code: 80
+  - code: 79
     tabWidth: 2
-    comments: 80
+    comments: 79
     ignoreComments: false
     ignoreTrailingComments: false
     ignoreUrls: false
