@@ -18,14 +18,8 @@ rules:
   # reduces consistency by defying the expectation that a getter's purpose is
   # to return a value, and reduces expressiveness because it's unclear whether
   # or not it's intentional. Also, when returning `undefined`, always do so
-  # explicitly instead of implicitly. Otherwise, it reduces correctness because
-  # it's easy to accidentally implicitly return `undefined`, and reduces
-  # expressiveness because it's unclear whether or not it's intentional. Better
-  # yet, return `null` instead of `undefined` whenever possible. Otherwise, it
-  # reduces correctness, debuggability, expressiveness, and accessibility due
-  # to the ambiguity of `undefined` (which can mean either "undeclared",
-  # "declared but unassigned", or "declared and explicitly assigned to
-  # `undefined`").
+  # explicitly instead of implicitly. See the `no-undefined` rule for reasons
+  # why.
   getter-return:
   - error
   - allowImplicit: false
@@ -339,10 +333,8 @@ rules:
   # `return` statement at the end of a function, and reduces expressiveness
   # because it's unclear whether or not it's intentional. If one code path
   # needs to return a value, but another doesn't, then express intent by having
-  # the latter return `null` instead of `undefined`. Otherwise, it reduces
-  # correctness, debuggability, expressiveness, and accessibility due to the
-  # ambiguity of `undefined` (which can mean either "undeclared", "declared but
-  # unassigned", or "declared and explicitly assigned to `undefined`").
+  # the latter return `null` instead of `undefined`. See the `no-undefined`
+  # rule for reasons why.
   consistent-return:
   - error
   - treatUndefinedAsUnspecified: false
@@ -828,16 +820,7 @@ rules:
   # Never use the `void` operator; it reduces accessibility because it's not
   # widely understood that `void` always returns `undefined`. Instead,
   # reference `undefined` explicitly. Better yet, use `null` instead of
-  # `undefined` whenever possible. Otherwise, it reduces correctness,
-  # debuggability, expressiveness, and accessibility due to the ambiguity of
-  # `undefined` (which can mean either "undeclared", "declared but unassigned",
-  # or "declared and explicitly assigned to `undefined`"). 
-  #
-  # Note that some guides recommend using `void` instead of referencing
-  # `undefined` explicitly because `undefined` can be redefined or shadowed,
-  # thus opening the door for unexpected behavior. But starting with ES5, the
-  # global `undefined` can't be redefined, and the `no-shadow-restricted-names`
-  # rule disallows shadowing `undefined`.
+  # `undefined` whenever possible. See the `no-undefined` rule for reasons why.
   no-void: error
 
   # Feel free to add an inline reminder using a `// TODO:` comment; it improves
@@ -931,11 +914,8 @@ rules:
   # reduces correctness because it's easy to forget to assign a value during
   # initialization, and reduces expressiveness because it's unclear whether or
   # not it's intentional. If declaring a variable before its value has been
-  # determined, then assign it to `null` instead of `undefined`. Otherwise, it
-  # reduces correctness, debuggability, expressiveness, and accessibility due
-  # to the ambiguity of `undefined` (which can mean either "undeclared",
-  # "declared but unassigned", or "declared and explicitly assigned to
-  # `undefined`").
+  # determined, then assign it to `null` instead of `undefined`. See the
+  # `no-undefined` rule for reasons why.
   init-declarations:
   - error
   - always
@@ -982,21 +962,10 @@ rules:
     hoist: all
  
   # When initializing a variable to `undefined`, always do so explicitly
-  # instead of implicitly. Otherwise, it reduces correctness because it's easy
-  # to accidentally implicitly initialize a variable to `undefined`, and
-  # reduces expressiveness because it's unclear whether or not it's
-  # intentional. Better yet, initialize the variable to `null` instead of
-  # `undefined` whenever possible. Otherwise, it reduces correctness,
-  # debuggability, expressiveness, and accessibility due to the ambiguity of
-  # `undefined` (which can mean either "undeclared", "declared but unassigned",
-  # or "declared and explicitly assigned to `undefined`").
+  # instead of implicitly. See the `no-undefined` rule for reasons why.
   #
   # This rule is disabled because it promotes implicitly initializing a
-  # variable to `undefined` instead of doing so explicitly. Some guides
-  # recommend only referencing `undefined` implicitly because `undefined` can
-  # be redefined or shadowed, thus opening the door for unexpected behavior.
-  # But starting with ES5, the global `undefined` can't be redefined, and the
-  # `no-shadow-restricted-names` rule disallows shadowing `undefined`.
+  # variable to `undefined` instead of doing so explicitly.
   #
   # Note that the `init-declarations` rule disallows declaring a variable
   # without explicitly initializing it at the same time.
