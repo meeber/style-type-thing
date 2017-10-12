@@ -2088,7 +2088,7 @@ rules:
   # Feel free to sort imports in whichever order that makes sense.
   #
   # This rule is highly subjective. It's disabled because it's too limiting.
-  sort-imports: error
+  sort-imports: off
 
   # Always provide a description when defining a `Symbol`. Otherwise, it
   # reduces debuggability by producing less informative stack traces.
