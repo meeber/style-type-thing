@@ -423,14 +423,15 @@ rules:
   # pointlessly inelegant style.
   no-div-regex: off
 
-  # When defining an `if` block that always returns when executed, never define
-  # an `else` block; it reduces elegance because the code after the `if` block
-  # will only be executed when the `if` block isn't executed, regardless of
-  # whether or not the code is contained inside of an `else` block. Instead,
-  # put the code outside, directly after the end of the `if` block.
+  # When defining an `if` block that always returns when executed, feel free to
+  # define an `else` block afterward, even though there's no functional
+  # difference between putting code in an `else` block and putting it directly
+  # after the `if` block. In some situations, defining an `else` block may even
+  # improve expressiveness. 
   #
-  # This rule is highly subjective.
-  no-else-return: error
+  # This rule is highly subjective. It's disabled because it protects against
+  # something that's not a problem.
+  no-else-return: off
 
   # When defining an empty function, always express intent by adding a comment
   # inside. Otherwise, it reduces correctness because it's easy to accidentally
