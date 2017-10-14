@@ -1233,6 +1233,10 @@ rules:
   # limiting.
   lines-around-comment: off
 
+  # This rule is disabled because the use of padding lines between class members
+  # is highly subjective and situational.
+  lines-between-class-members: off
+
   # This rule is highly subjective. It's disabled because it's too arbitrary
   # and doesn't add enough value.
   max-depth: off
@@ -1277,6 +1281,14 @@ rules:
   # This rule is highly subjective. It's disabled because it's too arbitrary
   # and doesn't add enough value.
   max-statements-per-line: off
+
+  # When writing multiline comments, always include a line of either `*` or `//`
+  # along the left side. Otherwise, it reduces elegance.
+  #
+  # This rule is highly subjective. It's disabled because both `starred-block`
+  # and `separate-lines` are acceptable styles depending on the situation, but
+  # the rule requires that only one be chosen.
+  multiline-comment-style: off
 
   # This rule is disabled due to being handled by Prettier.
   multiline-ternary: off
