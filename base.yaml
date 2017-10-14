@@ -38,7 +38,7 @@ rules:
   # project, then disable this rule in the local config file.
   no-await-in-loop: error
 
-  # When comparing a value to `-0`, always use `Object.is` instead of a `===`.
+  # When comparing a value to `-0`, always use `Object.is` instead of `===`.
   # Otherwise, it reduces correctness because `x === -0` passes for both `+0`
   # and `-0`.
   no-compare-neg-zero: error
@@ -491,9 +491,9 @@ rules:
   # on the default implementation.
   no-extend-native: error
 
-  # Never create a new function with `bind` if the new function doesn't use
-  # `this` or perform argument binding, or if the target function is an arrow
-  # function; it's pointless because it adds no functionality over the unbound
+  # Never create a new function with `bind` if the target function is an arrow
+  # function, or if the new function doesn't use `this` or perform argument
+  # binding; it's pointless because it adds no functionality over the unbound
   # version.
   no-extra-bind: error
 
@@ -1191,10 +1191,9 @@ rules:
   # something that's not a problem.
   capitalized-comments: off
 
-  # When defining a multiline list in any context except for a function call or
-  # declaration, always include a comma at the end of the last item. Otherwise,
-  # it reduces maintainability by producing noisy diffs when an item is added
-  # to or removed from the end.
+  # When defining a multiline list, always include a comma at the end of the
+  # last item. Otherwise, it reduces maintainability by producing noisy diffs
+  # when an item is added to or removed from the end.
   comma-dangle:
   - error
   - arrays: always-multiline
@@ -1239,7 +1238,8 @@ rules:
   - never
 
   # Always name a variable `self` when it's being used to capture `this`.
-  # Otherwise, it reduces elegance.
+  # Otherwise, it reduces consistency by defying the expectation that no
+  # variable other than `self` would contain a reference to `this`.
   #
   # This rule is highly subjective.
   consistent-this:
