@@ -240,13 +240,8 @@ rules:
   # expressiveness because it's unclear whether or not it's intentional.
   no-template-curly-in-string: error
 
-  # Never split an expression across multiple lines in such a way that the
-  # newline looks like it's ending the statement when it's not; it reduces
-  # correctness because it's easy to accidentally write incorrect logic due to
-  # automatic semicolon insertion, and reduces expressiveness because it's
-  # unclear whether or not it's intentional, and reduces accessibility because
-  # automatic semicolon insertion isn't widely understood.
-  no-unexpected-multiline: error
+  # This rule is disabled due to being handled by Prettier.
+  no-unexpected-multiline: off
 
   # Never put code after an unconditional exit statement; it's pointless
   # because it's never executed. This problem usually happens on accident.
@@ -1227,10 +1222,7 @@ rules:
   - error
   - unix
 
-  # Feel free to add a comment anywhere.
-  #
-  # This rule is highly subjective. It's disabled because it's pointlessly
-  # limiting.
+  # This rule is disabled due to being handled by Prettier.
   lines-around-comment: off
 
   # This rule is disabled because the use of padding lines between class members
