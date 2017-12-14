@@ -1199,6 +1199,9 @@ rules:
   id-match: off
 
   # This rule is disabled due to being handled by Prettier.
+  implicit-arrow-linebreak: off
+
+  # This rule is disabled due to being handled by Prettier.
   indent: off
 
   # This rule is disabled due to lack of jsx usage.
