@@ -296,10 +296,13 @@ rules:
   # When invoking one of Array's map/reduce methods, always return a value in
   # the callback. Otherwise, it reduces correctness because such methods rely
   # on a return value in order to complete their task, but it's easy to forget
-  # to add a `return` statement. If the method was just being used to invoke a
-  # function for each entry in an array, then use `Array.prototype.forEach`
-  # instead.
-  array-callback-return: error
+  # to add a `return` statement. Also, when returning `undefined`, always do so
+  # explicitly instead of implicitly. See the `no-undefined` rule for reasons
+  # why. If the method was just being used to invoke a function for each entry
+  # in an array, then use `Array.prototype.forEach` instead.
+  array-callback-return:
+  - error
+  - allowImplicit: false
 
   # Never use a variable defined via `var` outside of the block in which it was
   # defined; it reduces accessibility because it's not widely understood that
