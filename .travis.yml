@@ -1,10 +1,9 @@
 language: node_js
 sudo: false
 node_js:
-  - 9 # EoL: 2018-06-30
-  - 8 # EoL: 2019-12-31
-  - 6 # EoL: 2019-04-30
-  - 4 # EoL: 2018-04-30
+  - 10 # EoL: 2021-04-30
+  - 8  # EoL: 2019-12-31
+  - 6  # EoL: 2019-04-30
 cache:
   directories:
     - ~/.npm
