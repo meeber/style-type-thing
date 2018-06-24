@@ -1,5 +1,5 @@
 parserOptions:
-  ecmaVersion: 2017
+  ecmaVersion: 2018
 env:
   es6: true
 plugins:
@@ -394,6 +394,12 @@ rules:
   # accessibility because it's not widely understood that `for`/`in` includes
   # inherited properties.
   guard-for-in: error
+
+  # Never define more than one class in a file; it reduces maintainability
+  # because it makes it difficult to locate class definitions.
+  max-classes-per-file:
+  - error
+  - 1
 
   # Never use `alert`, `prompt`, or `confirm`; they create a poor user
   # experience. Instead, use a custom UI widget.
@@ -1101,6 +1107,7 @@ rules:
   camelcase:
   - error
   - properties: always
+    ignoreDestructuring: true
 
   # Feel free to start a comment with any character, including an uppercase or
   # lowercase letter.
@@ -1148,6 +1155,7 @@ rules:
   - error
   - always
   - includeCommonJSModuleExports: false
+    considerPropertyDescriptor: true
 
   # Always manually give a name to a function expression when it's not
   # automatically given one in ES6 based on context. Otherwise, it reduces
@@ -1263,6 +1271,10 @@ rules:
   # This rule is highly subjective. It's disabled because it's too arbitrary
   # and doesn't add enough value.
   max-lines: off
+
+  # This rule is highly subjective. It's disabled because it's too arbitrary
+  # and doesn't add enough value.
+  max-lines-per-function: off
 
   # This rule is highly subjective. It's disabled because it's too arbitrary
   # and doesn't add enough value.
@@ -1484,6 +1496,12 @@ rules:
   # This rule is disabled because the use of padding lines between different
   # types of statements is highly subjective and situational.
   padding-line-between-statements: off
+
+  # Never pass an object literal as the first argument to `Object.assign`; it
+  # reduces elegance. Instead, use object spread syntax.
+  #
+  # This rule is highly subjective.
+  prefer-object-spread: error
 
   # This rule is disabled due to being handled by Prettier.
   quote-props: off
