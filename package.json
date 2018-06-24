@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": "meeber/style-type-thing",
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0"
   },
   "main": "base.yaml",
   "scripts": {
