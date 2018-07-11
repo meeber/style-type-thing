@@ -885,10 +885,6 @@ rules:
   - error
   - always
 
-  # This rule is disabled because it protects against a bug that's only present
-  # in IE8 and earlier.
-  no-catch-shadow: off
-
   # Never use `delete` on a variable; it only works on object properties. If
   # resetting a variable, then reassign it to `null`.
   no-delete-var: error
