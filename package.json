@@ -10,8 +10,8 @@
   },
   "main": "base.yaml",
   "scripts": {
-    "postversion": "git checkout dev && git merge master && git push --all --follow-tags && npm publish",
-    "preversion": "git checkout master && git merge dev && npm test",
+    "postversion": "git push --follow-tags",
+    "preversion": "npm test",
     "release": "npm version -m 'Finalize v%s'",
     "test": "npm run validate-base-config && npm run validate-test-config",
     "validate-base-config": "eslint --no-eslintrc --print-config base.yaml | eslint-config-prettier-check",
