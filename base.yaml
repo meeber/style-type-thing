@@ -48,6 +48,13 @@ rules:
   - error
   - allowImplicit: false
 
+  # When using the `new Promise` constructor, never pass an `async function` as
+  # the executor; it reduces debuggability because any error thrown inside of
+  # the function will be swallowed instead of being passed to the `reject`
+  # function, and reduces consistency because it defies the expectation that a
+  # promise executor will just be a standard function.
+  no-async-promise-executor: error
+
   # Don't put an `await` statement inside of a loop unless it's intentional
   # that each promise resolve before iterating, in which case express intent by
   # disabling this rule via an inline comment. Otherwise, it reduces
@@ -204,6 +211,12 @@ rules:
     skipRegExps: false
     skipTemplates: false
 
+  # Never use regular expression character class syntax (e.g., `/[abc]/`) with
+  # a character that consists of multiple code points; it reduces correctness
+  # because the character is broken down into its code points, resulting in
+  # unexpected results.
+  no-misleading-character-class: error
+
   # Never invoke a non-function global object such as `Math` or `JSON` as if
   # it's a function; it throws a `TypeError` when executed. This problem
   # usually happens on accident.
@@ -259,6 +272,14 @@ rules:
   # instead of the full expression, resulting in faulty logic. It also reduces
   # expressiveness because it's unclear whether or not it's intentional.
   no-unsafe-negation: error
+
+  # When using `yield` or `await` while reassigning a variable or property to a
+  # new value that is based on its old value, always read the old value after
+  # `yield` or `await`; otherwise, it reduces correctness because the
+  # expression won't take into account any other reassignments that may have
+  # occurred to the variable after the initial read but before fulfillment of
+  # the promise.
+  require-automic-updates: error
 
   # Never compare a value to `NaN`; it reduces accessibility because it's not
   # widely understood that `NaN` is the only value in JavaScript that's not
@@ -834,6 +855,13 @@ rules:
   # statement; it's pointless because it adds no functionality over a standard
   # function.
   require-await: error
+
+  # When defining regular expressions, always set the `u` flag to enable
+  # Unicode; otherwise, it reduces correctness because UTF-16 surrogate pairs
+  # won't be handled correctly, and reduces debuggability because JavaScript
+  # will swallow syntax errors related to the regular expression instead of
+  # throwing them.
+  require-unicode-regexp: error
 
   # Always put a `var` declaration at the top of the function or program.
   # Otherwise, it reduces accessibility because it's not widely understood that
