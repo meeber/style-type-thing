@@ -8,4 +8,4 @@ before_install:
 - npm install -g npm@latest
 cache:
   directories:
-  - ~/.npm
+  - $HOME/.npm
