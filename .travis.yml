@@ -4,6 +4,8 @@ node_js:
   - 10 # EoL: 2021-04-30
   - 8  # EoL: 2019-12-31
   - 6  # EoL: 2019-04-30
+before_install:
+  - npm install -g npm@latest
 cache:
   directories:
     - ~/.npm
