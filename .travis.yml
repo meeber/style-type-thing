@@ -1,6 +1,7 @@
 language: node_js
 sudo: false
 node_js:
+- 11 # EoL: 2019-06-30
 - 10 # EoL: 2021-04-30
 - 8  # EoL: 2019-12-31
 - 6  # EoL: 2019-04-30
