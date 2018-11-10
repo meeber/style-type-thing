@@ -18,14 +18,14 @@
     "validate-test-config": "eslint --no-eslintrc --print-config test.yaml | eslint-config-prettier-check"
   },
   "devDependencies": {
-    "eslint": "^5.8.0",
-    "eslint-config-prettier": "^3.1.0",
+    "eslint": "^5.9.0",
+    "eslint-config-prettier": "^3.2.0",
     "eslint-plugin-prettier": "^3.0.0",
-    "prettier": "^1.14.3"
+    "prettier": "^1.15.2"
   },
   "peerDependencies": {
-    "eslint": "^5.8.0",
+    "eslint": "^5.9.0",
     "eslint-plugin-prettier": "^3.0.0",
-    "prettier": "^1.14.3"
+    "prettier": "^1.15.2"
   }
 }
