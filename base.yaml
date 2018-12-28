@@ -788,6 +788,11 @@ rules:
   # over using `.apply`.
   no-useless-call: error
 
+  # Never rethrow a caught error without doing anything else in between the
+  # error being caught and the error being rethrown; it's pointless. This
+  # problem usually happens on accident as a result of refactoring.
+  no-useless-catch: error
+
   # Only use string concatenation when necessary, such as when breaking up a
   # long string across multiple lines. Otherwise, it's pointless because it's
   # the same as putting everything inside of a single string, except it reduces
