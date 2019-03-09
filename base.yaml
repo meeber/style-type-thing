@@ -1265,11 +1265,8 @@ rules:
   # limiting.
   line-comment-position: off
 
-  # Always use a Unix line ending; Unix is a more common development
-  # environment for Node.js than Windows.
-  linebreak-style:
-  - error
-  - unix
+  # This rule is disabled due to being handled by Prettier.
+  linebreak-style: off
 
   # This rule is disabled due to being handled by Prettier.
   lines-around-comment: off
