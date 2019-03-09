@@ -833,6 +833,12 @@ rules:
   # highly error-prone and misunderstood feature.
   no-with: error
 
+  # When writing regular expressions with capture groups, always use named
+  # capture groups instead of numbered capture groups. Otherwise, it reduces
+  # expressiveness because it's not always clear where all of the capture groups
+  # are and what each one represents.
+  prefer-named-capture-group: error
+
   # When rejecting a promise, always provide an `Error` object, or an object
   # that extends `Error`. Otherwise, it reduces debuggability due to the lack
   # of a stack trace, and reduces consistency because it defies the expectation
